@@ -136,7 +136,7 @@ def roll():  # Define cualquier dado
                             if not cut_2:
                                 result.config(text=f'{cut_1}\n= {suma} + mod\n= {suma + c + f}', fg='green')
                     else:
-                        result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n= {suma} + mod\n= {suma + c + d}',
+                        result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n= {suma} + mod\n= {suma + c + f}',
                                       fg='green')
         else:
             result.config(text='Error:\nEnter a valid number\nDice = 2 - 100\nNumber of dice = 1 - 100', fg='red')
