@@ -256,7 +256,7 @@ def genesys_interfaz():  # Genera toda la interfáz de los dados Genesys
                 result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50', fg='red')
         except ValueError:
             result.config(text='Error:\nEnter a number', fg='red')
-    # Ajunsta el tamaño de la ventana
+    # Ajusta el tamaño de la ventana
     raiz.geometry('800x330')
     # Destruye el boton que crea la interfaz
     btn5.destroy()
