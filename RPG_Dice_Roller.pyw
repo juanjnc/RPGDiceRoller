@@ -22,23 +22,26 @@ def info():
 
 
 def version():  # TODO actualizar los cambios
-    messagebox.showinfo('Version RPG DR', 'Version 1.5.4')
+    messagebox.showinfo('Version RPG DR', 'Version 1.5.6')
 
 
 def cambios():  # TODO actualizar los cambios
     cl = Toplevel(raiz)
     cl.resizable(0, 0)
     cl.title('Changelog RPG Dice Roller')
-    cl_label = Label(cl, text='1.5.4 - Improved internal logic, Improved the way to show the results'
+    cl_label = Label(cl, text='1.5.6 - Now the limit od 100 dice is tracking the combined values for 1st and 2nd die'
+                              '\n1.5.5 - Fixed a bug with the 2nd die (rolls using the first die as a exponent). Now, '
+                              'shows both dice separately instead of combined and sliced in four'
+                              '\n1.5.4 - Improved internal logic. Improved the way to show the results'
                               '\n1.5.3 - Changed \"User Guide\'s\" and \"Changelog\" messages box to windows'
                               '\n1.5.2 - HOTFIX: Capped values for the second die'
-                              '\n1.5.1 - Improved stability, Grammar fixing, Adjusted default size'
+                              '\n1.5.1 - Improved stability. Grammar fixing. Adjusted default size'
                               '\n1.5.0 - Added the option for roll two type of dice with two mods values'
                               '\n1.4.0 - Improved how probability works'
                               '\n1.3.0 - Changed result background, Hidden by default Genesys Custom Dice'
                               '\n1.2.0 - Changed the way to show the results, Minor fixes'
                               '\n1.1.1 - FATE now support Mod values, Minor fixes'
-                              '\n1.1.0 - Added Genesys, Added \"Clear\" button, Smaller texts fields'
+                              '\n1.1.0 - Added Genesys, Added \"Clear\" button. Smaller texts fields'
                               '\n1.0.1 - Minor fixes\n1.0.0 - Initial Release',
                      justify='left', font=('Arial', 9), bg='white')
     cl_label.pack()
@@ -64,7 +67,8 @@ def tut_roll():  # Instrucciones de botón roll
     tu_ro.resizable(0, 0)
     tu_ro.title('Roll Guide')
     tu_ro_label = Label(tu_ro, text='Fill \"Number of dice\", \"Type of dice\" and \"Mod value\" text fields with the '
-                                    'numbers you want.\nYou can roll two types of dice with his owns mod values.',
+                                    'numbers you want.\nYou can roll two types of dice with his owns mod values.'
+                                    ' Combined values can not be more of 100 and 1st die must be at least 2',
                         justify='left', font=('Arial', 10), bg='white')
     tu_ro_label.pack()
 
@@ -109,35 +113,25 @@ def roll():  # Define cualquier dado
     try:
         a, b, c, d, e, f = int(pool.get()), int(dado.get()), int(mod.get()), \
                            int(pool_2.get()), int(dado_2.get()), int(mod_2.get())
-        var = []
-        if (101 > b > 1) and (101 > a > 0) and (101 > e >= 0) and (101 > d >= 0) and (e != 1):
+        var_1, var_2 = [], []
+        if (101 > b + e > 1) and (101 > a + d > 0) and (e >= 0) and (d >= 0) and (e != 1):
             for i in range(a):
                 n = random.randint(1, b)
-                var.append(n)
-                for j in range(d):
-                    n = random.randint(1, e)
-                    var.append(n)
-                suma = sum(var)
-                cut_1, cut_2, cut_3, cut_4 = var[:24], var[25:49], var[50:74], var[75:]
-                if c == 0 and f == 0:
-                    if not cut_4:
-                        result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n= {suma}', fg='green')
-                        if not cut_3:
-                            result.config(text=f'{cut_1}\n{cut_2}\n= {suma}', fg='green')
-                            if not cut_2:
-                                result.config(text=f'{cut_1}\n= {suma}', fg='green')
-                    else:
-                        result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n= {suma}', fg='green')
+                var_1.append(n)
+            for j in range(d):
+                m = random.randint(1, e)
+                var_2.append(m)
+            suma = sum(var_1 + var_2)
+            if c == 0 and f == 0:
+                if not var_2:
+                    result.config(text=f'{var_1}\n= {suma}', fg='green')
                 else:
-                    if not cut_4:
-                        result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n= {suma} + mod\n= {suma + c + f}', fg='green')
-                        if not cut_3:
-                            result.config(text=f'{cut_1}\n{cut_2}\n= {suma} + mod\n= {suma + c + f}', fg='green')
-                            if not cut_2:
-                                result.config(text=f'{cut_1}\n= {suma} + mod\n= {suma + c + f}', fg='green')
-                    else:
-                        result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n= {suma} + mod\n= {suma + c + f}',
-                                      fg='green')
+                    result.config(text=f'{var_1}\n{var_2}\n= {suma}', fg='green')
+            else:
+                if not var_2:
+                    result.config(text=f'{var_1}\n= {suma} + mod\n= {suma + c + f}', fg='green')
+                else:
+                    result.config(text=f'{var_1}\n{var_2}\n= {suma} + mod\n= {suma + c + f}', fg='green')
         else:
             result.config(text='Error:\nEnter a valid number\nDice = 2 - 100\nNumber of dice = 1 - 100', fg='red')
     except ValueError:
