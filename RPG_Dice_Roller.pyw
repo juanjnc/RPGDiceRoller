@@ -30,18 +30,18 @@ def cambios():  # TODO actualizar los cambios
     cl.resizable(0, 0)
     cl.title('Changelog RPG Dice Roller')
     cl_label = Label(cl, text='1.5.6 - Now the limit of 100 dice is tracking the combined values for 1st and 2nd die'
-                              '\n1.5.5 - HOTFIX: Fixed a bug with the 2nd die (rolls using the first die as a exponent). Now '
-                              'shows both dice separately instead of combined and sliced in four'
+                              '\n1.5.5 - HOTFIX: Fixed a bug with the 2nd die (rolls using the first die as a exponent)'
+                              '. Now shows both dice separately instead of combined and sliced in four'
                               '\n1.5.4 - Improved internal logic. Improved the way to show the results'
                               '\n1.5.3 - Changed \"User Guide\'s\" and \"Changelog\" messages box to windows'
                               '\n1.5.2 - HOTFIX: Capped values for the second die'
                               '\n1.5.1 - Improved stability. Grammar fixing. Adjusted default size'
                               '\n1.5.0 - Added the option for roll two type of dice with two mods values'
                               '\n1.4.0 - Improved how probability works'
-                              '\n1.3.0 - Changed result background, Hidden by default Genesys Custom Dice'
+                              '\n1.3.0 - Changed result background. Hidden by default Genesys Custom Dice'
                               '\n1.2.0 - Changed the way to show the results, Minor fixes'
                               '\n1.1.1 - FATE now support Mod values. Minor fixes'
-                              '\n1.1.0 - Added Genesys, Added \"Clear\" button. Smaller texts fields'
+                              '\n1.1.0 - Added Genesys. Added \"Clear\" button. Smaller texts fields'
                               '\n1.0.1 - Minor fixes\n1.0.0 - Initial Release',
                      justify='left', font=('Arial', 9), bg='white')
     cl_label.pack()
@@ -67,9 +67,9 @@ def tut_roll():  # Instrucciones de botón roll
     tu_ro.resizable(0, 0)
     tu_ro.title('Roll Guide')
     tu_ro_label = Label(tu_ro, text='Fill \"Number of dice\", \"Type of dice\" and \"Mod value\" text fields with the '
-                                    'numbers you want.\nYou can roll two types of dice with his owns mod values.'
-                                    ' Combined values can not be more of 100 and 1st die must be at least 2',
-                        justify='left', font=('Arial', 10), bg='white')
+                                    'numbers you want.\nYou can roll two types of dice with his owns mod values, but'
+                                    'first column must be filled. Combined values can not be more of 100 and 1st die '
+                                    'must be at least 2', justify='left', font=('Arial', 10), bg='white')
     tu_ro_label.pack()
 
 
@@ -111,10 +111,10 @@ def blue_genesys():  # Instrucciones de botón mostrar Genesys
 
 def roll():  # Define cualquier dado
     try:
-        a, b, c, d, e, f = int(pool.get()), int(dado.get()), int(mod.get()), \
-                           int(pool_2.get()), int(dado_2.get()), int(mod_2.get())
+        a, b, c = int(pool.get()), int(dado.get()), int(mod.get())
+        d, e, f = int(pool_2.get()), int(dado_2.get()), int(mod_2.get())
         var_1, var_2 = [], []
-        if (101 > b > 1) and (101 > e > 0) and (101 > a + d > 0) and (d >= 0) and (e != 1):
+        if (101 > b > 1) and (101 > e >= 0) and (101 > a + d > 0) and (a != 0) and (e != 1):
             for i in range(a):
                 n = random.randint(1, b)
                 var_1.append(n)
