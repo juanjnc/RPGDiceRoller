@@ -22,16 +22,17 @@ def info():
 
 
 def version():  # TODO actualizar los cambios
-    messagebox.showinfo('Version RPG DR', 'Version 1.5.6')
+    messagebox.showinfo('Version RPG DR', 'Version 1.5.7')
 
 
 def cambios():  # TODO actualizar los cambios
     cl = Toplevel(raiz)
     cl.resizable(0, 0)
     cl.title('Changelog RPG Dice Roller')
-    cl_label = Label(cl, text='1.5.6 - Now the limit of 100 dice is tracking the combined values for 1st and 2nd die'
+    cl_label = Label(cl, text='1.5.7 - Now the limit for FATE dice is 50. Now the combined limit for GENESYS is 50'
+                              '\n1.5.6 - Now the limit of 100 dice is tracking the combined values for 1st and 2nd die'
                               '\n1.5.5 - HOTFIX: Fixed a bug with the 2nd die (rolls using the first die as a exponent)'
-                              '. Now shows both dice separately instead of combined and sliced in four'
+                              '.\nNow shows both dice separately instead of combined and sliced in four'
                               '\n1.5.4 - Improved internal logic. Improved the way to show the results'
                               '\n1.5.3 - Changed \"User Guide\'s\" and \"Changelog\" messages box to windows'
                               '\n1.5.2 - HOTFIX: Capped values for the second die'
@@ -143,12 +144,12 @@ def fate():  # Define el dado usado en FATE, FUDGE y derivados
         a, c = int(pool.get()), int(mod.get())
         var = ('+', '-', '0')
         dest = []
-        if 101 > a > 0:
+        if 51 > a > 0:
             for i in range(a):
                 n = random.choices(var, weights=[2, 2, 2])
                 dest.extend(n)
                 total = dest.count('+') - dest.count('-') + c
-                cut_1, cut_2, cut_3, cut_4 = dest[:24], dest[25:49], dest[50:74], dest[75:]
+                cut_1, cut_2, cut_3, cut_4 = dest[:12], dest[12:24], dest[24:36], dest[36:]
                 if not cut_4:
                     result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n= {total}', fg='green')
                     if not cut_3:
@@ -158,7 +159,7 @@ def fate():  # Define el dado usado en FATE, FUDGE y derivados
                 else:
                     result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n= {total}', fg='green')
         else:
-            result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 100', fg='red')
+            result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50', fg='red')
     except ValueError:
         result.config(text='Error:\nEnter a number', fg='red')
 
@@ -177,8 +178,8 @@ def genesys_interfaz():  # Genera toda la interfáz de los dados Genesys
     def genesys():  # Define los dados del sistema Genesys junto con el dado de fuerza de SW
         genesys_interfaz()
         try:
-            a, b, c, d, e, f, g = int(boost.get()), int(ability.get()), int(proficiency.get()), int(setback.get()), \
-                                  int(difficulty.get()), int(challenge.get()), int(force.get())
+            a, b, c, d = int(boost.get()), int(ability.get()), int(proficiency.get()), int(setback.get())
+            e, f, g = int(difficulty.get()), int(challenge.get()), int(force.get())
             var_boost = ('0', 'success', 'advantage', 'advantage, advantage', 'advantage, success')
             var_ability = ('success', 'success, success', '0', 'advantage', 'advantage, success',
                            'advantage, advantage')
@@ -191,8 +192,7 @@ def genesys_interfaz():  # Genera toda la interfáz de los dados Genesys
                              'despair')
             var_force = ('DARK', 'LIGHT', 'DARK, DARK', 'LIGHT, LIGHT')
             dest = []
-            if (51 > a > 0) or (51 > b > 0) or (51 > c > 0) or (51 > d > 0) or \
-                    (51 > e > 0) or (51 > f > 0) or (51 > g > 0):
+            if 51 > a + b + c + d + e + f + g > 0:
                 for i in range(a):
                     n = random.choices(var_boost, weights=[2, 1, 1, 1, 1])
                     dest.extend(n)
