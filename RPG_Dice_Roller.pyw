@@ -26,26 +26,22 @@ def version():  # TODO actualizar los cambios
 
 
 def cambios():  # TODO actualizar los cambios
-    cl = Toplevel(raiz)
-    cl.resizable(0, 0)
-    cl.title('Changelog RPG Dice Roller')
-    cl_label = Label(cl, text='1.5.7 - Now the limit for FATE dice is 50. Now the combined limit for Genesys is 50'
-                              '\n1.5.6 - Now the limit of 100 dice is tracking the combined values for 1st and 2nd die'
-                              '\n1.5.5 - HOTFIX: Fixed a bug with the 2nd die (rolls using the first die as a exponent)'
-                              '.\nNow shows both dice separately instead of combined and sliced in four'
-                              '\n1.5.4 - Improved internal logic. Improved the way to show the results'
-                              '\n1.5.3 - Changed \"User Guide\'s\" and \"Changelog\" messages box to windows'
-                              '\n1.5.2 - HOTFIX: Capped values for the second die'
-                              '\n1.5.1 - Improved stability. Grammar fixing. Adjusted default size'
-                              '\n1.5.0 - Added the option for roll two type of dice with two mods values'
-                              '\n1.4.0 - Improved how probability works'
-                              '\n1.3.0 - Changed result background. Hidden by default Genesys Custom Dice'
-                              '\n1.2.0 - Changed the way to show the results, Minor fixes'
-                              '\n1.1.1 - FATE now support Mod values. Minor fixes'
-                              '\n1.1.0 - Added Genesys. Added \"Clear\" button. Smaller texts fields'
-                              '\n1.0.1 - Minor fixes\n1.0.0 - Initial Release',
-                     justify='left', font=('Arial', 9), bg='white')
-    cl_label.pack()
+    messagebox.showinfo('Changelog', '1.5.8 - Reverted \"Changelog\" to message box.'
+                                     '\n1.5.7 - Now the limit for FATE dice and combined Genesys dice is now 50.'
+                                     '\n1.5.6 - Now the limit of 100 dice is tracking the combined values for 1st and'
+                                     ' 2nd die.\n1.5.5 - Fixed a bug with the 2nd die (rolls using the first die'
+                                     ' as a exponent). Now shows both dice separately instead of combined and sliced'
+                                     ' in four.\n1.5.4 - Improved internal logic. Improved the way to show the results.'
+                                     '\n1.5.3 - Changed \"User Guide\'s\" and \"Changelog\" messages box to windows.'
+                                     '\n1.5.2 - HOTFIX: Capped values for the second die.'
+                                     '\n1.5.1 - Improved stability. Grammar fixing. Adjusted default size.'
+                                     '\n1.5.0 - Added the option for roll two type of dice with two mods values.'
+                                     '\n1.4.0 - Improved how probability works.'
+                                     '\n1.3.0 - Changed result background. Hidden by default Genesys Custom Dice.'
+                                     '\n1.2.0 - Changed the way to show the results, Minor fixes.'
+                                     '\n1.1.1 - FATE now support Mod values. Minor fixes. \n1.1.0 - Added Genesys. '
+                                     'Added \"Clear\" button. Smaller texts fields.\n1.0.1 - Minor fixes.'
+                                     '\n1.0.0 - Initial Release.')
 
 
 def tutorial():  # Instrucciones de uso general
