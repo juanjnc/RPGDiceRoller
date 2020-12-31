@@ -962,3 +962,16 @@
 /venv/Lib/site-packages/pip/_internal/network/xmlrpc.py
 /venv/Lib/site-packages/pkg_resources/tests/data/my-test-package_unpacked-egg/my_test_package-1.0-py3.7.egg/EGG-INFO/zip-safe
 /venv/Lib/site-packages/zipextimporter.py
+/venv/Lib/site-packages/setuptools-51.1.1.dist-info/dependency_links.txt
+/.idea/.gitignore
+/venv/Lib/site-packages/setuptools-51.1.1.dist-info/entry_points.txt
+/venv/Lib/site-packages/setuptools-51.1.1.dist-info/INSTALLER
+/venv/Lib/site-packages/setuptools-51.1.1.dist-info/LICENSE
+/venv/Lib/site-packages/setuptools-51.1.1.dist-info/METADATA
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/venv/Lib/site-packages/setuptools-51.1.1.dist-info/RECORD
+/venv/Lib/site-packages/setuptools-51.1.1.dist-info/top_level.txt
+/.idea/vcs.xml
+/venv/Lib/site-packages/setuptools-51.1.1.dist-info/WHEEL
