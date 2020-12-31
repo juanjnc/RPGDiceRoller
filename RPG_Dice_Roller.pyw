@@ -18,12 +18,12 @@ def info():
 
 
 def version():  # TODO actualizar los cambios
-    messagebox.showinfo('Version RPG DR', 'Version 1.5.7')
+    messagebox.showinfo('Version RPG DR', 'Version 1.5.8')
 
 
 def cambios():  # TODO actualizar los cambios
     messagebox.showinfo('Changelog', '1.5.8 - Reverted \"Changelog\" to message box. Small fixes.'
-                                     '\n1.5.7 - Now the limit for FATE dice and combined Genesys dice is now 50.'
+                                     '\n1.5.7 - Now the limit for FATE dice and combined Genesys dice is 50.'
                                      '\n1.5.6 - Now the limit of 100 dice is tracking the combined values for 1st and'
                                      ' 2nd die.\n1.5.5 - Fixed a bug with the 2nd die (rolls using the first die'
                                      ' as a exponent). Now shows both dice separately instead of combined and sliced'
