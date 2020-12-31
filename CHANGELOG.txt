@@ -1,6 +1,6 @@
-1.5.9 - Small and grammar fixes.
+1.5.9 - Small changes and grammar fixes.
 1.5.8 - Reverted "Changelog" to message box. Small fixes.
-1.5.7 - Now the limit for FATE dice is 50. Now the combined limit for GENESYS is 50.
+1.5.7 - Now the limit for FATE dice and combined Genesys dice is 50.
 1.5.6 - Now the limit of 100 dice is tracking the combined values for 1st and 2nd die.
 1.5.5 - Fixed a bug with the 2nd die (rolls using the first die as a exponent). Now shows both dice separately.
 1.5.4 - Improved internal logic. Improved the way to show the results.

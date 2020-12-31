@@ -22,8 +22,8 @@ def version():  # TODO actualizar los cambios
 
 
 def cambios():  # TODO actualizar los cambios
-    mb.showinfo('Changelog', '''1.5.9 - Small and grammar fixes.\n1.5.8 - Reverted "Changelog" to message box. Small fixes.
-1.5.7 - Now the limit for FATE dice is 50. Now the combined limit for GENESYS is 50.
+    mb.showinfo('Changelog', '''1.5.9 - Small changes and grammar fixes.\n1.5.8 - Reverted "Changelog" to message box. Small fixes.
+1.5.7 - Now the limit for FATE dice and combined Genesys dice is 50.
 1.5.6 - Now the limit of 100 dice is tracking the combined values for 1st and 2nd die.
 1.5.5 - Fixed a bug with the 2nd die (rolls using the first die as a exponent). Now shows both dice separately
 1.5.4 - Improved internal logic. Improved the way to show the results.
@@ -130,13 +130,13 @@ def fate():  # Define el dado usado en FATE, FUDGE y derivados
     try:
         a, c = int(pool.get()), int(mod.get())
         var = ('+', '-', '0')
-        dest = []
+        fin = []
         if 51 > a > 0:
             for i in range(a):
                 n = random.choices(var, weights=[2, 2, 2])
-                dest.extend(n)
-                total = dest.count('+') - dest.count('-') + c
-                cut_1, cut_2, cut_3, cut_4 = dest[:12], dest[12:24], dest[24:36], dest[36:]
+                fin.extend(n)
+                total = fin.count('+') - fin.count('-') + c
+                cut_1, cut_2, cut_3, cut_4 = fin[:12], fin[12:24], fin[24:36], fin[36:]
                 if not cut_4:
                     result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n= {total}', fg='green')
                     if not cut_3:
@@ -153,11 +153,11 @@ def fate():  # Define el dado usado en FATE, FUDGE y derivados
 
 def rq():  # Define los rangos de cuerpo de BRP y derivados
     var = ('L. Leg', 'R. Leg', 'Abdomen', 'R. Arm', 'L. Arm', 'Chest', 'Head')
-    dest = []
+    fin = []
     for i in range(1):
         n = random.choices(var, weights=[4, 4, 3, 3, 3, 1, 2])
-        dest.extend(n)
-        result.config(text=f'{dest}', fg='green')
+        fin.extend(n)
+        result.config(text=f'{fin}', fg='green')
 
 
 def genesys_interfaz():  # Genera toda la interfaz de los dados Genesys
@@ -178,61 +178,59 @@ def genesys_interfaz():  # Genera toda la interfaz de los dados Genesys
             var_challenge = ('failure', 'failure, failure', '0', 'threat', 'threat, failure', 'threat, threat',
                              'despair')
             var_force = ('DARK', 'LIGHT', 'DARK, DARK', 'LIGHT, LIGHT')
-            dest = []
+            fin = []
             if 51 > a + b + c + d + e + f + g > 0:
                 for i in range(a):
                     n = random.choices(var_boost, weights=[2, 1, 1, 1, 1])
-                    dest.extend(n)
-                for i in range(b):
+                    fin.extend(n)
+                for j in range(b):
                     n = random.choices(var_ability, weights=[2, 1, 1, 2, 1, 1])
-                    dest.extend(n)
-                for i in range(c):
+                    fin.extend(n)
+                for ii in range(c):
                     n = random.choices(var_proficiency, weights=[1, 1, 2, 1, 2, 2, 3])
-                    dest.extend(n)
-                for i in range(d):
+                    fin.extend(n)
+                for jj in range(d):
                     n = random.choices(var_setback, weights=[2, 1, 1, 2, 1, 1])
-                    dest.extend(n)
-                for i in range(e):
+                    fin.extend(n)
+                for iii in range(e):
                     n = random.choices(var_difficulty, weights=[1, 2, 3, 3, 1, 1])
-                    dest.extend(n)
-                for i in range(f):
+                    fin.extend(n)
+                for jjj in range(f):
                     n = random.choices(var_challenge, weights=[2, 2, 1, 2, 2, 2, 1])
-                    dest.extend(n)
-                for i in range(g):
+                    fin.extend(n)
+                for iiii in range(g):
                     n = random.choices(var_force, weights=[6, 2, 1, 3])
-                    dest.extend(n)
-                suc = dest.count('success') + 2 * dest.count('success, success') + dest.count('advantage, success')
-                adv = dest.count('advantage') + 2 * dest.count('advantage, advantage') \
-                    + dest.count('advantage, success')
-                tri = dest.count('triumph')
-                thr = dest.count('threat') + 2 * dest.count('threat, threat') + dest.count('threat, failure')
-                fail = dest.count('failure') + 2 * dest.count('failure, failure') + dest.count('threat, failure')
-                des = dest.count('despair')
-                fds = dest.count('DARK') + 2 * dest.count('DARK, DARK')
-                fls = dest.count('LIGHT') + 2 * dest.count('LIGHT, LIGHT')
-                cut_1, cut_2, cut_3, cut_4, cut_5 = dest[:5], dest[5:10], dest[10:20], dest[20:30], dest[30:]
+                    fin.extend(n)
+                suc = fin.count('success') + 2 * fin.count('success, success') + fin.count('advantage, success')
+                adv = fin.count('advantage') + 2 * fin.count('advantage, advantage') + fin.count('advantage, success')
+                tri = fin.count('triumph')
+                thr = fin.count('threat') + 2 * fin.count('threat, threat') + fin.count('threat, failure')
+                fail = fin.count('failure') + 2 * fin.count('failure, failure') + fin.count('threat, failure')
+                des = fin.count('despair')
+                fds = fin.count('DARK') + 2 * fin.count('DARK, DARK')
+                fls = fin.count('LIGHT') + 2 * fin.count('LIGHT, LIGHT')
+                cut_1, cut_2, cut_3, cut_4, cut_5 = fin[:5], fin[5:10], fin[10:20], fin[20:30], fin[30:]
                 if not cut_5:
                     result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\nsuccess = {suc}; advantage = {adv}'
                                        f'; triumph = {tri}\nfailure = {fail}; threat = {thr}; despair = {des}'
-                                       f'\nForce Dark Side = {fds}, Force Light Side = {fls}', fg='green')
+                                       f'\nForce Dark Side = {fds}; Force Light Side = {fls}', fg='green')
                     if not cut_4:
                         result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\nsuccess = {suc}; advantage = {adv}'
                                            f'; triumph = {tri}\nfailure = {fail}; threat = {thr}; despair = {des}'
-                                           f'\nForce Dark Side = {fds}, Force Light Side = {fls}', fg='green')
+                                           f'\nForce Dark Side = {fds}; Force Light Side = {fls}', fg='green')
                         if not cut_3:
                             result.config(text=f'{cut_1}\n{cut_2}\nsuccess = {suc}; advantage = {adv}'
                                                f'; triumph = {tri}\nfailure = {fail}; threat = {thr}; despair = {des}'
-                                               f'\nForce Dark Side = {fds}, Force Light Side = {fls}', fg='green')
+                                               f'\nForce Dark Side = {fds}; Force Light Side = {fls}', fg='green')
                             if not cut_2:
-                                result.config(
-                                    text=f'{cut_1}\nsuccess = {suc}; advantage = {adv}; triumph = {tri}'
-                                         f'\nfailure = {fail}; threat = {thr}; despair = {des}\nForce Dark Side = {fds}'
-                                         f', Force Light Side = {fls}', fg='green')
+                                result.config(text=f'{cut_1}\nsuccess = {suc}; advantage = {adv}; triumph = {tri}'
+                                                   f'\nfailure = {fail}; threat = {thr}; despair = {des}\nForce Dark'
+                                                   f' Side = {fds}; Force Light Side = {fls}', fg='green')
                 else:
                     result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n{cut_5}'
                                        f'\nsuccess = {suc}; advantage = {adv}; triumph = {tri}\n'
                                        f'failure = {fail}; threat = {thr}; despair = {des}\n'
-                                       f'Force Dark Side = {fds}, Force Light Side = {fls}', fg='green')
+                                       f'Force Dark Side = {fds}; Force Light Side = {fls}', fg='green')
             else:
                 result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50', fg='red')
         except ValueError:
@@ -377,7 +375,7 @@ btn5.grid(row=3, column=1, padx=5, pady=5, columnspan=2)
 cuadro.pack()  # Fin del Cuadro de los botones e inputs
 
 canvas = Canvas(raiz, bg='white', highlightthickness=5, highlightbackground="grey")  # Inicio de Canvas y resultado
-result = Label(canvas, justify='center', text='', font=('Arial', 16), fg='green', bg='white')
+result = Label(canvas, justify='center', text='', font=('Arial', 15), fg='green', bg='white')
 result.pack(expand=YES)
 canvas.pack(expand=YES, fill=BOTH)  # Fin de Canvas y resultado
 
