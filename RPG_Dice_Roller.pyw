@@ -22,7 +22,8 @@ def version():  # TODO actualizar los cambios
 
 
 def cambios():  # TODO actualizar los cambios
-    mb.showinfo('Changelog', '''1.5.9 - Small changes and grammar fixes.\n1.5.8 - Reverted "Changelog" to message box. Small fixes.
+    mb.showinfo('Changelog', '''1.5.9 - Small changes and grammar fixes. Fixed the initial values reset in Genesys dice.
+1.5.8 - Reverted "Changelog" to message box. Small fixes.
 1.5.7 - Now the limit for FATE dice and combined Genesys dice is 50.
 1.5.6 - Now the limit of 100 dice is tracking the combined values for 1st and 2nd die.
 1.5.5 - Fixed a bug with the 2nd die (rolls using the first die as a exponent). Now shows both dice separately
@@ -161,9 +162,7 @@ def rq():  # Define los rangos de cuerpo de BRP y derivados
 
 
 def genesys_interfaz():  # Genera toda la interfaz de los dados Genesys
-
     def genesys():  # Define los dados del sistema Genesys junto con el dado de fuerza de SW
-        genesys_interfaz()
         try:
             a, b, c, d = int(boost.get()), int(ability.get()), int(proficiency.get()), int(setback.get())
             e, f, g = int(difficulty.get()), int(challenge.get()), int(force.get())
