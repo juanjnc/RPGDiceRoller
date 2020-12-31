@@ -2,10 +2,6 @@ from tkinter import *
 from tkinter import messagebox
 import random
 
-raiz = Tk()  # Inicio raiz
-raiz.title('RPG Dice Roller')
-raiz.geometry('400x330')
-
 
 def limpiar():
     result.config(text='')
@@ -26,7 +22,7 @@ def version():  # TODO actualizar los cambios
 
 
 def cambios():  # TODO actualizar los cambios
-    messagebox.showinfo('Changelog', '1.5.8 - Reverted \"Changelog\" to message box.'
+    messagebox.showinfo('Changelog', '1.5.8 - Reverted \"Changelog\" to message box. Small fixes.'
                                      '\n1.5.7 - Now the limit for FATE dice and combined Genesys dice is now 50.'
                                      '\n1.5.6 - Now the limit of 100 dice is tracking the combined values for 1st and'
                                      ' 2nd die.\n1.5.5 - Fixed a bug with the 2nd die (rolls using the first die'
@@ -169,7 +165,7 @@ def rq():  # Define los rangos de cuerpo de BRP y derivados
         result.config(text=f'{dest}', fg='green')
 
 
-def genesys_interfaz():  # Genera toda la interfáz de los dados Genesys
+def genesys_interfaz():  # Genera toda la interfaz de los dados Genesys
 
     def genesys():  # Define los dados del sistema Genesys junto con el dado de fuerza de SW
         genesys_interfaz()
@@ -298,6 +294,10 @@ def genesys_interfaz():  # Genera toda la interfáz de los dados Genesys
     btn3 = Button(cuadro, text="Genesys/SW", fg='green', command=genesys, font=('Arial', 11), cursor='hand2')
     btn3.grid(row=3, column=6, columnspan=2, padx=5, pady=5)
 
+
+raiz = Tk()  # Inicio raiz
+raiz.title('RPG Dice Roller')
+raiz.geometry('400x330')
 
 barra_menu = Menu(raiz)  # Config de las barras de menu
 archivo_menu = Menu(barra_menu, tearoff=0)
