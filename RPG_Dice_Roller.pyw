@@ -127,7 +127,7 @@ def roll():  # Define cualquier dado
         result.config(text='Error:\nEnter a number', fg='red')
 
 
-def fate():  # Define el dado usado en FATE, FUDGE y derivados
+def roll_fate():  # Define el dado usado en FATE, FUDGE y derivados
     try:
         a, c = int(pool.get()), int(mod.get())
         var = ('+', '-', '0')
@@ -152,7 +152,7 @@ def fate():  # Define el dado usado en FATE, FUDGE y derivados
         result.config(text='Error:\nEnter a number', fg='red')
 
 
-def rq():  # Define los rangos de cuerpo de BRP y derivados
+def roll_rq():  # Define los rangos de cuerpo de BRP y derivados
     var = ('L. Leg', 'R. Leg', 'Abdomen', 'R. Arm', 'L. Arm', 'Chest', 'Head')
     fin = []
     for i in range(1):
@@ -161,9 +161,9 @@ def rq():  # Define los rangos de cuerpo de BRP y derivados
         result.config(text=f'{fin}', fg='green')
 
 
-def genesys_interfaz():  # Genera toda la interfaz de los dados Genesys
+def genesys():  # Genera toda la interfaz de los dados Genesys
 
-    def genesys():  # Define los dados del sistema Genesys junto con el dado de fuerza de SW
+    def roll_g():  # Define los dados del sistema Genesys junto con el dado de fuerza de SW
         try:
             a, b, c, d = int(boost.get()), int(ability.get()), int(proficiency.get()), int(setback.get())
             e, f, g = int(difficulty.get()), int(challenge.get()), int(force.get())
@@ -302,7 +302,7 @@ def genesys_interfaz():  # Genera toda la interfaz de los dados Genesys
     force_label = Label(cuadro, justify='right', text='Force Dice: ', font=('Arial', 12))
     force_label.grid(row=2, column=6, padx=10, pady=10, sticky='E')
     # Crea el boton para tirar los dados
-    btn3 = Button(cuadro, text="Genesys/SW", fg='green', command=genesys, font=('Arial', 11), cursor='hand2')
+    btn3 = Button(cuadro, text="Genesys/SW", fg='green', command=roll_g, font=('Arial', 11), cursor='hand2')
     btn3.grid(row=3, column=6, columnspan=2, padx=5, pady=5)
     dados_menu.add_command(label='Delete', command=eliminar_g, font=('Arial', 10))
 
@@ -332,7 +332,7 @@ ayuda_menu.add_command(label='Version', command=version, font=('Arial', 10))
 ayuda_menu.add_command(label='Changelog', command=cambios, font=('Arial', 10))
 ayuda_menu.add_command(label='About...', command=info, font=('Arial', 10))
 
-dados_menu.add_command(label='Genesys', command=genesys_interfaz, font=('Arial', 10))
+dados_menu.add_command(label='Genesys', command=genesys, font=('Arial', 10))
 
 barra_menu.add_cascade(label='File', menu=archivo_menu, font=('Arial', 10))
 barra_menu.add_cascade(label='User Guide', menu=tutorial_menu, font=('Arial', 10))
@@ -384,10 +384,10 @@ mod_label.grid(row=2, column=1, padx=10, pady=10, sticky='E')
 btn0 = Button(cuadro, text="Roll", fg='green', command=roll, font=('Arial', 11), cursor='hand2')
 btn0.grid(row=0, column=0, padx=5, pady=5)
 # Boton tirar FATE
-btn1 = Button(cuadro, text="FATE", fg='green', command=fate, font=('Arial', 11), cursor='hand2')
+btn1 = Button(cuadro, text="FATE", fg='green', command=roll_fate, font=('Arial', 11), cursor='hand2')
 btn1.grid(row=1, column=0, padx=5, pady=5)
 # Boton tirar RQ
-btn2 = Button(cuadro, text="RQ\nHit Location", fg='green', command=rq, font=('Arial', 11), cursor='hand2')
+btn2 = Button(cuadro, text="RQ\nHit Location", fg='green', command=roll_rq, font=('Arial', 11), cursor='hand2')
 btn2.grid(row=2, column=0, padx=5, pady=5)
 # btn3 está dentro de Genesys
 # Boton limpiar
