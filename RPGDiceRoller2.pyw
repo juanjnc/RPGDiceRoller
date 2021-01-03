@@ -309,37 +309,40 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
     dados_menu.add_command(label='Delete', command=eliminar_g, font=('Arial', 10))
 
 
+def barra_menu(Menu):
+    barra_menu = Menu(raiz)  # Config de las barras de menu
+    archivo_menu = Menu(barra_menu, tearoff=0)
+    tutorial_menu = Menu(barra_menu, tearoff=0)
+    ayuda_menu = Menu(barra_menu, tearoff=0)
+    dados_menu = Menu(barra_menu, tearoff=0)
+
+    archivo_menu.add_command(label='Exit', command=salir, font=('Arial', 10))
+
+    tutorial_menu.add_command(label='Guide', command=tutorial, font=('Arial', 10))
+    tutorial_menu.add_command(label='Roll', command=tut_roll, font=('Arial', 10))
+    tutorial_menu.add_command(label='FATE', command=tut_fate, font=('Arial', 10))
+    tutorial_menu.add_command(label='RuneQuest', command=tut_rq, font=('Arial', 10))
+    tutorial_menu.add_command(label='Show Menu', command=mostrar, font=('Arial', 10))
+    tutorial_menu.add_separator()
+    tutorial_menu.add_command(label='Genesys/SW', command=tut_genesys, font=('Arial', 10))
+
+    ayuda_menu.add_command(label='Version', command=version, font=('Arial', 10))
+    ayuda_menu.add_command(label='Changelog', command=cambios, font=('Arial', 10))
+    ayuda_menu.add_command(label='About...', command=info, font=('Arial', 10))
+
+    dados_menu.add_command(label='Genesys', command=genesys, font=('Arial', 10))
+
+    barra_menu.add_cascade(label='File', menu=archivo_menu, font=('Arial', 10))
+    barra_menu.add_cascade(label='User Guide', menu=tutorial_menu, font=('Arial', 10))
+    barra_menu.add_cascade(label='Show', menu=dados_menu, font=('Arial', 10))
+    barra_menu.add_cascade(label='Help', menu=ayuda_menu, font=('Arial', 10))
+
+
 class App(raiz.Tk):
     def __init__(self):
         super().__init__()
         self.title('RPG Dice Roller')
         self.geometry('400x330')
-        barra_menu = Menu(self)  # Config de las barras de menu
-        archivo_menu = Menu(barra_menu, tearoff=0)
-        tutorial_menu = Menu(barra_menu, tearoff=0)
-        ayuda_menu = Menu(barra_menu, tearoff=0)
-        dados_menu = Menu(barra_menu, tearoff=0)
-
-        archivo_menu.add_command(label='Exit', command=salir, font=('Arial', 10))
-
-        tutorial_menu.add_command(label='Guide', command=tutorial, font=('Arial', 10))
-        tutorial_menu.add_command(label='Roll', command=tut_roll, font=('Arial', 10))
-        tutorial_menu.add_command(label='FATE', command=tut_fate, font=('Arial', 10))
-        tutorial_menu.add_command(label='RuneQuest', command=tut_rq, font=('Arial', 10))
-        tutorial_menu.add_command(label='Show Menu', command=mostrar, font=('Arial', 10))
-        tutorial_menu.add_separator()
-        tutorial_menu.add_command(label='Genesys/SW', command=tut_genesys, font=('Arial', 10))
-
-        ayuda_menu.add_command(label='Version', command=version, font=('Arial', 10))
-        ayuda_menu.add_command(label='Changelog', command=cambios, font=('Arial', 10))
-        ayuda_menu.add_command(label='About...', command=info, font=('Arial', 10))
-
-        dados_menu.add_command(label='Genesys', command=genesys, font=('Arial', 10))
-
-        barra_menu.add_cascade(label='File', menu=archivo_menu, font=('Arial', 10))
-        barra_menu.add_cascade(label='User Guide', menu=tutorial_menu, font=('Arial', 10))
-        barra_menu.add_cascade(label='Show', menu=dados_menu, font=('Arial', 10))
-        barra_menu.add_cascade(label='Help', menu=ayuda_menu, font=('Arial', 10))
         self.config(menu=barra_menu, width=400, height=400)  # Fin de la config de la barra de menu
 
 
