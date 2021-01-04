@@ -413,4 +413,3 @@ if __name__ == "__main__":
     result = Resultado(canvas)
     menu()
     raiz.mainloop()
-
