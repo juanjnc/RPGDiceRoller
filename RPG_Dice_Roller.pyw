@@ -18,11 +18,12 @@ def info():
 
 
 def version():  # TODO actualizar los cambios
-    mb.showinfo('Version RPG DR', 'Version 1.5.10')
+    mb.showinfo('Version RPG DR', 'Version 1.5.10.1')
 
 
 def cambios():  # TODO actualizar los cambios
-    mb.showinfo('Changelog', '''1.5.10 - New context menu called "Show" for additional dice. Now show mod values.
+    mb.showinfo('Changelog', '''1.5.10.1 - Now "Delete" clear the results.
+1.5.10 - New context menu called "Show" for additional dice. Now show mod values.
 1.5.9 - Small changes and grammar fixes. Fixed the initial values reset in Genesys dice.
 1.5.8 - Reverted "Changelog" to message box. Small fixes.
 1.5.7 - Now the limit for FATE dice and combined Genesys dice is 50.
@@ -238,6 +239,7 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
             result.config(text='Error:\nEnter a number', fg='red')
 
     def eliminar_g():
+        result.config(text='')
         boost.destroy()
         ability.destroy()
         proficiency.destroy()

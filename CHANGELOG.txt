@@ -1,3 +1,4 @@
+1.5.10.1 - Now "Delete" clear the results.
 1.5.10 - New context menu called "Show" for additional dice. Now show mod values.
 1.5.9 - Small changes and grammar fixes. Fixed the initial values reset in Genesys dice.
 1.5.8 - Reverted "Changelog" to message box. Small fixes.
