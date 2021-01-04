@@ -18,11 +18,12 @@ def info():
 
 
 def version():  # TODO actualizar los cambios
-    mb.showinfo('Version RPG DR', 'Version 1.5.9')
+    mb.showinfo('Version RPG DR', 'Version 1.5.10')
 
 
 def cambios():  # TODO actualizar los cambios
-    mb.showinfo('Changelog', '''1.5.9 - Small changes and grammar fixes. Fixed the initial values reset in Genesys dice.
+    mb.showinfo('Changelog', '''1.5.10 - New context menu called "Show" for additional dice. Now show mod values.
+1.5.9 - Small changes and grammar fixes. Fixed the initial values reset in Genesys dice.
 1.5.8 - Reverted "Changelog" to message box. Small fixes.
 1.5.7 - Now the limit for FATE dice and combined Genesys dice is 50.
 1.5.6 - Now the limit of 100 dice is tracking the combined values for 1st and 2nd die.
@@ -118,9 +119,9 @@ def roll():  # Define cualquier dado
                     result.config(text=f'{var_1}\n{var_2}\n= {suma}', fg='green')
             else:
                 if not var_2:
-                    result.config(text=f'{var_1}\n= {suma} + mod\n= {suma + c + f}', fg='green')
+                    result.config(text=f'{var_1}\n= {suma} + mod {c+f}\n= {suma + c + f}', fg='green')
                 else:
-                    result.config(text=f'{var_1}\n{var_2}\n= {suma} + mod\n= {suma + c + f}', fg='green')
+                    result.config(text=f'{var_1}\n{var_2}\n= {suma} + mod {c+f}\n= {suma + c + f}', fg='green')
         else:
             result.config(text='Error:\nEnter a valid number\nDice = 2 - 100\nNumber of dice = 1 - 100', fg='red')
     except ValueError:
@@ -141,11 +142,11 @@ def roll_fate():  # Define el dado usado en FATE, FUDGE y derivados
                 if not cut_4:
                     result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n= {total}', fg='green')
                     if not cut_3:
-                        result.config(text=f'{cut_1}\n{cut_2}\n= {total}', fg='green')
+                        result.config(text=f'{cut_1}\n{cut_2}\n + mod {c}= {total}', fg='green')
                         if not cut_2:
-                            result.config(text=f'{cut_1}\n= {total}', fg='green')
+                            result.config(text=f'{cut_1}\n + mod {c}= {total}', fg='green')
                 else:
-                    result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n= {total}', fg='green')
+                    result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n + mod {c}= {total}', fg='green')
         else:
             result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50', fg='red')
     except ValueError:
