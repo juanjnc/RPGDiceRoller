@@ -18,15 +18,16 @@ def info():
 
 
 def version():  # TODO actualizar los cambios
-    mb.showinfo('Version RPG DR', 'Version 1.5.9')
+    mb.showinfo('Version RPG DR', 'Version 1.5.10')
 
 
 def cambios():  # TODO actualizar los cambios
-    mb.showinfo('Changelog', '''1.5.9 - Small changes and grammar fixes. Fixed the initial values reset in Genesys dice.
+    mb.showinfo('Changelog', '''1.5.10 - New context menu called "Show" for additional dice. Now show mod values.
+1.5.9 - Small changes and grammar fixes. Fixed the initial values reset in Genesys dice.
 1.5.8 - Reverted "Changelog" to message box. Small fixes.
 1.5.7 - Now the limit for FATE dice and combined Genesys dice is 50.
 1.5.6 - Now the limit of 100 dice is tracking the combined values for 1st and 2nd die.
-1.5.5 - Fixed a bug with the 2nd die (rolls using the first die as a exponent). Now shows both dice separately
+1.5.5 - Fixed a bug with the 2nd die (rolls using the first die as an exponent). Now shows both dice separately
 1.5.4 - Improved internal logic. Improved the way to show the results.
 1.5.3 - Changed "User Guide's" and "Changelog" messages box to windows.
 1.5.2 - HOTFIX: Capped values for the second die.\n1.5.1 - Improved stability. Grammar fixing. Adjusted default size.
@@ -89,12 +90,12 @@ def tut_genesys():  # Instrucciones de botón Genesys/SW
     tu_ge_label.pack()
 
 
-def blue_genesys():  # Instrucciones de botón mostrar Genesys
+def mostrar():  # Instrucciones del menú para mostrar más tipos de dados
     tu_sge = Toplevel(raiz)
     tu_sge.resizable(0, 0)
     tu_sge.title('Show Genesys Guide')
-    tu_sge_label = Label(tu_sge, text='Show the Genesys Custom Dice expanding the window.',
-                         justify='left', font=('Arial', 10), bg='white')
+    tu_sge_label = Label(tu_sge, text='Show the list for additional custom dice systems, and create the interface for'
+                                      ' them.', justify='left', font=('Arial', 10), bg='white')
     tu_sge_label.pack()
 
 
@@ -118,16 +119,16 @@ def roll():  # Define cualquier dado
                     result.config(text=f'{var_1}\n{var_2}\n= {suma}', fg='green')
             else:
                 if not var_2:
-                    result.config(text=f'{var_1}\n= {suma} + mod\n= {suma + c + f}', fg='green')
+                    result.config(text=f'{var_1}\n= {suma} + mod {c+f}\n= {suma + c + f}', fg='green')
                 else:
-                    result.config(text=f'{var_1}\n{var_2}\n= {suma} + mod\n= {suma + c + f}', fg='green')
+                    result.config(text=f'{var_1}\n{var_2}\n= {suma} + mod {c+f}\n= {suma + c + f}', fg='green')
         else:
             result.config(text='Error:\nEnter a valid number\nDice = 2 - 100\nNumber of dice = 1 - 100', fg='red')
     except ValueError:
         result.config(text='Error:\nEnter a number', fg='red')
 
 
-def fate():  # Define el dado usado en FATE, FUDGE y derivados
+def roll_fate():  # Define el dado usado en FATE, FUDGE y derivados
     try:
         a, c = int(pool.get()), int(mod.get())
         var = ('+', '-', '0')
@@ -141,18 +142,18 @@ def fate():  # Define el dado usado en FATE, FUDGE y derivados
                 if not cut_4:
                     result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n= {total}', fg='green')
                     if not cut_3:
-                        result.config(text=f'{cut_1}\n{cut_2}\n= {total}', fg='green')
+                        result.config(text=f'{cut_1}\n{cut_2}\n + mod {c}= {total}', fg='green')
                         if not cut_2:
-                            result.config(text=f'{cut_1}\n= {total}', fg='green')
+                            result.config(text=f'{cut_1}\n + mod {c}= {total}', fg='green')
                 else:
-                    result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n= {total}', fg='green')
+                    result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n + mod {c}= {total}', fg='green')
         else:
             result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50', fg='red')
     except ValueError:
         result.config(text='Error:\nEnter a number', fg='red')
 
 
-def rq():  # Define los rangos de cuerpo de BRP y derivados
+def roll_rq():  # Define los rangos de cuerpo de BRP y derivados
     var = ('L. Leg', 'R. Leg', 'Abdomen', 'R. Arm', 'L. Arm', 'Chest', 'Head')
     fin = []
     for i in range(1):
@@ -161,8 +162,9 @@ def rq():  # Define los rangos de cuerpo de BRP y derivados
         result.config(text=f'{fin}', fg='green')
 
 
-def genesys_interfaz():  # Genera toda la interfaz de los dados Genesys
-    def genesys():  # Define los dados del sistema Genesys junto con el dado de fuerza de SW
+def genesys():  # Genera toda la interfaz de los dados Genesys
+
+    def roll_g():  # Define los dados del sistema Genesys junto con el dado de fuerza de SW
         try:
             a, b, c, d = int(boost.get()), int(ability.get()), int(proficiency.get()), int(setback.get())
             e, f, g = int(difficulty.get()), int(challenge.get()), int(force.get())
@@ -234,10 +236,28 @@ def genesys_interfaz():  # Genera toda la interfaz de los dados Genesys
                 result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50', fg='red')
         except ValueError:
             result.config(text='Error:\nEnter a number', fg='red')
+
+    def eliminar_g():
+        boost.destroy()
+        ability.destroy()
+        proficiency.destroy()
+        setback.destroy()
+        difficulty.destroy()
+        challenge.destroy()
+        force.destroy()
+        boost_label.destroy()
+        ability_label.destroy()
+        proficiency_label.destroy()
+        setback_label.destroy()
+        difficulty_label.destroy()
+        challenge_label.destroy()
+        force_label.destroy()
+        btn3.destroy()
+        dados_menu.delete('Delete')
+        raiz.geometry('400x330')
+
     # Ajusta el tamaño de la ventana
     raiz.geometry('800x330')
-    # Destruye el boton que crea la interfaz
-    btn5.destroy()
     # Crean las entradas de los dados
     boost = Entry(cuadro, width=5)
     boost.grid(row=0, column=5, padx=10, pady=10)
@@ -283,8 +303,9 @@ def genesys_interfaz():  # Genera toda la interfaz de los dados Genesys
     force_label = Label(cuadro, justify='right', text='Force Dice: ', font=('Arial', 12))
     force_label.grid(row=2, column=6, padx=10, pady=10, sticky='E')
     # Crea el boton para tirar los dados
-    btn3 = Button(cuadro, text="Genesys/SW", fg='green', command=genesys, font=('Arial', 11), cursor='hand2')
+    btn3 = Button(cuadro, text="Genesys/SW", fg='green', command=roll_g, font=('Arial', 11), cursor='hand2')
     btn3.grid(row=3, column=6, columnspan=2, padx=5, pady=5)
+    dados_menu.add_command(label='Delete', command=eliminar_g, font=('Arial', 10))
 
 
 raiz = Tk()  # Inicio raiz
@@ -295,6 +316,8 @@ barra_menu = Menu(raiz)  # Config de las barras de menu
 archivo_menu = Menu(barra_menu, tearoff=0)
 tutorial_menu = Menu(barra_menu, tearoff=0)
 ayuda_menu = Menu(barra_menu, tearoff=0)
+dados_menu = Menu(barra_menu, tearoff=0)
+
 
 archivo_menu.add_command(label='Exit', command=salir, font=('Arial', 10))
 
@@ -302,15 +325,19 @@ tutorial_menu.add_command(label='Guide', command=tutorial, font=('Arial', 10))
 tutorial_menu.add_command(label='Roll', command=tut_roll, font=('Arial', 10))
 tutorial_menu.add_command(label='FATE', command=tut_fate, font=('Arial', 10))
 tutorial_menu.add_command(label='RuneQuest', command=tut_rq, font=('Arial', 10))
-tutorial_menu.add_command(label='Show Genesys', command=blue_genesys, font=('Arial', 10))
+tutorial_menu.add_command(label='Show Menu', command=mostrar, font=('Arial', 10))
+tutorial_menu.add_separator()
 tutorial_menu.add_command(label='Genesys/SW', command=tut_genesys, font=('Arial', 10))
 
 ayuda_menu.add_command(label='Version', command=version, font=('Arial', 10))
 ayuda_menu.add_command(label='Changelog', command=cambios, font=('Arial', 10))
 ayuda_menu.add_command(label='About...', command=info, font=('Arial', 10))
 
+dados_menu.add_command(label='Genesys', command=genesys, font=('Arial', 10))
+
 barra_menu.add_cascade(label='File', menu=archivo_menu, font=('Arial', 10))
 barra_menu.add_cascade(label='User Guide', menu=tutorial_menu, font=('Arial', 10))
+barra_menu.add_cascade(label='Show', menu=dados_menu, font=('Arial', 10))
 barra_menu.add_cascade(label='Help', menu=ayuda_menu, font=('Arial', 10))
 raiz.config(menu=barra_menu, width=400, height=400)  # Fin de la config de la barra de menu
 
@@ -358,24 +385,20 @@ mod_label.grid(row=2, column=1, padx=10, pady=10, sticky='E')
 btn0 = Button(cuadro, text="Roll", fg='green', command=roll, font=('Arial', 11), cursor='hand2')
 btn0.grid(row=0, column=0, padx=5, pady=5)
 # Boton tirar FATE
-btn1 = Button(cuadro, text="FATE", fg='green', command=fate, font=('Arial', 11), cursor='hand2')
+btn1 = Button(cuadro, text="FATE", fg='green', command=roll_fate, font=('Arial', 11), cursor='hand2')
 btn1.grid(row=1, column=0, padx=5, pady=5)
 # Boton tirar RQ
-btn2 = Button(cuadro, text="RQ\nHit Location", fg='green', command=rq, font=('Arial', 11), cursor='hand2')
+btn2 = Button(cuadro, text="RQ\nHit Location", fg='green', command=roll_rq, font=('Arial', 11), cursor='hand2')
 btn2.grid(row=2, column=0, padx=5, pady=5)
 # btn3 está dentro de Genesys
 # Boton limpiar
 btn4 = Button(cuadro, text="Clear", fg='blue', command=limpiar, font=('Arial', 11), cursor='hand2')
 btn4.grid(row=3, column=0, padx=5, pady=5)
-# Boton mostrar Genesys
-btn5 = Button(cuadro, text="Show Genesys", fg='blue', command=genesys_interfaz, font=('Arial', 11), cursor='hand2')
-btn5.grid(row=3, column=1, padx=5, pady=5, columnspan=2)
-
 cuadro.pack()  # Fin del Cuadro de los botones e inputs
 
 canvas = Canvas(raiz, bg='white', highlightthickness=5, highlightbackground="grey")  # Inicio de Canvas y resultado
 result = Label(canvas, justify='center', text='', font=('Arial', 15), fg='green', bg='white')
 result.pack(expand=YES)
-canvas.pack(expand=YES, fill=BOTH)  # Fin de Canvas y resultado
+canvas.pack(side=BOTTOM, expand=YES, fill=BOTH)  # Fin de Canvas y resultado
 
 raiz.mainloop()  # Fin raiz
