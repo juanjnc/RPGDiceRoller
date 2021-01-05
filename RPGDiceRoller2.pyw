@@ -85,32 +85,66 @@ def mostrar():  # Instrucciones del menú para mostrar más tipos de dados
     tu_sge_label.pack()
 
 
-def genesys():  # Genera toda la interfaz de los dados Genesys
-    def eliminar_g():  # Elimina toda la interfaz de Genesys
-        result.config(text='')
-        boost.destroy()
-        ability.destroy()
-        proficiency.destroy()
-        setback.destroy()
-        difficulty.destroy()
-        challenge.destroy()
-        force.destroy()
-        boost_label.destroy()
-        ability_label.destroy()
-        proficiency_label.destroy()
-        setback_label.destroy()
-        difficulty_label.destroy()
-        challenge_label.destroy()
-        force_label.destroy()
-        btn_g.destroy()
-        menu.dados_menu.delete('Delete')
-        raiz.geometry('400x330')
+class Genesys:  # Genera toda la interfaz de los dados Genesys
+    def __init__(self, container):
+        super().__init__(container)
+        # Ajusta el tamaño de la ventana
+        raiz.geometry('800x330')
+        # Crean las entradas de los dados
+        self.boost = tk.Entry(cuadro, width=5)
+        self.boost.grid(row=0, column=5, padx=10, pady=10)
+        self.boost.config(justify='center', font=('Arial', 12))
+        self.boost.insert(0, 0)
+        self.ability = tk.Entry(cuadro, width=5)
+        self.ability.grid(row=1, column=5, padx=10, pady=10)
+        self.ability.config(justify='center', font=('Arial', 12))
+        self.ability.insert(0, 0)
+        self.proficiency = tk.Entry(cuadro, width=5)
+        self.proficiency.grid(row=2, column=5, padx=10, pady=10)
+        self.proficiency.config(justify='center', font=('Arial', 12))
+        self.proficiency.insert(0, 0)
+        self.setback = tk.Entry(cuadro, width=5)
+        self.setback.grid(row=3, column=5, padx=10, pady=10)
+        self.setback.config(justify='center', font=('Arial', 12))
+        self.setback.insert(0, 0)
+        self.difficulty = tk.Entry(cuadro, width=5)
+        self.difficulty.grid(row=0, column=7, padx=10, pady=10)
+        self.difficulty.config(justify='center', font=('Arial', 12))
+        self.difficulty.insert(0, 0)
+        self.challenge = tk.Entry(cuadro, width=5)
+        self.challenge.grid(row=1, column=7, padx=10, pady=10)
+        self.challenge.config(justify='center', font=('Arial', 12))
+        self.challenge.insert(0, 0)
+        self.force = tk.Entry(cuadro, width=5)
+        self.force.grid(row=2, column=7, padx=10, pady=10)
+        self.force.config(justify='center', font=('Arial', 12))
+        self.force.insert(0, 0)
+        # Crean los textos de los dados
+        self.boost_label = tk.Label(cuadro, justify='right', text='Boost Dice: ', font=('Arial', 12))
+        self.boost_label.grid(row=0, column=4, padx=10, pady=10, sticky='E')
+        self.ability_label = tk.Label(cuadro, justify='right', text='Ability Dice: ', font=('Arial', 12))
+        self.ability_label.grid(row=1, column=4, padx=10, pady=10, sticky='E')
+        self.proficiency_label = tk.Label(cuadro, justify='right', text='Proficiency Dice: ', font=('Arial', 12))
+        self.proficiency_label.grid(row=2, column=4, padx=10, pady=10, sticky='E')
+        self.setback_label = tk.Label(cuadro, justify='right', text='Setback Dice: ', font=('Arial', 12))
+        self.setback_label.grid(row=3, column=4, padx=10, pady=10, sticky='E')
+        self.difficulty_label = tk.Label(cuadro, justify='right', text='Difficulty Dice: ', font=('Arial', 12))
+        self.difficulty_label.grid(row=0, column=6, padx=10, pady=10, sticky='E')
+        self.challenge_label = tk.Label(cuadro, justify='right', text='Challenge Dice: ', font=('Arial', 12))
+        self.challenge_label.grid(row=1, column=6, padx=10, pady=10, sticky='E')
+        self.force_label = tk.Label(cuadro, justify='right', text='Force Dice: ', font=('Arial', 12))
+        self.force_label.grid(row=2, column=6, padx=10, pady=10, sticky='E')
+        # Crea el boton para tirar los dados
+        self.btn3 = tk.Button(cuadro, text="Genesys/SW", fg='green', command=self.roll_g, font=('Arial', 11),
+                              cursor='hand2')
+        self.btn3.grid(row=3, column=6, columnspan=2, padx=5, pady=5)
+        # dados_menu.add_command(label='Delete', command=eliminar_g, font=('Arial', 10))
 
-    def roll_g():  # Define los dados del sistema Genesys junto con el dado de fuerza de SW
+    def roll_g(self):  # Define los dados del sistema Genesys junto con el dado de fuerza de SW
         try:
-            a, b, c = int(boost.get()), int(ability.get()), int(proficiency.get())
-            d, e, f = int(setback.get()), int(difficulty.get()), int(challenge.get())
-            g = int(force.get())
+            a, b, c = int(self.boost.get()), int(self.ability.get()), int(self.proficiency.get())
+            d, e, f = int(self.setback.get()), int(self.difficulty.get()), int(self.challenge.get())
+            g = int(self.force.get())
             var_boost = ('0', 'success', 'advantage', 'advantage, advantage', 'advantage, success')
             var_ability = ('success', 'success, success', '0', 'advantage', 'advantage, success',
                            'advantage, advantage')
@@ -179,82 +213,52 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
                 result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50', fg='red')
         except ValueError:
             result.config(text='Error:\nEnter a number', fg='red')
-    # Ajusta el tamaño de la ventana
-    raiz.geometry('800x330')
-    # Crean las entradas de los dados
-    force_label = tk.Label(cuadro, justify='right', text='Force Dice: ', font=('Arial', 12))
-    challenge_label = tk.Label(cuadro, justify='right', text='Challenge Dice: ', font=('Arial', 12))
-    difficulty_label = tk.Label(cuadro, justify='right', text='Difficulty Dice: ', font=('Arial', 12))
-    setback_label = tk.Label(cuadro, justify='right', text='Setback Dice: ', font=('Arial', 12))
-    proficiency_label = tk.Label(cuadro, justify='right', text='Proficiency Dice: ', font=('Arial', 12))
-    ability_label = tk.Label(cuadro, justify='right', text='Ability Dice: ', font=('Arial', 12))
-    boost_label = tk.Label(cuadro, justify='right', text='Boost Dice: ', font=('Arial', 12))
-    force = tk.Entry(cuadro, width=5)
-    challenge = tk.Entry(cuadro, width=5)
-    difficulty = tk.Entry(cuadro, width=5)
-    setback = tk.Entry(cuadro, width=5)
-    proficiency = tk.Entry(cuadro, width=5)
-    ability = tk.Entry(cuadro, width=5)
-    boost = tk.Entry(cuadro, width=5)
-    boost.grid(row=0, column=5, padx=10, pady=10)
-    boost.config(justify='center', font=('Arial', 12))
-    boost.insert(0, 0)
-    ability.grid(row=1, column=5, padx=10, pady=10)
-    ability.config(justify='center', font=('Arial', 12))
-    ability.insert(0, 0)
-    proficiency.grid(row=2, column=5, padx=10, pady=10)
-    proficiency.config(justify='center', font=('Arial', 12))
-    proficiency.insert(0, 0)
-    setback.grid(row=3, column=5, padx=10, pady=10)
-    setback.config(justify='center', font=('Arial', 12))
-    setback.insert(0, 0)
-    difficulty.grid(row=0, column=7, padx=10, pady=10)
-    difficulty.config(justify='center', font=('Arial', 12))
-    difficulty.insert(0, 0)
-    challenge.grid(row=1, column=7, padx=10, pady=10)
-    challenge.config(justify='center', font=('Arial', 12))
-    challenge.insert(0, 0)
-    force.grid(row=2, column=7, padx=10, pady=10)
-    force.config(justify='center', font=('Arial', 12))
-    force.insert(0, 0)
-    # Crean los textos de los dados
-    boost_label.grid(row=0, column=4, padx=10, pady=10, sticky='E')
-    ability_label.grid(row=1, column=4, padx=10, pady=10, sticky='E')
-    proficiency_label.grid(row=2, column=4, padx=10, pady=10, sticky='E')
-    setback_label.grid(row=3, column=4, padx=10, pady=10, sticky='E')
-    difficulty_label.grid(row=0, column=6, padx=10, pady=10, sticky='E')
-    challenge_label.grid(row=1, column=6, padx=10, pady=10, sticky='E')
-    force_label.grid(row=2, column=6, padx=10, pady=10, sticky='E')
-    # Crea el boton para tirar los dados
-    btn_g = tk.Button(cuadro, text="Genesys/SW", fg='green', command=roll_g, font=('Arial', 11), cursor='hand2')
-    btn_g.grid(row=3, column=6, columnspan=2, padx=5, pady=5)
-    menu.dados_menu.add_command(label='Delete', command=eliminar_g, font=('Arial', 10))
+
+    def eliminar_g(self):
+        result.config(text='')
+        self.boost.destroy()
+        self.ability.destroy()
+        self.proficiency.destroy()
+        self.setback.destroy()
+        self.difficulty.destroy()
+        self.challenge.destroy()
+        self.force.destroy()
+        self.boost_label.destroy()
+        self.ability_label.destroy()
+        self.proficiency_label.destroy()
+        self.setback_label.destroy()
+        self.difficulty_label.destroy()
+        self.challenge_label.destroy()
+        self.force_label.destroy()
+        self.btn3.destroy()
+        #dados_menu.delete('Delete')
+        raiz.geometry('400x330')
 
 
-class Menu(tk.Menu):
-    def __init__(self, container):
-        super().__init__(container)
-        archivo_menu = tk.Menu(self, tearoff=0)
-        tutorial_menu = tk.Menu(self, tearoff=0)
-        ayuda_menu = tk.Menu(self, tearoff=0)
-        dados_menu = tk.Menu(self, tearoff=0)
-        archivo_menu.add_command(label='Exit', command=salir, font=('Arial', 10))
-        tutorial_menu.add_command(label='Guide', command=tutorial, font=('Arial', 10))
-        tutorial_menu.add_command(label='Roll', command=tut_roll, font=('Arial', 10))
-        tutorial_menu.add_command(label='FATE', command=tut_fate, font=('Arial', 10))
-        tutorial_menu.add_command(label='RuneQuest', command=tut_rq, font=('Arial', 10))
-        tutorial_menu.add_command(label='Show Menu', command=mostrar, font=('Arial', 10))
-        tutorial_menu.add_separator()
-        tutorial_menu.add_command(label='Genesys/SW', command=tut_genesys, font=('Arial', 10))
-        ayuda_menu.add_command(label='Version', command=version, font=('Arial', 10))
-        ayuda_menu.add_command(label='Changelog', command=cambios, font=('Arial', 10))
-        ayuda_menu.add_command(label='About...', command=info, font=('Arial', 10))
-        dados_menu.add_command(label='Genesys', command=genesys, font=('Arial', 10))
-        self.add_cascade(label='File', menu=archivo_menu, font=('Arial', 10))
-        self.add_cascade(label='User Guide', menu=tutorial_menu, font=('Arial', 10))
-        self.add_cascade(label='Show', menu=dados_menu, font=('Arial', 10))
-        self.add_cascade(label='Help', menu=ayuda_menu, font=('Arial', 10))
-        raiz.config(menu=self, width=400, height=400)  # Fin de la config de la barra de menu
+
+def menu():
+    barra_menu = tk.Menu(raiz)  # Config de las barras de menu
+    archivo_menu = tk.Menu(barra_menu, tearoff=0)
+    tutorial_menu = tk.Menu(barra_menu, tearoff=0)
+    ayuda_menu = tk.Menu(barra_menu, tearoff=0)
+    dados_menu = tk.Menu(barra_menu, tearoff=0)
+    archivo_menu.add_command(label='Exit', command=salir, font=('Arial', 10))
+    tutorial_menu.add_command(label='Guide', command=tutorial, font=('Arial', 10))
+    tutorial_menu.add_command(label='Roll', command=tut_roll, font=('Arial', 10))
+    tutorial_menu.add_command(label='FATE', command=tut_fate, font=('Arial', 10))
+    tutorial_menu.add_command(label='RuneQuest', command=tut_rq, font=('Arial', 10))
+    tutorial_menu.add_command(label='Show Menu', command=mostrar, font=('Arial', 10))
+    tutorial_menu.add_separator()
+    tutorial_menu.add_command(label='Genesys/SW', command=tut_genesys, font=('Arial', 10))
+    ayuda_menu.add_command(label='Version', command=version, font=('Arial', 10))
+    ayuda_menu.add_command(label='Changelog', command=cambios, font=('Arial', 10))
+    ayuda_menu.add_command(label='About...', command=info, font=('Arial', 10))
+    dados_menu.add_command(label='Genesys', command=Genesys, font=('Arial', 10))
+    barra_menu.add_cascade(label='File', menu=archivo_menu, font=('Arial', 10))
+    barra_menu.add_cascade(label='User Guide', menu=tutorial_menu, font=('Arial', 10))
+    barra_menu.add_cascade(label='Show', menu=dados_menu, font=('Arial', 10))
+    barra_menu.add_cascade(label='Help', menu=ayuda_menu, font=('Arial', 10))
+    raiz.config(menu=barra_menu, width=400, height=400)  # Fin de la config de la barra de menu
 
 
 class Raiz(tk.Tk):
@@ -317,9 +321,10 @@ class Frame(tk.Frame):
         # Boton tirar RQ
         self.btn2 = tk.Button(self, text="RQ\nHit Location", fg='green', command=self.roll_rq, font=('Arial', 11), cursor='hand2')
         self.btn2.grid(row=2, column=0, **options)
+        # btn3 está dentro de Genesys
         # Boton limpiar
-        self.btn3 = tk.Button(self, text="Clear", fg='blue', command=limpiar, font=('Arial', 11), cursor='hand2')
-        self.btn3.grid(row=3, column=0, **options)
+        self.btn4 = tk.Button(self, text="Clear", fg='blue', command=limpiar, font=('Arial', 11), cursor='hand2')
+        self.btn4.grid(row=3, column=0, **options)
         self.pack()  # Fin del Cuadro de los botones e inputs
 
     def roll(self):  # Define cualquier dado
@@ -401,10 +406,10 @@ class Resultado(tk.Label):
         self.pack(**options)
 
 
-if __name__ == "__main__":  # Arranca toda la interfaz
+if __name__ == "__main__":
     raiz = Raiz()
-    menu = Menu(raiz)
     cuadro = Frame(raiz)
     canvas = Lienzo(raiz)
     result = Resultado(canvas)
+    menu()
     raiz.mainloop()
