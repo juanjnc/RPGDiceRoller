@@ -3,86 +3,26 @@ import tkinter as tk
 import random
 
 
-def limpiar():
-    result.config(text='')
-
-
-def salir():
-    valor = mb.askokcancel('Close', 'Are you sure?')
-    if valor is True:
-        raiz.destroy()
-
-
-def info():
+def info():  # Muestra la info de quien lo ha hecho
     mb.showinfo('Info RPG DR', 'Programmed in Python by Juan José Núñez')
 
 
-def version():  # TODO actualizar los cambios
+def version():  # Muestra la version actual TODO actualizar los cambios
     mb.showinfo('Version RPG DR', 'Version 2.0.0')
 
 
-def cambios():  # TODO actualizar los cambios
-    mb.showinfo('Changelog', '''2.0.0 - Remade from the scratch''')
+def cambios():  # Muestra el registro de versiones TODO actualizar los cambios
+    mb.showinfo('Changelog', '''2.0.0 - Remade from the scratch. Now uses a completely new internal logic.''')
 
 
-def tutorial():  # Instrucciones de uso general
-    tu = tk.Toplevel(raiz)
-    tu.resizable(0, 0)
-    tu.title('General Guide')
-    tu_label = tk.Label(tu, text='Fill the text fields with the numbers you want.\n\n\"Number of dice\" indicates '
-                                 'how many dice you want to roll.\n\"Type of dice\" indicates how many sides have '
-                                 'your dice.\n\"Mod value\" can add or subtract the number to the result.\nFATE use '
-                                 'a custom Dice, you can change te amount of it.\nRQ Hit Location use a custom die'
-                                 ' and roll only one.\nIn Genesys Dice they have custom names.',
-                        justify='left', font=('Arial', 10), bg='white')
-    tu_label.pack()
+def limpiar():  # Limpia los resultados
+    result.config(text='')
 
 
-def tut_roll():  # Instrucciones de botón roll
-    tu_ro = tk.Toplevel(raiz)
-    tu_ro.resizable(0, 0)
-    tu_ro.title('Roll Guide')
-    tu_ro_label = tk.Label(tu_ro, text='Fill \"Number of dice\", \"Type of dice\" and \"Mod value\" text fields with the '
-                                      'numbers you want.\nYou can roll two types of dice with his owns mod values, but'
-                                    'first column must be filled. Combined values can not be more of 100 and 1st die '
-                                    'must be at least 2', justify='left', font=('Arial', 10), bg='white')
-    tu_ro_label.pack()
-
-
-def tut_fate():  # Instrucciones de botón fate
-    tu_fa = tk.Toplevel(raiz)
-    tu_fa.resizable(0, 0)
-    tu_fa.title('FATE Guide')
-    tu_fa_label = tk.Label(tu_fa, text='Needs fill \"Number of dice\" and \"Mod value\".',
-                        justify='left', font=('Arial', 10), bg='white')
-    tu_fa_label.pack()
-
-
-def tut_rq():  # Instrucciones de botón RQ
-    tu_rq = tk.Toplevel(raiz)
-    tu_rq.resizable(0, 0)
-    tu_rq.title('RQ Hit Location Guide')
-    tu_rq_label = tk.Label(tu_rq, text='No input needed. Roll once.\nUse the RuneQuest/BRP/Mythras hit location table.',
-                        justify='left', font=('Arial', 10), bg='white')
-    tu_rq_label.pack()
-
-
-def tut_genesys():  # Instrucciones de botón Genesys/SW
-    tu_ge = tk.Toplevel(raiz)
-    tu_ge.resizable(0, 0)
-    tu_ge.title('Genesys Guide')
-    tu_ge_label = tk.Label(tu_ge, text='Needs fill the Genesys Dice and the Star Wars Force Die, can roll with at least'
-                                    ' one die of any type.', justify='left', font=('Arial', 10), bg='white')
-    tu_ge_label.pack()
-
-
-def mostrar():  # Instrucciones del menú para mostrar más tipos de dados
-    tu_sge = tk.Toplevel(raiz)
-    tu_sge.resizable(0, 0)
-    tu_sge.title('Show Genesys Guide')
-    tu_sge_label = tk.Label(tu_sge, text='Show the list for additional custom dice systems, and create the interface for'
-                                      ' them.', justify='left', font=('Arial', 10), bg='white')
-    tu_sge_label.pack()
+def salir():  # Menu de salida de la app
+    valor = mb.askokcancel('Close', 'Are you sure?')
+    if valor is True:
+        raiz.destroy()
 
 
 def genesys():  # Genera toda la interfaz de los dados Genesys
@@ -103,7 +43,7 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
         challenge_label.destroy()
         force_label.destroy()
         btn_g.destroy()
-        menu.dados_menu.delete('Delete')
+        menu.delete('Delete')
         raiz.geometry('400x330')
 
     def roll_g():  # Define los dados del sistema Genesys junto con el dado de fuerza de SW
@@ -225,46 +165,20 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
     difficulty_label.grid(row=0, column=6, padx=10, pady=10, sticky='E')
     challenge_label.grid(row=1, column=6, padx=10, pady=10, sticky='E')
     force_label.grid(row=2, column=6, padx=10, pady=10, sticky='E')
-    # Crea el boton para tirar los dados
+    # Crea el boton para tirar los dados y eliminar la interfaz
     btn_g = tk.Button(cuadro, text="Genesys/SW", fg='green', command=roll_g, font=('Arial', 11), cursor='hand2')
     btn_g.grid(row=3, column=6, columnspan=2, padx=5, pady=5)
-    menu.dados_menu.add_command(label='Delete', command=eliminar_g, font=('Arial', 10))
+    menu.insert_command(5, label='Delete', command=eliminar_g, font=('Arial', 10))
 
 
-class Menu(tk.Menu):
-    def __init__(self, container):
-        super().__init__(container)
-        archivo_menu = tk.Menu(self, tearoff=0)
-        tutorial_menu = tk.Menu(self, tearoff=0)
-        ayuda_menu = tk.Menu(self, tearoff=0)
-        dados_menu = tk.Menu(self, tearoff=0)
-        archivo_menu.add_command(label='Exit', command=salir, font=('Arial', 10))
-        tutorial_menu.add_command(label='Guide', command=tutorial, font=('Arial', 10))
-        tutorial_menu.add_command(label='Roll', command=tut_roll, font=('Arial', 10))
-        tutorial_menu.add_command(label='FATE', command=tut_fate, font=('Arial', 10))
-        tutorial_menu.add_command(label='RuneQuest', command=tut_rq, font=('Arial', 10))
-        tutorial_menu.add_command(label='Show Menu', command=mostrar, font=('Arial', 10))
-        tutorial_menu.add_separator()
-        tutorial_menu.add_command(label='Genesys/SW', command=tut_genesys, font=('Arial', 10))
-        ayuda_menu.add_command(label='Version', command=version, font=('Arial', 10))
-        ayuda_menu.add_command(label='Changelog', command=cambios, font=('Arial', 10))
-        ayuda_menu.add_command(label='About...', command=info, font=('Arial', 10))
-        dados_menu.add_command(label='Genesys', command=genesys, font=('Arial', 10))
-        self.add_cascade(label='File', menu=archivo_menu, font=('Arial', 10))
-        self.add_cascade(label='User Guide', menu=tutorial_menu, font=('Arial', 10))
-        self.add_cascade(label='Show', menu=dados_menu, font=('Arial', 10))
-        self.add_cascade(label='Help', menu=ayuda_menu, font=('Arial', 10))
-        raiz.config(menu=self, width=400, height=400)  # Fin de la config de la barra de menu
-
-
-class Raiz(tk.Tk):
+class Raiz(tk.Tk):  # Crea la ventana principal
     def __init__(self):
         super().__init__()
-        self.title('RPG Dice Roller')
+        self.title('RPG Dice Roller v2')
         self.geometry('400x330')
 
 
-class Frame(tk.Frame):
+class Frame(tk.Frame):  # Gestiona el marco de los botones
     def __init__(self, container):
         super().__init__(container)
         options = {'padx': 10, 'pady': 10}
@@ -315,7 +229,8 @@ class Frame(tk.Frame):
         self.btn1 = tk.Button(self, text="FATE", fg='green', command=self.roll_fate, font=('Arial', 11), cursor='hand2')
         self.btn1.grid(row=1, column=0, **options)
         # Boton tirar RQ
-        self.btn2 = tk.Button(self, text="RQ\nHit Location", fg='green', command=self.roll_rq, font=('Arial', 11), cursor='hand2')
+        self.btn2 = tk.Button(self, text="RQ\nHit Loc", fg='green', command=self.roll_rq, font=('Arial', 11),
+                              cursor='hand2')
         self.btn2.grid(row=2, column=0, **options)
         # Boton limpiar
         self.btn3 = tk.Button(self, text="Clear", fg='blue', command=limpiar, font=('Arial', 11), cursor='hand2')
@@ -385,7 +300,7 @@ class Frame(tk.Frame):
             result.config(text=f'{fin}', fg='green')
 
 
-class Lienzo(tk.Canvas):
+class Lienzo(tk.Canvas):  # Gestiona el lienzo donde se muestra el resultado
     def __init__(self, container):
         super().__init__(container)
         options = {'side': 'bottom', 'expand': 'YES', 'fill': 'both'}
@@ -393,7 +308,101 @@ class Lienzo(tk.Canvas):
         self.pack(**options)
 
 
-class Resultado(tk.Label):
+class Tutorials:  # Almacena todos los tutoriales
+    @staticmethod
+    def tutorial():  # Instrucciones de uso general
+        tu = tk.Toplevel(raiz)
+        tu.resizable(0, 0)
+        tu.title('General Guide')
+        tu_label = tk.Label(tu, text='''Fill the text fields with the numbers you want.\n\n\"Number of dice\" indicates
+         how many dice you want to roll.\n\"Type of dice\" indicates how many sides have your dice.\n\"Mod value\" 
+         can add or subtract the number to the result.\nFATE use a custom Dice, you can change te amount of it.\nRQ 
+         Hit Location use a custom die and roll only one.\nIn Genesys Dice they have custom names.''',
+                            justify='left', font=('Arial', 10), bg='white')
+        tu_label.pack()
+
+    @staticmethod
+    def tut_roll():  # Instrucciones de botón roll
+        tu_ro = tk.Toplevel(raiz)
+        tu_ro.resizable(0, 0)
+        tu_ro.title('Roll Guide')
+        tu_ro_label = tk.Label(tu_ro, text='''Fill \"Number of dice\", \"Type of dice\" and \"Mod value\" text fields
+         with the numbers you want.\nYou can roll two types of dice with his owns mod values, but first column must 
+         be filled. Combined values can not be more of 100 and 1st die must be at least 2''',
+                               justify='left', font=('Arial', 10), bg='white')
+        tu_ro_label.pack()
+
+    @staticmethod
+    def tut_fate():  # Instrucciones de botón fate
+        tu_fa = tk.Toplevel(raiz)
+        tu_fa.resizable(0, 0)
+        tu_fa.title('FATE Guide')
+        tu_fa_label = tk.Label(tu_fa, text='Needs fill \"Number of dice\" and \"Mod value\".',
+                               justify='left', font=('Arial', 10), bg='white')
+        tu_fa_label.pack()
+
+    @staticmethod
+    def tut_rq():  # Instrucciones de botón RQ
+        tu_rq = tk.Toplevel(raiz)
+        tu_rq.resizable(0, 0)
+        tu_rq.title('RQ Hit Location Guide')
+        tu_rq_label = tk.Label(tu_rq, text='No input needed. Roll once.\nUse the RuneQuest/BRP/Mythras hit location'
+                                           ' table.', justify='left', font=('Arial', 10), bg='white')
+        tu_rq_label.pack()
+
+    @staticmethod
+    def tut_genesys():  # Instrucciones de botón Genesys/SW
+        tu_ge = tk.Toplevel(raiz)
+        tu_ge.resizable(0, 0)
+        tu_ge.title('Genesys Guide')
+        tu_ge_label = tk.Label(tu_ge,
+                               text='Needs fill the Genesys Dice and the Star Wars Force Die, can roll with at least'
+                                    ' one die of any type.', justify='left', font=('Arial', 10), bg='white')
+        tu_ge_label.pack()
+
+    @staticmethod
+    def mostrar():  # Instrucciones del menú para mostrar más tipos de dados
+        tu_sge = tk.Toplevel(raiz)
+        tu_sge.resizable(0, 0)
+        tu_sge.title('Show Genesys Guide')
+        tu_sge_label = tk.Label(tu_sge,
+                                text='Show the list for additional custom dice systems, and create the interface'
+                                     ' for them.', justify='left', font=('Arial', 10), bg='white')
+        tu_sge_label.pack()
+
+
+class Menus(tk.Menu):  # Gestiona la barra de menú
+    def __init__(self, container):
+        super().__init__(container)
+        # menu archivo
+        archivo_menu = tk.Menu(self, tearoff=0)
+        archivo_menu.add_command(label='Exit', command=salir, font=('Arial', 10))
+        self.add_cascade(label='File', menu=archivo_menu, font=('Arial', 10))
+        # menu de tutoriales
+        tutorial_menu = tk.Menu(self, tearoff=0)
+        tutorial_menu.add_command(label='Guide', command=Tutorials.tutorial, font=('Arial', 10))
+        tutorial_menu.add_command(label='Roll', command=Tutorials.tut_roll, font=('Arial', 10))
+        tutorial_menu.add_command(label='FATE', command=Tutorials.tut_fate, font=('Arial', 10))
+        tutorial_menu.add_command(label='RuneQuest', command=Tutorials.tut_rq, font=('Arial', 10))
+        tutorial_menu.add_command(label='Show Menu', command=Tutorials.mostrar, font=('Arial', 10))
+        tutorial_menu.add_separator()
+        tutorial_menu.add_command(label='Genesys/SW', command=Tutorials.tut_genesys, font=('Arial', 10))
+        self.add_cascade(label='User Guide', menu=tutorial_menu, font=('Arial', 10))
+        # menu ed ayuda
+        ayuda_menu = tk.Menu(self, tearoff=0)
+        ayuda_menu.add_command(label='Version', command=version, font=('Arial', 10))
+        ayuda_menu.add_command(label='Changelog', command=cambios, font=('Arial', 10))
+        ayuda_menu.add_command(label='About...', command=info, font=('Arial', 10))
+        self.add_cascade(label='Help', menu=ayuda_menu, font=('Arial', 10))
+        # menu de dados adicionales
+        dados_menu = tk.Menu(self, tearoff=0)
+        dados_menu.add_command(label='Genesys', command=genesys, font=('Arial', 10))
+        self.add_cascade(label='Show', menu=dados_menu, font=('Arial', 10))
+        # Cierre
+        raiz.config(menu=self, width=400, height=400)  # Fin de la config de la barra de menu
+
+
+class Resultado(tk.Label):  # Gestiona la etiqueta de resultado
     def __init__(self, container):
         super().__init__(container)
         options = {'expand': 'YES'}
@@ -403,7 +412,7 @@ class Resultado(tk.Label):
 
 if __name__ == "__main__":  # Arranca toda la interfaz
     raiz = Raiz()
-    menu = Menu(raiz)
+    menu = Menus(raiz)
     cuadro = Frame(raiz)
     canvas = Lienzo(raiz)
     result = Resultado(canvas)
