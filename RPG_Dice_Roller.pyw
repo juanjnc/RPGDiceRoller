@@ -22,7 +22,8 @@ def version():  # TODO actualizar los cambios
 
 
 def cambios():  # TODO actualizar los cambios
-    mb.showinfo('Changelog', '''1.5.10.1 - Now "Delete" clear the results.
+    mb.showinfo('Changelog', '''1.5.10.2 - Fix a small display error. Changed name to RPG Dice Roller v1.
+1.5.10.1 - Now "Delete" clear the results.
 1.5.10 - New context menu called "Show" for additional dice. Now show mod values.
 1.5.9 - Small changes and grammar fixes. Fixed the initial values reset in Genesys dice.
 1.5.8 - Reverted "Changelog" to message box. Small fixes.
@@ -311,7 +312,7 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
 
 
 raiz = Tk()  # Inicio raiz
-raiz.title('RPG Dice Roller')
+raiz.title('RPG Dice Roller v1')
 raiz.geometry('400x330')
 
 barra_menu = Menu(raiz)  # Config de las barras de menu
