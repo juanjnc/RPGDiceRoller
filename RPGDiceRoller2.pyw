@@ -8,11 +8,12 @@ def info():  # Muestra la info de quien lo ha hecho
 
 
 def version():  # Muestra la version actual TODO actualizar los cambios
-    mb.showinfo('Version RPG DR', 'Version 2.0.0')
+    mb.showinfo('Version RPG DR', 'Version 2.1.0')
 
 
 def cambios():  # Muestra el registro de versiones TODO actualizar los cambios
-    mb.showinfo('Changelog', '''2.0.0 - Remade from the scratch. Now uses a completely new internal logic.''')
+    mb.showinfo('Changelog', '''2.1.0 - Added Mythras Hit Location die, use a sightly different table.
+2.0.0 - Remade from the scratch. Now uses a completely new internal logic.''')
 
 
 def limpiar():  # Limpia los resultados
@@ -231,10 +232,14 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
         # Boton tirar RQ
         self.btn2 = tk.Button(self, text="RQ\nHit Loc", fg='green', command=self.roll_rq, font=('Arial', 11),
                               cursor='hand2')
-        self.btn2.grid(row=2, column=0, **options)
+        self.btn2.grid(row=3, column=2, **options)
         # Boton limpiar
-        self.btn3 = tk.Button(self, text="Clear", fg='blue', command=limpiar, font=('Arial', 11), cursor='hand2')
+        self.btn3 = tk.Button(self, text="Clear", fg='red', command=limpiar, font=('Arial', 11), cursor='hand2')
         self.btn3.grid(row=3, column=0, **options)
+        # Boton tirar Mythras
+        self.btn4 = tk.Button(self, text="Mythras\nHit Loc", fg='green', command=self.roll_mythras,
+                              font=('Arial', 11), cursor='hand2')
+        self.btn4.grid(row=3, column=1, **options)
         self.pack()  # Fin del Cuadro de los botones e inputs
 
     def roll(self):  # Define cualquier dado
@@ -299,6 +304,14 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
             fin.extend(n)
             result.config(text=f'{fin}', fg='green')
 
+    def roll_mythras(self):  # Define los rangos de cuerpo de BRP y derivados
+        var = ('L. Leg', 'R. Leg', 'Abdomen', 'R. Arm', 'L. Arm', 'Chest', 'Head')
+        fin = []
+        for i in range(1):
+            n = random.choices(var, weights=[3, 3, 3, 3, 3, 3, 2])
+            fin.extend(n)
+            result.config(text=f'{fin}', fg='green')
+
 
 class Lienzo(tk.Canvas):  # Gestiona el lienzo donde se muestra el resultado
     def __init__(self, container):
@@ -314,10 +327,11 @@ class Tutorials:  # Almacena todos los tutoriales
         tu = tk.Toplevel(raiz)
         tu.resizable(0, 0)
         tu.title('General Guide')
-        tu_label = tk.Label(tu, text='''Fill the text fields with the numbers you want.\n\n\"Number of dice\" indicates
-         how many dice you want to roll.\n\"Type of dice\" indicates how many sides have your dice.\n\"Mod value\" 
-         can add or subtract the number to the result.\nFATE use a custom Dice, you can change te amount of it.\nRQ 
-         Hit Location use a custom die and roll only one.\nIn Genesys Dice they have custom names.''',
+        tu_label = tk.Label(tu, text='\nFill the text fields with the numbers you want.\n\n\"Number of dice\" indicates'
+                                     ' how many dice you want to roll.\n\"Type of dice\" indicates how many sides have'
+                                     ' your dice.\n\"Mod value\" can add or subtract the number to the result.\nFATE '
+                                     'use a custom Dice, you can change te amount of it.\nRQ Hit Location use a custom'
+                                     ' die and roll only one.\nIn Genesys Dice they have custom names.\n',
                             justify='left', font=('Arial', 10), bg='white')
         tu_label.pack()
 
@@ -326,9 +340,10 @@ class Tutorials:  # Almacena todos los tutoriales
         tu_ro = tk.Toplevel(raiz)
         tu_ro.resizable(0, 0)
         tu_ro.title('Roll Guide')
-        tu_ro_label = tk.Label(tu_ro, text='''Fill \"Number of dice\", \"Type of dice\" and \"Mod value\" text fields
-         with the numbers you want.\nYou can roll two types of dice with his owns mod values, but first column must 
-         be filled. Combined values can not be more of 100 and 1st die must be at least 2''',
+        tu_ro_label = tk.Label(tu_ro, text='\nFill \"Number of dice\", \"Type of dice\" and \"Mod value\" text fields'
+                                           ' with the numbers you want.\nYou can roll two types of dice with his owns'
+                                           ' mod values, but first column must be filled.\nCombined values can not be'
+                                           ' more of 100 and 1st die must be at least 2\n',
                                justify='left', font=('Arial', 10), bg='white')
         tu_ro_label.pack()
 
@@ -337,7 +352,7 @@ class Tutorials:  # Almacena todos los tutoriales
         tu_fa = tk.Toplevel(raiz)
         tu_fa.resizable(0, 0)
         tu_fa.title('FATE Guide')
-        tu_fa_label = tk.Label(tu_fa, text='Needs fill \"Number of dice\" and \"Mod value\".',
+        tu_fa_label = tk.Label(tu_fa, text='\nNeeds fill \"Number of dice\" and \"Mod value\".\n',
                                justify='left', font=('Arial', 10), bg='white')
         tu_fa_label.pack()
 
@@ -346,8 +361,17 @@ class Tutorials:  # Almacena todos los tutoriales
         tu_rq = tk.Toplevel(raiz)
         tu_rq.resizable(0, 0)
         tu_rq.title('RQ Hit Location Guide')
-        tu_rq_label = tk.Label(tu_rq, text='No input needed. Roll once.\nUse the RuneQuest/BRP/Mythras hit location'
-                                           ' table.', justify='left', font=('Arial', 10), bg='white')
+        tu_rq_label = tk.Label(tu_rq, text='\nNo input needed. Roll once.\nUse the RuneQuest/BRP humanoid hit location'
+                                           ' table.\n', justify='left', font=('Arial', 10), bg='white')
+        tu_rq_label.pack()
+
+    @staticmethod
+    def tut_mythras():  # Instrucciones de botón RQ
+        tu_rq = tk.Toplevel(raiz)
+        tu_rq.resizable(0, 0)
+        tu_rq.title('RQ Hit Location Guide')
+        tu_rq_label = tk.Label(tu_rq, text='\nNo input needed. Roll once.\nUse the Mythras humanoid hit location'
+                                           ' table.\n', justify='left', font=('Arial', 10), bg='white')
         tu_rq_label.pack()
 
     @staticmethod
@@ -384,6 +408,7 @@ class Menus(tk.Menu):  # Gestiona la barra de menú
         tutorial_menu.add_command(label='Roll', command=Tutorials.tut_roll, font=('Arial', 10))
         tutorial_menu.add_command(label='FATE', command=Tutorials.tut_fate, font=('Arial', 10))
         tutorial_menu.add_command(label='RuneQuest', command=Tutorials.tut_rq, font=('Arial', 10))
+        tutorial_menu.add_command(label='Mythras', command=Tutorials.tut_rq, font=('Arial', 10))
         tutorial_menu.add_command(label='Show Menu', command=Tutorials.mostrar, font=('Arial', 10))
         tutorial_menu.add_separator()
         tutorial_menu.add_command(label='Genesys/SW', command=Tutorials.tut_genesys, font=('Arial', 10))
