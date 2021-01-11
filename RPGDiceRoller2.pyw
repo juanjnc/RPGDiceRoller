@@ -8,11 +8,12 @@ def info():  # Muestra la info de quien lo ha hecho
 
 
 def version():  # Muestra la version actual TODO actualizar los cambios
-    mb.showinfo('Version RPG DR', 'Version 2.1.0')
+    mb.showinfo('Version RPG DR', 'Version 2.1.1')
 
 
 def cambios():  # Muestra el registro de versiones TODO actualizar los cambios
-    mb.showinfo('Changelog', '''2.1.0 - Added Mythras Hit Location die, use a sightly different table.
+    mb.showinfo('Changelog', '''2.1.1 - Minor fixes and clarifications in the user guide's menus.
+2.1.0 - Added Mythras Hit Location die, use a sightly different table.
 2.0.0 - Remade from the scratch. Now uses a completely new internal logic.''')
 
 
@@ -234,7 +235,7 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
                               cursor='hand2')
         self.btn2.grid(row=3, column=2, **options)
         # Boton limpiar
-        self.btn3 = tk.Button(self, text="Clear", fg='red', command=limpiar, font=('Arial', 11), cursor='hand2')
+        self.btn3 = tk.Button(self, text="Clear", fg='red', command=limpiar, font=('Arial', 14), cursor='hand2')
         self.btn3.grid(row=3, column=0, **options)
         # Boton tirar Mythras
         self.btn4 = tk.Button(self, text="Mythras\nHit Loc", fg='green', command=self.roll_mythras,
@@ -341,10 +342,11 @@ class Tutorials:  # Almacena todos los tutoriales
         tu_ro.resizable(0, 0)
         tu_ro.title('Roll Guide')
         tu_ro_label = tk.Label(tu_ro, text='\nFill \"Number of dice\", \"Type of dice\" and \"Mod value\" text fields'
-                                           ' with the numbers you want.\nYou can roll two types of dice with his owns'
+                                           ' with the numbers you want.\n\nYou can roll two types of dice with his owns'
                                            ' mod values, but first column must be filled.\nCombined values can not be'
-                                           ' more of 100 and 1st die must be at least 2\n',
-                               justify='left', font=('Arial', 10), bg='white')
+                                           ' more of 100 for Number of dice.'
+                                           '\n1st die must be at least 2 and second die can be 0 but not 1.'
+                                           '\n', justify='left', font=('Arial', 10), bg='white')
         tu_ro_label.pack()
 
     @staticmethod
@@ -369,7 +371,7 @@ class Tutorials:  # Almacena todos los tutoriales
     def tut_mythras():  # Instrucciones de botón RQ
         tu_rq = tk.Toplevel(raiz)
         tu_rq.resizable(0, 0)
-        tu_rq.title('RQ Hit Location Guide')
+        tu_rq.title('Mythras Hit Location Guide')
         tu_rq_label = tk.Label(tu_rq, text='\nNo input needed. Roll once.\nUse the Mythras humanoid hit location'
                                            ' table.\n', justify='left', font=('Arial', 10), bg='white')
         tu_rq_label.pack()
@@ -390,8 +392,8 @@ class Tutorials:  # Almacena todos los tutoriales
         tu_sge.resizable(0, 0)
         tu_sge.title('Show Genesys Guide')
         tu_sge_label = tk.Label(tu_sge,
-                                text='Show the list for additional custom dice systems, and create the interface'
-                                     ' for them.', justify='left', font=('Arial', 10), bg='white')
+                                text='\nShow the list for additional custom dice systems, and create the interface'
+                                     ' for them.\n', justify='left', font=('Arial', 10), bg='white')
         tu_sge_label.pack()
 
 
@@ -408,7 +410,7 @@ class Menus(tk.Menu):  # Gestiona la barra de menú
         tutorial_menu.add_command(label='Roll', command=Tutorials.tut_roll, font=('Arial', 10))
         tutorial_menu.add_command(label='FATE', command=Tutorials.tut_fate, font=('Arial', 10))
         tutorial_menu.add_command(label='RuneQuest', command=Tutorials.tut_rq, font=('Arial', 10))
-        tutorial_menu.add_command(label='Mythras', command=Tutorials.tut_rq, font=('Arial', 10))
+        tutorial_menu.add_command(label='Mythras', command=Tutorials.tut_mythras, font=('Arial', 10))
         tutorial_menu.add_command(label='Show Menu', command=Tutorials.mostrar, font=('Arial', 10))
         tutorial_menu.add_separator()
         tutorial_menu.add_command(label='Genesys/SW', command=Tutorials.tut_genesys, font=('Arial', 10))
