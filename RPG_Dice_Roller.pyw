@@ -18,7 +18,7 @@ def info():
 
 
 def version():  # TODO actualizar los cambios
-    mb.showinfo('Version RPG DR', 'Version 1.5.10.1')
+    mb.showinfo('Version RPG DR', 'Version 1.5.10.2')
 
 
 def cambios():  # TODO actualizar los cambios
