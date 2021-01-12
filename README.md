@@ -8,9 +8,9 @@ Para usar el programa:
 
 a)  Si usas Python 3.6 o superior solo necesitas descargarte el archivo RPGDiceRoller2.pyw.
 
-b)  Si necesitas pasarlo a EXE necesitas descargarte instalar py2exe (http://www.py2exe.org/) (https://pypi.org/project/py2exe/) y ejecutar según las indicaciones de su web (http://www.py2exe.org/index.cgi/Tutorial). Alternativamente puedes usar PyInstalle (https://www.pyinstaller.org/) (https://pypi.org/project/pyinstaller/) y ejecutar según las indicaciones de su web (recordad añadir --noconsole al final para que se ejecute solo en ventana.
+b)  Si necesitas pasarlo a EXE necesitas descargarte instalar py2exe (http://www.py2exe.org/) (https://pypi.org/project/py2exe/) y ejecutar según las indicaciones de su web (http://www.py2exe.org/index.cgi/Tutorial). Alternativamente puedes usar PyInstaller (https://www.pyinstaller.org/) (https://pypi.org/project/pyinstaller/) y ejecutar según las indicaciones de su web (recordad añadir --noconsole al final para que se ejecute solo en ventana.
 
-c)  Si no puedes/tienes ninguno de los dos descarga el archivo comprimido en ZIP (RPGDiceRoller2.zip), esto requiere que tengas el último VCRedist instalado (https://support.microsoft.com/es-es/help/2977003/the-latest-supported-visual-c-downloads). Se que esta opción funciona en Win10 de 64 bits.
+c)  Si no puedes/tienes ninguno de los dos descarga el archivo comprimido en ZIP (RPGDiceRoller2.zip), esto puede requierir que tengas el último VCRedist instalado (https://support.microsoft.com/es-es/help/2977003/the-latest-supported-visual-c-downloads). Se que esta opción funciona en Win10 de 64 bits.
 
 d) Tambien puedes instalar el programa descargando el archivo Setup_RPGDiceRoller.exe dentro de la carpeta Output
 
