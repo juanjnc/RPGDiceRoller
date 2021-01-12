@@ -12,7 +12,7 @@ b)  Si necesitas pasarlo a EXE necesitas descargarte instalar py2exe (http://www
 
 c)  Si no puedes/tienes ninguno de los dos descarga el archivo comprimido en ZIP (RPGDiceRoller2.zip), esto requiere que tengas el último VCRedist instalado (https://support.microsoft.com/es-es/help/2977003/the-latest-supported-visual-c-downloads). Se que esta opción funciona en Win10 de 64 bits.
 
-d) Tambien puedes instalar el programas descargando el archivo Setup_RPGDiceRoller2.exe
+d) Tambien puedes instalar el programas descargando el archivo Setup_RPGDiceRoller2.exe dentro de la carpeta Output
 
 Sobre la versión 1.x...
 La versión 1 se conserva por motivos de tener registro de la evolución de mis habilidades, no se recomienda su uso porque no recibe soporte.
