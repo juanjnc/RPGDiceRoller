@@ -1,3 +1,4 @@
+2.1.1.1 - Optimized and reduced code. Minor fixes.
 2.1.1 - Minor fixes and clarifications in the user guide's menus.
 2.1.0 - Added Mythras Hit Location die, use a sightly different table. Small fixes.
 2.0.0 - Remade from the scratch. Now uses a completely new internal logic.
