@@ -8,11 +8,12 @@ def info():  # Muestra la info de quien lo ha hecho
 
 
 def version():  # Muestra la version actual TODO actualizar los cambios
-    mb.showinfo('Version RPG DR', 'Version 2.1.1.1')
+    mb.showinfo('Version RPG DR', 'Version 2.1.1.2')
 
 
 def cambios():  # Muestra el registro de versiones TODO actualizar los cambios
-    mb.showinfo('Changelog', '''2.1.1.1 - Optimized and reduced code. Minor fixes.
+    mb.showinfo('Changelog', '''2.1.1.2 - The Error for empty text fields now resets the "mod fields" and 2nd dice. Most common source of this error.
+2.1.1.1 - Optimized and reduced code. Minor fixes.
 2.1.1 - Minor fixes and clarifications in the user guide's menus.
 2.1.0 - Added Mythras Hit Location die, use a sightly different table.
 2.0.0 - Remade from the scratch. Now uses a completely new internal logic.''')
@@ -105,6 +106,7 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
                 result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50', fg='red')
         except ValueError:
             result.config(text='Error:\nEnter a number', fg='red')
+
     # Ajusta el tamaño de la ventana
     raiz.geometry('800x330')
     # Crean los textos de los dados
@@ -176,7 +178,7 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
         self.dado_2.config(justify='center', font=('Arial', 12)), self.dado_2.insert(0, 0)
         # Segundo modificador
         self.mod_2 = tk.Entry(self, width=5)
-        self.mod_2.grid(row=2, column=3,  **opt)
+        self.mod_2.grid(row=2, column=3, **opt)
         self.mod_2.config(justify='center', font=('Arial', 12)), self.mod_2.insert(0, 0)
         # Etiqueta cantidad de dados
         self.pool_label = tk.Label(self, justify='right', text='nº of Dice: ', font=('Arial', 12))
@@ -235,6 +237,8 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
                               fg='red')
         except ValueError:
             result.config(text='Error:\nEnter a number', fg='red')
+            self.mod.delete(0, 10), self.mod.insert(0, 0), self.mod_2.delete(0, 10), self.mod_2.insert(0, 0)
+            self.dado_2.delete(0, 10), self.dado_2.insert(0, 0), self.pool_2.delete(0, 10), self.pool_2.insert(0, 0)
 
     def roll_fate(self):  # Define el dado usado en FATE, FUDGE y derivados
         try:
@@ -257,7 +261,7 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
             else:
                 result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50', fg='red')
         except ValueError:
-            result.config(text='Error:\nEnter a number', fg='red')
+            result.config(text='Error:\nEnter a number', fg='red'), self.mod.delete(0, 10), self.mod.insert(0, 0)
 
     def roll_rq(self):  # Define los rangos de cuerpo de BRP y derivados
         var, fin = ('L. Leg', 'R. Leg', 'Abdomen', 'R. Arm', 'L. Arm', 'Chest', 'Head'), []
@@ -333,8 +337,8 @@ class Tutorials:  # Almacena todos los tutoriales
         tu_ge = tk.Toplevel(raiz)
         tu_ge.resizable(0, 0), tu_ge.title('Genesys Guide')
         tu_ge_label = tk.Label(tu_ge,
-                               text='Needs fill the Genesys Dice and the Star Wars Force Die, can roll with at least'
-                                    ' one die of any type.', justify='left', font=('Arial', 10), bg='white')
+                               text='\nNeeds fill the Genesys Dice and the Star Wars Force Die, can roll with at least'
+                                    ' one die of any type.\n', justify='left', font=('Arial', 10), bg='white')
         tu_ge_label.pack()
 
     @staticmethod
