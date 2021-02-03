@@ -1,3 +1,4 @@
+2.2.0 - Added icons. Change some buttons colors.
 2.1.1.2 - The error for empty text fields now resets the "mod fields" and 2nd dice. Most common source of this error.
 2.1.1.1 - Optimized and reduced code. Minor fixes.
 2.1.1 - Minor fixes and clarifications in the user guide's menus.

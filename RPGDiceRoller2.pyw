@@ -4,15 +4,16 @@ import random
 
 
 def info():  # Muestra la info de quien lo ha hecho
-    mb.showinfo('Info RPG DR', 'Programmed in Python by Juan José Núñez')
+    mb.showinfo('Info RPG DR', 'Programmed in Python by Juan José Núñez.\nIcons made by Ana Canalejo')
 
 
 def version():  # Muestra la version actual TODO actualizar los cambios
-    mb.showinfo('Version RPG DR', 'Version 2.1.1.2')
+    mb.showinfo('Version RPG DR', 'Version 2.2.0')
 
 
 def cambios():  # Muestra el registro de versiones TODO actualizar los cambios
-    mb.showinfo('Changelog', '''2.1.1.2 - The Error for empty text fields now resets the "mod fields" and 2nd dice. Most common source of this error.
+    mb.showinfo('Changelog', '''2.2.0 - Added icons. Change some buttons colors.
+2.1.1.2 - The Error for empty text fields now resets the "mod fields" and 2nd dice. Most common source of this error.
 2.1.1.1 - Optimized and reduced code. Minor fixes.
 2.1.1 - Minor fixes and clarifications in the user guide's menus.
 2.1.0 - Added Mythras Hit Location die, use a sightly different table.
@@ -31,21 +32,21 @@ def salir():  # Menu de salida de la app
 
 def genesys():  # Genera toda la interfaz de los dados Genesys
     def eliminar_g():  # Elimina toda la interfaz de Genesys
-        result.config(text=''), bst.destroy(), abi.destroy(), prof.destroy(), sbak.destroy(), diff.destroy()
+        result.config(text=''), bst.destroy(), abi.destroy(), prof.destroy(), set_.destroy(), diff.destroy()
         cha.destroy(), frc.destroy(), bst_label.destroy(), abi_label.destroy(), prof_label.destroy()
-        sbak_label.destroy(), diff_label.destroy(), cha_label.destroy(), frc_label.destroy(), btn_g.destroy()
+        set_label.destroy(), diff_label.destroy(), cha_label.destroy(), frc_label.destroy(), btn_g.destroy()
         menu.delete('Delete'), raiz.geometry('400x330')
 
     def roll_g():  # Define los dados del sistema Genesys junto con el dado de fuerza de SW
         try:
             a, b, c = int(bst.get()), int(abi.get()), int(prof.get())
-            d, e, f = int(sbak.get()), int(diff.get()), int(cha.get())
+            d, e, f = int(set_.get()), int(diff.get()), int(cha.get())
             g = int(frc.get())
             var_bst = ('0', 'success', 'advantage', 'advantage, advantage', 'advantage, success')
             var_abi = ('success', 'success, success', '0', 'advantage', 'advantage, success', 'advantage, advantage')
             var_prof = ('0', 'triumph', 'success', 'advantage', 'success, success', 'advantage, advantage',
                         'advantage, success')
-            var_sbak = ('success', 'success, success', '0', 'advantage', 'advantage, success', 'advantage, advantage')
+            var_set = ('success', 'success, success', '0', 'advantage', 'advantage, success', 'advantage, advantage')
             var_diff = ('failure', 'failure, failure', '0', 'threat', 'threat, failure', 'threat, threat')
             var_cha = ('failure', 'failure, failure', '0', 'threat', 'threat, failure', 'threat, threat', 'despair')
             var_frc = ('DARK', 'LIGHT', 'DARK, DARK', 'LIGHT, LIGHT')
@@ -61,7 +62,7 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
                     n = random.choices(var_prof, weights=[1, 1, 2, 1, 2, 2, 3])
                     fin.extend(n)
                 for jj in range(d):
-                    n = random.choices(var_sbak, weights=[2, 1, 1, 2, 1, 1])
+                    n = random.choices(var_set, weights=[2, 1, 1, 2, 1, 1])
                     fin.extend(n)
                 for iii in range(e):
                     n = random.choices(var_diff, weights=[1, 2, 3, 3, 1, 1])
@@ -116,8 +117,8 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
     cha_label.grid(row=1, column=6, padx=10, pady=10, sticky='E')
     diff_label = tk.Label(cuadro, justify='right', text='Difficulty Dice: ', font=('Arial', 12))
     diff_label.grid(row=0, column=6, padx=10, pady=10, sticky='E')
-    sbak_label = tk.Label(cuadro, justify='right', text='Setback Dice: ', font=('Arial', 12))
-    sbak_label.grid(row=3, column=4, padx=10, pady=10, sticky='E')
+    set_label = tk.Label(cuadro, justify='right', text='Setback Dice: ', font=('Arial', 12))
+    set_label.grid(row=3, column=4, padx=10, pady=10, sticky='E')
     prof_label = tk.Label(cuadro, justify='right', text='Proficiency Dice: ', font=('Arial', 12))
     prof_label.grid(row=2, column=4, padx=10, pady=10, sticky='E')
     abi_label = tk.Label(cuadro, justify='right', text='Ability Dice: ', font=('Arial', 12))
@@ -131,8 +132,8 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
     cha.grid(row=1, column=7, padx=10, pady=10), cha.config(justify='center', font=('Arial', 12)), cha.insert(0, 0)
     diff = tk.Entry(cuadro, width=5)
     diff.grid(row=0, column=7, padx=10, pady=10), diff.config(justify='center', font=('Arial', 12)), diff.insert(0, 0)
-    sbak = tk.Entry(cuadro, width=5)
-    sbak.grid(row=3, column=5, padx=10, pady=10), sbak.config(justify='center', font=('Arial', 12)), sbak.insert(0, 0)
+    set_ = tk.Entry(cuadro, width=5)
+    set_.grid(row=3, column=5, padx=10, pady=10), set_.config(justify='center', font=('Arial', 12)), set_.insert(0, 0)
     prof = tk.Entry(cuadro, width=5)
     prof.grid(row=2, column=5, padx=10, pady=10), prof.config(justify='center', font=('Arial', 12)), prof.insert(0, 0)
     abi = tk.Entry(cuadro, width=5)
@@ -148,7 +149,7 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
 class Raiz(tk.Tk):  # Crea la ventana principal
     def __init__(self):
         super().__init__()
-        self.title('RPG Dice Roller v2'), self.geometry('400x330')
+        self.title('RPG Dice Roller v2'), self.geometry('400x330'), self.iconbitmap(None)  # TODO icono
 
 
 class Frame(tk.Frame):  # Gestiona el marco de los botones
@@ -196,14 +197,14 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
         self.btn1 = tk.Button(self, text="FATE", fg='green', command=self.roll_fate, font=('Arial', 11), cursor='hand2')
         self.btn1.grid(row=1, column=0, **opt)
         # Botón tirar RQ
-        self.btn2 = tk.Button(self, text="RQ\nHit Loc", fg='green', command=self.roll_rq, font=('Arial', 11),
+        self.btn2 = tk.Button(self, text="RQ\nHit Loc", fg='blue', command=self.roll_rq, font=('Arial', 11),
                               cursor='hand2')
         self.btn2.grid(row=3, column=2, **opt)
         # Botón limpiar
         self.btn3 = tk.Button(self, text="Clear", fg='red', command=limpiar, font=('Arial', 14), cursor='hand2')
         self.btn3.grid(row=3, column=0, **opt)
         # Botón tirar Mythras
-        self.btn4 = tk.Button(self, text="Mythras\nHit Loc", fg='green', command=self.roll_mythras,
+        self.btn4 = tk.Button(self, text="Mythras\nHit Loc", fg='blue', command=self.roll_mythras,
                               font=('Arial', 11), cursor='hand2')
         self.btn4.grid(row=3, column=1, **opt)
         self.pack()  # Fin del Cuadro de los botones e inputs
