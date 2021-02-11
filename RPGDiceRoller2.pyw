@@ -1,23 +1,19 @@
 import tkinter as tk
 from tkinter import messagebox as mb
-import random
+from random import choices, randint
+from os import startfile
 
 
 def info():  # Muestra la info de quien lo ha hecho
-    mb.showinfo('Info RPG DR', 'Programmed in Python by Juan José Núñez.\nIcons made by Ana Canalejo')
+    mb.showinfo('Info RPG DR 2', 'Programmed in Python by Juan José Núñez.\nIcons made by Ana Canalejo')
 
 
 def version():  # Muestra la version actual TODO actualizar los cambios
-    mb.showinfo('Version RPG DR', 'Version 2.2.0')
+    mb.showinfo('Version RPG DR 2', 'Version 2.2.0')
 
 
 def cambios():  # Muestra el registro de versiones TODO actualizar los cambios
-    mb.showinfo('Changelog', '''2.2.0 - Added icons. Change some buttons colors.
-2.1.1.2 - The Error for empty text fields now resets the "mod fields" and 2nd dice. Most common source of this error.
-2.1.1.1 - Optimized and reduced code. Minor fixes.
-2.1.1 - Minor fixes and clarifications in the user guide's menus.
-2.1.0 - Added Mythras Hit Location die, use a sightly different table.
-2.0.0 - Remade from the scratch. Now uses a completely new internal logic.''')
+    startfile('CHANGELOG.txt')
 
 
 def limpiar():  # Limpia los resultados
@@ -53,25 +49,25 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
             fin = []
             if 50 >= a + b + c + d + e + f + g > 0:
                 for i in range(a):
-                    n = random.choices(var_bst, weights=[2, 1, 1, 1, 1])
+                    n = choices(var_bst, weights=[2, 1, 1, 1, 1])
                     fin.extend(n)
                 for j in range(b):
-                    n = random.choices(var_abi, weights=[2, 1, 1, 2, 1, 1])
+                    n = choices(var_abi, weights=[2, 1, 1, 2, 1, 1])
                     fin.extend(n)
                 for ii in range(c):
-                    n = random.choices(var_prof, weights=[1, 1, 2, 1, 2, 2, 3])
+                    n = choices(var_prof, weights=[1, 1, 2, 1, 2, 2, 3])
                     fin.extend(n)
                 for jj in range(d):
-                    n = random.choices(var_set, weights=[2, 1, 1, 2, 1, 1])
+                    n = choices(var_set, weights=[2, 1, 1, 2, 1, 1])
                     fin.extend(n)
                 for iii in range(e):
-                    n = random.choices(var_diff, weights=[1, 2, 3, 3, 1, 1])
+                    n = choices(var_diff, weights=[1, 2, 3, 3, 1, 1])
                     fin.extend(n)
                 for jjj in range(f):
-                    n = random.choices(var_cha, weights=[2, 2, 1, 2, 2, 2, 1])
+                    n = choices(var_cha, weights=[2, 2, 1, 2, 2, 2, 1])
                     fin.extend(n)
                 for iv in range(g):
-                    n = random.choices(var_frc, weights=[6, 2, 1, 3])
+                    n = choices(var_frc, weights=[6, 2, 1, 3])
                     fin.extend(n)
                 suc = fin.count('success') + 2 * fin.count('success, success') + fin.count('advantage, success')
                 adv = fin.count('advantage') + 2 * fin.count('advantage, advantage') + fin.count('advantage, success')
@@ -216,10 +212,10 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
             var_1, var_2 = [], []
             if (101 > b > 1) and (101 > e >= 0) and (101 > a + d > 0) and (a != 0) and (e != 1):
                 for i in range(a):
-                    n = random.randint(1, b)
+                    n = randint(1, b)
                     var_1.append(n)
                 for j in range(d):
-                    m = random.randint(1, e)
+                    m = randint(1, e)
                     var_2.append(m)
                 suma = sum(var_1 + var_2)
                 if c == 0 and f == 0:
@@ -247,7 +243,7 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
             var, fin = ('+', '-', '0'), []
             if 51 > a > 0:
                 for i in range(a):
-                    n = random.choices(var, weights=[2, 2, 2])
+                    n = choices(var, weights=[2, 2, 2])
                     fin.extend(n)
                     total = fin.count('+') - fin.count('-') + c
                     cut_1, cut_2, cut_3, cut_4 = fin[:12], fin[12:24], fin[24:36], fin[36:]
@@ -267,13 +263,13 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
     def roll_rq(self):  # Define los rangos de cuerpo de BRP y derivados
         var, fin = ('L. Leg', 'R. Leg', 'Abdomen', 'R. Arm', 'L. Arm', 'Chest', 'Head'), []
         for i in range(1):
-            n = random.choices(var, weights=[4, 4, 3, 3, 3, 1, 2])
+            n = choices(var, weights=[4, 4, 3, 3, 3, 1, 2])
             fin.extend(n), result.config(text=f'{fin}', fg='green')
 
     def roll_mythras(self):  # Define los rangos de cuerpo de BRP y derivados
         var, fin = ('L. Leg', 'R. Leg', 'Abdomen', 'R. Arm', 'L. Arm', 'Chest', 'Head'), []
         for i in range(1):
-            n = random.choices(var, weights=[3, 3, 3, 3, 3, 3, 2])
+            n = choices(var, weights=[3, 3, 3, 3, 3, 3, 2])
             fin.extend(n), result.config(text=f'{fin}', fg='green')
 
 
