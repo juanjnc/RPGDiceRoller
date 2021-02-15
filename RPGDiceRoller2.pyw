@@ -1,18 +1,18 @@
 import tkinter as tk
 from tkinter import messagebox as mb
-from random import choices, randint
-from os import startfile
+from random import choices, randint  # Solo los módulos utilizados
+from os import startfile  # De momento la única función usada
 
 
 def info():  # Muestra la info de quien lo ha hecho
     mb.showinfo('Info RPG DR 2', 'Programmed in Python by Juan José Núñez.\nIcons made by Ana Canalejo')
 
 
-def version():  # Muestra la version actual TODO actualizar los cambios
+def version():  # Muestra la version actual
     mb.showinfo('Version RPG DR 2', 'Version 2.2.0')
 
 
-def cambios():  # Muestra el registro de versiones TODO actualizar los cambios
+def cambios():  # Muestra el registro de versiones
     startfile('CHANGELOG.txt')
 
 
@@ -260,13 +260,15 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
         except ValueError:
             result.config(text='Error:\nEnter a number', fg='red'), self.mod.delete(0, 10), self.mod.insert(0, 0)
 
-    def roll_rq(self):  # Define los rangos de cuerpo de BRP y derivados
+    @staticmethod
+    def roll_rq():  # Define los rangos de cuerpo de BRP y derivados
         var, fin = ('L. Leg', 'R. Leg', 'Abdomen', 'R. Arm', 'L. Arm', 'Chest', 'Head'), []
         for i in range(1):
             n = choices(var, weights=[4, 4, 3, 3, 3, 1, 2])
             fin.extend(n), result.config(text=f'{fin}', fg='green')
 
-    def roll_mythras(self):  # Define los rangos de cuerpo de BRP y derivados
+    @staticmethod
+    def roll_mythras():  # Define los rangos de cuerpo de BRP y derivados
         var, fin = ('L. Leg', 'R. Leg', 'Abdomen', 'R. Arm', 'L. Arm', 'Chest', 'Head'), []
         for i in range(1):
             n = choices(var, weights=[3, 3, 3, 3, 3, 3, 2])
