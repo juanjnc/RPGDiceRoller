@@ -4,26 +4,21 @@ from random import choices, randint  # Solo los módulos utilizados
 from os import startfile  # De momento la única función usada
 
 
-def info():  # Muestra la info de quien lo ha hecho
-    mb.showinfo('Info RPG DR 2', 'Programmed in Python by Juan José Núñez.\nIcons made by Ana Canalejo')
+def info(): mb.showinfo('Info RPG DR 2', 'Programmed in Python by Juan José Núñez.\nIcons made by Ana Canalejo')
 
 
-def version():  # Muestra la version actual
-    mb.showinfo('Version RPG DR 2', 'Version 2.2.0')
+def version(): mb.showinfo('Version RPG DR 2', 'Version 2.2.0')  # Muestra la version actual
 
 
-def cambios():  # Muestra el registro de versiones
-    startfile('CHANGELOG.txt')
+def cambios(): startfile('CHANGELOG.txt')  # Muestra el registro de versiones
 
 
-def limpiar():  # Limpia los resultados
-    result.config(text='')
+def limpiar(): result.config(text='')  # Limpia los resultados
 
 
 def salir():  # Menu de salida de la app
     valor = mb.askokcancel('Close', 'Are you sure?')
-    if valor is True:
-        raiz.destroy()
+    if valor is True: raiz.destroy()  # Destruye la app
 
 
 def genesys():  # Genera toda la interfaz de los dados Genesys
@@ -40,35 +35,20 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
             g = int(frc.get())
             var_bst = ('0', 'success', 'advantage', 'advantage, advantage', 'advantage, success')
             var_abi = ('success', 'success, success', '0', 'advantage', 'advantage, success', 'advantage, advantage')
-            var_prof = ('0', 'triumph', 'success', 'advantage', 'success, success', 'advantage, advantage',
-                        'advantage, success')
+            var_prof = ('0', 'triumph', 'success', 'advantage', 'success, success', 'advantage, advantage', 'advantage, success')
             var_set = ('success', 'success, success', '0', 'advantage', 'advantage, success', 'advantage, advantage')
             var_diff = ('failure', 'failure, failure', '0', 'threat', 'threat, failure', 'threat, threat')
             var_cha = ('failure', 'failure, failure', '0', 'threat', 'threat, failure', 'threat, threat', 'despair')
             var_frc = ('DARK', 'LIGHT', 'DARK, DARK', 'LIGHT, LIGHT')
             fin = []
             if 50 >= a + b + c + d + e + f + g > 0:
-                for i in range(a):
-                    n = choices(var_bst, weights=[2, 1, 1, 1, 1])
-                    fin.extend(n)
-                for j in range(b):
-                    n = choices(var_abi, weights=[2, 1, 1, 2, 1, 1])
-                    fin.extend(n)
-                for ii in range(c):
-                    n = choices(var_prof, weights=[1, 1, 2, 1, 2, 2, 3])
-                    fin.extend(n)
-                for jj in range(d):
-                    n = choices(var_set, weights=[2, 1, 1, 2, 1, 1])
-                    fin.extend(n)
-                for iii in range(e):
-                    n = choices(var_diff, weights=[1, 2, 3, 3, 1, 1])
-                    fin.extend(n)
-                for jjj in range(f):
-                    n = choices(var_cha, weights=[2, 2, 1, 2, 2, 2, 1])
-                    fin.extend(n)
-                for iv in range(g):
-                    n = choices(var_frc, weights=[6, 2, 1, 3])
-                    fin.extend(n)
+                for i in range(a): n = choices(var_bst, weights=[2, 1, 1, 1, 1]); fin.extend(n)   # Lanza y agrupa
+                for j in range(b): n = choices(var_abi, weights=[2, 1, 1, 2, 1, 1]); fin.extend(n)   # Lanza y agrupa
+                for ii in range(c): n = choices(var_prof, weights=[1, 1, 2, 1, 2, 2, 3]); fin.extend(n)   # Lanza y agrupa
+                for jj in range(d): n = choices(var_set, weights=[2, 1, 1, 2, 1, 1]); fin.extend(n)   # Lanza y agrupa
+                for iii in range(e): n = choices(var_diff, weights=[1, 2, 3, 3, 1, 1]); fin.extend(n)   # Lanza y agrupa
+                for jjj in range(f): n = choices(var_cha, weights=[2, 2, 1, 2, 2, 2, 1]); fin.extend(n)   # Lanza y agrupa
+                for iv in range(g): n = choices(var_frc, weights=[6, 2, 1, 3]); fin.extend(n)   # Lanza y agrupa
                 suc = fin.count('success') + 2 * fin.count('success, success') + fin.count('advantage, success')
                 adv = fin.count('advantage') + 2 * fin.count('advantage, advantage') + fin.count('advantage, success')
                 tri = fin.count('triumph')
@@ -103,7 +83,6 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
                 result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50', fg='red')
         except ValueError:
             result.config(text='Error:\nEnter a number', fg='red')
-
     # Ajusta el tamaño de la ventana
     raiz.geometry('800x330')
     # Crean los textos de los dados
@@ -193,8 +172,7 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
         self.btn1 = tk.Button(self, text="FATE", fg='green', command=self.roll_fate, font=('Arial', 11), cursor='hand2')
         self.btn1.grid(row=1, column=0, **opt)
         # Botón tirar RQ
-        self.btn2 = tk.Button(self, text="RQ\nHit Loc", fg='blue', command=self.roll_rq, font=('Arial', 11),
-                              cursor='hand2')
+        self.btn2 = tk.Button(self, text="RQ\nHit Loc", fg='blue', command=self.roll_rq, font=('Arial', 11), cursor='hand2')
         self.btn2.grid(row=3, column=2, **opt)
         # Botón limpiar
         self.btn3 = tk.Button(self, text="Clear", fg='red', command=limpiar, font=('Arial', 14), cursor='hand2')
@@ -206,33 +184,27 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
         self.pack()  # Fin del Cuadro de los botones e inputs
 
     def roll(self):  # Define cualquier dado
-        try:
+        try:  # Las tiradas y las listas de ambos dados
             a, b, c = int(self.pool.get()), int(self.dado.get()), int(self.mod.get())
             d, e, f = int(self.pool_2.get()), int(self.dado_2.get()), int(self.mod_2.get())
-            var_1, var_2 = [], []
+            fin_1, fin_2 = [], []
             if (101 > b > 1) and (101 > e >= 0) and (101 > a + d > 0) and (a != 0) and (e != 1):
-                for i in range(a):
-                    n = randint(1, b)
-                    var_1.append(n)
-                for j in range(d):
-                    m = randint(1, e)
-                    var_2.append(m)
-                suma = sum(var_1 + var_2)
-                if c == 0 and f == 0:
-                    if not var_2:
-                        result.config(text=f'{var_1}\n= {suma}', fg='green')
+                for i in range(a): n = randint(1, b); fin_1.append(n)  # Lanza y agrupa dado 1
+                for j in range(d): m = randint(1, e); fin_2.append(m)  # Lanza y agrupa dado 2
+                suma = sum(fin_1 + fin_2)  # Suma las dos tiradas
+                if c == 0 and f == 0:  # Si no hay modificadores
+                    if not fin_2:  # Si no hay dado 2
+                        result.config(text=f'{fin_1}\n= {suma}', fg='green')
                     else:
-                        result.config(text=f'{var_1}\n{var_2}\n= {suma}', fg='green')
-                else:
-                    if not var_2:
-                        result.config(text=f'{var_1}\n= {suma} + mod: {c + f}\n= {suma + c + f}', fg='green')
+                        result.config(text=f'{fin_1}\n{fin_2}\n= {suma}', fg='green')
+                else:  # Si hay modificadores
+                    if not fin_2:  # Si no hay dado 2
+                        result.config(text=f'{fin_1}\n= {suma} + mod: {c + f}\n= {suma + c + f}', fg='green')
                     else:
-                        result.config(text=f'{var_1}\n{var_2}\n= {suma} + mod: {c + f}\n= {suma + c + f}',
-                                      fg='green')
-            else:
-                result.config(text='Error:\nEnter a valid number\nDice = 2 - 100\nNumber of dice = 1 - 100',
-                              fg='red')
-        except ValueError:
+                        result.config(text=f'{fin_1}\n{fin_2}\n= {suma} + mod: {c + f}\n= {suma + c + f}', fg='green')
+            else:  # Recoge cualquier numero erróneo
+                result.config(text='Error:\nEnter a valid number\nDice = 2 - 100\nNumber of dice = 1 - 100', fg='red')
+        except ValueError:  #Recoge errores y limpia las casillas
             result.config(text='Error:\nEnter a number', fg='red')
             self.mod.delete(0, 10), self.mod.insert(0, 0), self.mod_2.delete(0, 10), self.mod_2.insert(0, 0)
             self.dado_2.delete(0, 10), self.dado_2.insert(0, 0), self.pool_2.delete(0, 10), self.pool_2.insert(0, 0)
@@ -243,10 +215,9 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
             var, fin = ('+', '-', '0'), []
             if 51 > a > 0:
                 for i in range(a):
-                    n = choices(var, weights=[2, 2, 2])
-                    fin.extend(n)
-                    total = fin.count('+') - fin.count('-') + c
-                    cut_1, cut_2, cut_3, cut_4 = fin[:12], fin[12:24], fin[24:36], fin[36:]
+                    n = choices(var, weights=[2, 2, 2]); fin.extend(n)  # Lanza y agrupa
+                    total = fin.count('+') - fin.count('-') + c  # Cuenta el resultado
+                    cut_1, cut_2, cut_3, cut_4 = fin[:12], fin[12:24], fin[24:36], fin[36:]  # Corta el resultado
                     if not cut_4:
                         result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n= {total}', fg='green')
                         if not cut_3:
@@ -264,15 +235,13 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
     def roll_rq():  # Define los rangos de cuerpo de BRP y derivados
         var, fin = ('L. Leg', 'R. Leg', 'Abdomen', 'R. Arm', 'L. Arm', 'Chest', 'Head'), []
         for i in range(1):
-            n = choices(var, weights=[4, 4, 3, 3, 3, 1, 2])
-            fin.extend(n), result.config(text=f'{fin}', fg='green')
+            n = choices(var, weights=[4, 4, 3, 3, 3, 1, 2]); fin.extend(n), result.config(text=f'{fin}', fg='green')
 
     @staticmethod
     def roll_mythras():  # Define los rangos de cuerpo de BRP y derivados
         var, fin = ('L. Leg', 'R. Leg', 'Abdomen', 'R. Arm', 'L. Arm', 'Chest', 'Head'), []
         for i in range(1):
-            n = choices(var, weights=[3, 3, 3, 3, 3, 3, 2])
-            fin.extend(n), result.config(text=f'{fin}', fg='green')
+            n = choices(var, weights=[3, 3, 3, 3, 3, 3, 2]); fin.extend(n), result.config(text=f'{fin}', fg='green')
 
 
 class Lienzo(tk.Canvas):  # Gestiona el lienzo donde se muestra el resultado
@@ -391,8 +360,8 @@ class Resultado(tk.Label):  # Gestiona la etiqueta de resultado
 
 if __name__ == "__main__":  # Arranca toda la interfaz
     raiz = Raiz()
-    menu = Menus(raiz)
-    cuadro = Frame(raiz)
-    canvas = Lienzo(raiz)
+    menu, cuadro, canvas = Menus(raiz), Frame(raiz), Lienzo(raiz)
     result = Resultado(canvas)
     raiz.mainloop()
+
+# TODO en el siguiente changelog añadir: Optimized and reduced code
