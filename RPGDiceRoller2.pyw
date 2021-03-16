@@ -32,7 +32,7 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
         try:
             a, b, c = int(bst.get()), int(abi.get()), int(prof.get())
             d, e, f = int(set_.get()), int(diff.get()), int(cha.get())
-            g = int(frc.get())
+            g = int(frc.get())  # Dado de fuerza, muy situacional en el sistema
             var_bst = ('0', 'success', 'advantage', 'advantage, advantage', 'advantage, success')
             var_abi = ('success', 'success, success', '0', 'advantage', 'advantage, success', 'advantage, advantage')
             var_prof = ('0', 'triumph', 'success', 'advantage', 'success, success', 'advantage, advantage', 'advantage, success')
@@ -41,14 +41,14 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
             var_cha = ('failure', 'failure, failure', '0', 'threat', 'threat, failure', 'threat, threat', 'despair')
             var_frc = ('DARK', 'LIGHT', 'DARK, DARK', 'LIGHT, LIGHT')
             fin = []
-            if 50 >= a + b + c + d + e + f + g > 0:
-                for i in range(a): n = choices(var_bst, weights=[2, 1, 1, 1, 1]); fin.extend(n)   # Lanza y agrupa
-                for j in range(b): n = choices(var_abi, weights=[2, 1, 1, 2, 1, 1]); fin.extend(n)   # Lanza y agrupa
-                for ii in range(c): n = choices(var_prof, weights=[1, 1, 2, 1, 2, 2, 3]); fin.extend(n)   # Lanza y agrupa
-                for jj in range(d): n = choices(var_set, weights=[2, 1, 1, 2, 1, 1]); fin.extend(n)   # Lanza y agrupa
-                for iii in range(e): n = choices(var_diff, weights=[1, 2, 3, 3, 1, 1]); fin.extend(n)   # Lanza y agrupa
-                for jjj in range(f): n = choices(var_cha, weights=[2, 2, 1, 2, 2, 2, 1]); fin.extend(n)   # Lanza y agrupa
-                for iv in range(g): n = choices(var_frc, weights=[6, 2, 1, 3]); fin.extend(n)   # Lanza y agrupa
+            if 50 >= a + b + c + d + e + f + g > 0:  # Lanza y agrupa los dados Genesys
+                for i in range(a): n = choices(var_bst, weights=[2, 1, 1, 1, 1]); fin.extend(n)
+                for j in range(b): n = choices(var_abi, weights=[2, 1, 1, 2, 1, 1]); fin.extend(n)
+                for ii in range(c): n = choices(var_prof, weights=[1, 1, 2, 1, 2, 2, 3]); fin.extend(n)
+                for jj in range(d): n = choices(var_set, weights=[2, 1, 1, 2, 1, 1]); fin.extend(n)
+                for iii in range(e): n = choices(var_diff, weights=[1, 2, 3, 3, 1, 1]); fin.extend(n)
+                for jjj in range(f): n = choices(var_cha, weights=[2, 2, 1, 2, 2, 2, 1]); fin.extend(n)
+                for iv in range(g): n = choices(var_frc, weights=[6, 2, 1, 3]); fin.extend(n)
                 suc = fin.count('success') + 2 * fin.count('success, success') + fin.count('advantage, success')
                 adv = fin.count('advantage') + 2 * fin.count('advantage, advantage') + fin.count('advantage, success')
                 tri = fin.count('triumph')
@@ -124,64 +124,56 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
 class Raiz(tk.Tk):  # Crea la ventana principal
     def __init__(self):
         super().__init__()
-        self.title('RPG Dice Roller v2'), self.geometry('400x330'), self.iconbitmap(None)  # TODO icono
+        self.title('RPG Dice Roller v2'), self.geometry('400x330'), self.iconbitmap('ico.ico')
 
 
 class Frame(tk.Frame):  # Gestiona el marco de los botones
     def __init__(self, container):
         super().__init__(container)
-        opt = {'padx': 10, 'pady': 10}
+        op = {'padx': 10, 'pady': 10}
         self.config(height='100', width='850')
         # Primera cantidad de dados
         self.pool = tk.Entry(self, width=5)
-        self.pool.grid(row=0, column=2, **opt)
-        self.pool.config(justify='center', font=('Arial', 12)), self.pool.insert(0, 1)
+        self.pool.grid(row=0, column=2, **op), self.pool.config(justify='center', font=('Arial', 12)), self.pool.insert(0, 1)
         # Primer dado
         self.dado = tk.Entry(self, width=5)
-        self.dado.grid(row=1, column=2, **opt)
-        self.dado.config(justify='center', font=('Arial', 12)), self.dado.insert(0, 2)
+        self.dado.grid(row=1, column=2, **op), self.dado.config(justify='center', font=('Arial', 12)), self.dado.insert(0, 2)
         # primer modificador
         self.mod = tk.Entry(self, width=5)
-        self.mod.grid(row=2, column=2, **opt)
-        self.mod.config(justify='center', font=('Arial', 12)), self.mod.insert(0, 0)
+        self.mod.grid(row=2, column=2, **op), self.mod.config(justify='center', font=('Arial', 12)), self.mod.insert(0, 0)
         # Segunda cantidad de dados
         self.pool_2 = tk.Entry(self, width=5)
-        self.pool_2.grid(row=0, column=3, **opt)
-        self.pool_2.config(justify='center', font=('Arial', 12)), self.pool_2.insert(0, 0)
+        self.pool_2.grid(row=0, column=3, **op), self.pool_2.config(justify='center', font=('Arial', 12)), self.pool_2.insert(0, 0)
         # Segundo dado
         self.dado_2 = tk.Entry(self, width=5)
-        self.dado_2.grid(row=1, column=3, **opt)
-        self.dado_2.config(justify='center', font=('Arial', 12)), self.dado_2.insert(0, 0)
+        self.dado_2.grid(row=1, column=3, **op), self.dado_2.config(justify='center', font=('Arial', 12)), self.dado_2.insert(0, 0)
         # Segundo modificador
         self.mod_2 = tk.Entry(self, width=5)
-        self.mod_2.grid(row=2, column=3, **opt)
-        self.mod_2.config(justify='center', font=('Arial', 12)), self.mod_2.insert(0, 0)
+        self.mod_2.grid(row=2, column=3, **op), self.mod_2.config(justify='center', font=('Arial', 12)), self.mod_2.insert(0, 0)
         # Etiqueta cantidad de dados
         self.pool_label = tk.Label(self, justify='right', text='nº of Dice: ', font=('Arial', 12))
-        self.pool_label.grid(row=0, column=1, **opt, sticky='E')
+        self.pool_label.grid(row=0, column=1, **op, sticky='E')
         # Etiqueta valor de dados
         self.dado_label = tk.Label(self, justify='right', text='Type of Dice: ', font=('Arial', 12))
-        self.dado_label.grid(row=1, column=1, **opt, sticky='E')
+        self.dado_label.grid(row=1, column=1, **op, sticky='E')
         # Etiqueta modificador
         self.mod_label = tk.Label(self, justify='right', text="Mod Value: ", font=('Arial', 12))
-        self.mod_label.grid(row=2, column=1, **opt, sticky='E')
+        self.mod_label.grid(row=2, column=1, **op, sticky='E')
         # Botón tirar dados
         self.btn0 = tk.Button(self, text="Roll", fg='green', command=self.roll, font=('Arial', 11), cursor='hand2')
-        self.btn0.grid(row=0, column=0, **opt)
+        self.btn0.grid(row=0, column=0, **op)
         # Botón tirar FATE
         self.btn1 = tk.Button(self, text="FATE", fg='green', command=self.roll_fate, font=('Arial', 11), cursor='hand2')
-        self.btn1.grid(row=1, column=0, **opt)
+        self.btn1.grid(row=1, column=0, **op)
         # Botón tirar RQ
         self.btn2 = tk.Button(self, text="RQ\nHit Loc", fg='blue', command=self.roll_rq, font=('Arial', 11), cursor='hand2')
-        self.btn2.grid(row=3, column=2, **opt)
+        self.btn2.grid(row=3, column=2, **op)
         # Botón limpiar
         self.btn3 = tk.Button(self, text="Clear", fg='red', command=limpiar, font=('Arial', 14), cursor='hand2')
-        self.btn3.grid(row=3, column=0, **opt)
+        self.btn3.grid(row=3, column=0, **op)
         # Botón tirar Mythras
-        self.btn4 = tk.Button(self, text="Mythras\nHit Loc", fg='blue', command=self.roll_mythras,
-                              font=('Arial', 11), cursor='hand2')
-        self.btn4.grid(row=3, column=1, **opt)
-        self.pack()  # Fin del Cuadro de los botones e inputs
+        self.btn4 = tk.Button(self, text="Mythras\nHit Loc", fg='blue', command=self.roll_myth, font=('Arial', 11), cursor='hand2')
+        self.btn4.grid(row=3, column=1, **op), self.pack()  # Fin del Cuadro de los botones e inputs
 
     def roll(self):  # Define cualquier dado
         try:  # Las tiradas y las listas de ambos dados
@@ -238,7 +230,7 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
             n = choices(var, weights=[4, 4, 3, 3, 3, 1, 2]); fin.extend(n), result.config(text=f'{fin}', fg='green')
 
     @staticmethod
-    def roll_mythras():  # Define los rangos de cuerpo de BRP y derivados
+    def roll_myth():  # Define los rangos de cuerpo de BRP y derivados
         var, fin = ('L. Leg', 'R. Leg', 'Abdomen', 'R. Arm', 'L. Arm', 'Chest', 'Head'), []
         for i in range(1):
             n = choices(var, weights=[3, 3, 3, 3, 3, 3, 2]); fin.extend(n), result.config(text=f'{fin}', fg='green')
@@ -293,11 +285,11 @@ class Tutorials:  # Almacena todos los tutoriales
         tu_rq_label.pack()
 
     @staticmethod
-    def tut_mythras():  # Instrucciones de botón RQ
+    def tut_myth():  # Instrucciones de botón RQ
         tu_rq = tk.Toplevel(raiz)
         tu_rq.resizable(0, 0), tu_rq.title('Mythras Hit Location Guide')
-        tu_rq_label = tk.Label(tu_rq, text='\nNo input needed. Roll once.\nUse the Mythras humanoid hit location'
-                                           ' table.\n', justify='left', font=('Arial', 10), bg='white')
+        tu_rq_label = tk.Label(tu_rq, text='\nNo input needed. Roll once.\nUse the Mythras humanoid hit location table.'
+                                           '\n', justify='left', font=('Arial', 10), bg='white')
         tu_rq_label.pack()
 
     @staticmethod
@@ -332,7 +324,7 @@ class Menus(tk.Menu):  # Gestiona la barra de menú
         tutorial_menu.add_command(label='Roll', command=Tutorials.tut_roll, font=('Arial', 10))
         tutorial_menu.add_command(label='FATE', command=Tutorials.tut_fate, font=('Arial', 10))
         tutorial_menu.add_command(label='RuneQuest', command=Tutorials.tut_rq, font=('Arial', 10))
-        tutorial_menu.add_command(label='Mythras', command=Tutorials.tut_mythras, font=('Arial', 10))
+        tutorial_menu.add_command(label='Mythras', command=Tutorials.tut_myth, font=('Arial', 10))
         tutorial_menu.add_command(label='Show Menu', command=Tutorials.mostrar, font=('Arial', 10))
         tutorial_menu.add_separator()
         tutorial_menu.add_command(label='Genesys/SW', command=Tutorials.tut_genesys, font=('Arial', 10))
