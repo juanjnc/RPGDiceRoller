@@ -1,3 +1,4 @@
+2.2.1 - Optimized and reduced code
 2.2.0 - Added icons. Now "Changelog" button open this file. Changed some buttons colors. Optimized code.
 2.1.1.2 - The error for empty text fields now resets the "mod fields" and 2nd dice. Most common source of this error.
 2.1.1.1 - Optimized and reduced code. Minor fixes.
