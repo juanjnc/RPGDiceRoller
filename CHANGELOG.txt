@@ -1,9 +1,10 @@
+2.2.0 - Added icons. Now "Changelog" button open this file. Changed some buttons colors. Optimized code.
 2.1.1.2 - The error for empty text fields now resets the "mod fields" and 2nd dice. Most common source of this error.
 2.1.1.1 - Optimized and reduced code. Minor fixes.
 2.1.1 - Minor fixes and clarifications in the user guide's menus.
 2.1.0 - Added Mythras Hit Location die, use a sightly different table. Small fixes.
-2.0.0 - Remade from the scratch. Now uses a completely new internal logic.
-1.5.10.2 - Fix a small display error. Changed name to RPG Dice Roller v1.
+2.0.0 - Remade from the scratch. Now uses a completely new internal logic. Changed name to "RPG Dice Roller v2".
+1.5.10.2 - Fix a small display error. Changed name to "RPG Dice Roller v1".
 1.5.10.1 - Now "Delete" clear the results.
 1.5.10 - New context menu called "Show" for additional dice. Now show mod values.
 1.5.9 - Small changes and grammar fixes. Fixed the initial values reset in Genesys dice.
