@@ -7,10 +7,10 @@ from tkinter import messagebox as mb
 def info(): mb.showinfo('Info RPG DR 2','Programmed in Python by Juan José Núñez.\nIcons made by Ana Canalejo')
 
 
-def version(): mb.showinfo('Version RPG DR 2','Version 2.2.0')  # Muestra la version actual
+def version(): mb.showinfo('Version RPG DR 2','Version 2.2.1')
 
 
-def cambios(): startfile('CHANGELOG.txt')  # Muestra el registro de versiones
+def cambios(): startfile('CHANGELOG.txt')
 
 
 def limpiar(): result.config(text='')  # Limpia los resultados
@@ -18,25 +18,24 @@ def limpiar(): result.config(text='')  # Limpia los resultados
 
 def salir():  # Menu de salida de la app
     valor = mb.askokcancel('Close','Are you sure?')
-    if valor is True: raiz.destroy()  # Destruye la app
+    if valor is True: raiz.destroy()
 
 
 def genesys():  # Genera toda la interfaz de los dados Genesys
     def eliminar_g():  # Elimina toda la interfaz de Genesys
-        result.config(text=''),bst.destroy(),abi.destroy(),prof.destroy(),set_.destroy(),diff.destroy()
-        cha.destroy(),frc.destroy(),bst_label.destroy(),abi_label.destroy(),prof_label.destroy()
-        set_label.destroy(),diff_label.destroy(),cha_label.destroy(),frc_label.destroy(),btn_g.destroy()
-        menu.delete('Delete'),raiz.geometry('400x330')
+        result.config(text=''),bst.destroy(),abi.destroy(),prof.destroy(),sback.destroy(),diff.destroy(),cha.destroy()
+        frc.destroy(),bst_label.destroy(),abi_label.destroy(),prof_label.destroy(),sback_label.destroy(),diff_label.destroy()
+        cha_label.destroy(),frc_label.destroy(),btn_g.destroy(),menu.delete('Delete'),raiz.geometry('400x340')
 
     def roll_g():  # Define los dados del sistema Genesys junto con el dado de fuerza de SW
         try:
             a,b,c = int(bst.get()),int(abi.get()),int(prof.get())
-            d,e,f = int(set_.get()),int(diff.get()),int(cha.get())
+            d,e,f = int(sback.get()),int(diff.get()),int(cha.get())
             g = int(frc.get())  # Dado de fuerza, muy situacional en el sistema
             var_bst = ('0','success','advantage','advantage, advantage','advantage, success')
             var_abi = ('success','success, success','0','advantage','advantage, success','advantage, advantage')
             var_prof = ('0','triumph','success','advantage','success, success','advantage, advantage','advantage, success')
-            var_set = ('success','success, success','0','advantage','advantage, success','advantage, advantage')
+            var_sback = ('success','success, success','0','advantage','advantage, success','advantage, advantage')
             var_diff = ('failure','failure, failure','0','threat','threat, failure','threat, threat')
             var_cha = ('failure','failure, failure','0','threat','threat, failure','threat, threat','despair')
             var_frc = ('DARK','LIGHT','DARK, DARK','LIGHT, LIGHT')
@@ -45,7 +44,7 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
                 for i in range(a): n = choices(var_bst,weights=[2,1,1,1,1]); fin.extend(n)
                 for j in range(b): n = choices(var_abi,weights=[2,1,1,2,1,1]); fin.extend(n)
                 for ii in range(c): n = choices(var_prof,weights=[1,1,2,1,2,2,3]); fin.extend(n)
-                for jj in range(d): n = choices(var_set,weights=[2,1,1,2,1,1]); fin.extend(n)
+                for jj in range(d): n = choices(var_sback,weights=[2,1,1,2,1,1]); fin.extend(n)
                 for iii in range(e): n = choices(var_diff,weights=[1,2,3,3,1,1]); fin.extend(n)
                 for jjj in range(f): n = choices(var_cha,weights=[2,2,1,2,2,2,1]); fin.extend(n)
                 for iv in range(g): n = choices(var_frc,weights=[6,2,1,3]); fin.extend(n)
@@ -75,17 +74,16 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
                                                    f'\nfailure = {fail}; threat = {thr}; despair = {des}\nForce Dark'
                                                    f' Side = {fds}; Force Light Side = {fls}',fg='green')
                 else:
-                    result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n{cut_5}'
-                                       f'\nsuccess = {suc}; advantage = {adv}; triumph = {tri}\n'
-                                       f'failure = {fail}; threat = {thr}; despair = {des}\n'
-                                       f'Force Dark Side = {fds}; Force Light Side = {fls}',fg='green')
+                    result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n{cut_5}\nsuccess = {suc}; advantage = {adv};'
+                                       f' triumph = {tri}\nfailure = {fail}; threat = {thr}; despair = {des}'
+                                       f'\nForce Dark Side = {fds}; Force Light Side = {fls}',fg='green')
             else:
                 result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50',fg='red')
         except ValueError:
             result.config(text='Error:\nEnter a number',fg='red')
 
     # Ajusta el tamaño de la ventana
-    raiz.geometry('800x330')
+    raiz.geometry('800x340')
     # Crean los textos de los dados
     frc_label = tk.Label(cuadro,justify='right',text='Force Dice: ',font=('Arial',12))
     frc_label.grid(row=2,column=6,padx=10,pady=10,sticky='E')
@@ -93,8 +91,8 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
     cha_label.grid(row=1,column=6,padx=10,pady=10,sticky='E')
     diff_label = tk.Label(cuadro,justify='right',text='Difficulty Dice: ',font=('Arial',12))
     diff_label.grid(row=0,column=6,padx=10,pady=10,sticky='E')
-    set_label = tk.Label(cuadro,justify='right',text='Setback Dice: ',font=('Arial',12))
-    set_label.grid(row=3,column=4,padx=10,pady=10,sticky='E')
+    sback_label = tk.Label(cuadro,justify='right',text='Setback Dice: ',font=('Arial',12))
+    sback_label.grid(row=3,column=4,padx=10,pady=10,sticky='E')
     prof_label = tk.Label(cuadro,justify='right',text='Proficiency Dice: ',font=('Arial',12))
     prof_label.grid(row=2,column=4,padx=10,pady=10,sticky='E')
     abi_label = tk.Label(cuadro,justify='right',text='Ability Dice: ',font=('Arial',12))
@@ -108,8 +106,8 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
     cha.grid(row=1,column=7,padx=10,pady=10),cha.config(justify='center',font=('Arial',12)),cha.insert(0,0)
     diff = tk.Entry(cuadro,width=5)
     diff.grid(row=0,column=7,padx=10,pady=10),diff.config(justify='center',font=('Arial',12)),diff.insert(0,0)
-    set_ = tk.Entry(cuadro,width=5)
-    set_.grid(row=3,column=5,padx=10,pady=10),set_.config(justify='center',font=('Arial',12)),set_.insert(0,0)
+    sback = tk.Entry(cuadro,width=5)
+    sback.grid(row=3,column=5,padx=10,pady=10),sback.config(justify='center',font=('Arial',12)),sback.insert(0,0)
     prof = tk.Entry(cuadro,width=5)
     prof.grid(row=2,column=5,padx=10,pady=10),prof.config(justify='center',font=('Arial',12)),prof.insert(0,0)
     abi = tk.Entry(cuadro,width=5)
@@ -125,7 +123,7 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
 class Raiz(tk.Tk):  # Crea la ventana principal
     def __init__(self):
         super().__init__()
-        self.title('RPG Dice Roller v2'),self.geometry('400x330'),self.iconbitmap('ico.ico')
+        self.title('RPG Dice Roller v2'),self.geometry('400x340'),self.iconbitmap('ico.ico')
 
 
 class Frame(tk.Frame):  # Gestiona el marco de los botones
@@ -150,8 +148,7 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
         self.dado_2.grid(row=1,column=3,**op),self.dado_2.config(justify='center',font=('Arial',12)),self.dado_2.insert(0,0)
         # Segundo modificador
         self.mod_2 = tk.Entry(self,width=5)
-        self.mod_2.grid(row=2,column=3,**op),self.mod_2.config(justify='center',
-                                                               font=('Arial',12)),self.mod_2.insert(0,0)
+        self.mod_2.grid(row=2,column=3,**op),self.mod_2.config(justify='center',font=('Arial',12)),self.mod_2.insert(0,0)
         # Etiqueta cantidad de dados
         self.pool_label = tk.Label(self,justify='right',text='nº of Dice: ',font=('Arial',12))
         self.pool_label.grid(row=0,column=1,**op,sticky='E')
@@ -253,23 +250,21 @@ class Tutorials:  # Almacena todos los tutoriales
     def tutorial():  # Instrucciones de uso general
         tu = tk.Toplevel(raiz)
         tu.resizable(0,0),tu.title('General Guide')
-        tu_label = tk.Label(tu,text='\nFill the text fields with the numbers you want.\n\n\"Number of dice\" indicates'
-                                    ' how many dice you want to roll.\n\"Type of dice\" indicates how many sides have'
-                                    ' your dice.\n\"Mod value\" can add or subtract the number to the result.\nFATE '
-                                    'use a custom Dice, you can change te amount of it.\nRQ Hit Location use a custom'
-                                    ' die and roll only one.\nIn Genesys Dice they have custom names.\n',
-                            justify='left',font=('Arial',10),bg='white')
+        tu_label = tk.Label(tu,text='\nFill the text fields with the numbers you want.\n\n\"Number of dice\" indicates how many '
+                                    'dice you want to roll.\n\"Type of dice\" indicates how many sides have your dice.\n\"Mod '
+                                    'value\" can add or subtract the number to the result.\nFATE use a custom Dice, you can '
+                                    'change te amount of it.\nRQ Hit Location use a custom die and roll only one.'
+                                    '\nIn Genesys Dice they have custom names.\n',justify='left',font=('Arial',10),bg='white')
         tu_label.pack()
 
     @staticmethod
     def tut_roll():  # Instrucciones de botón roll
         tu_ro = tk.Toplevel(raiz)
         tu_ro.resizable(0,0),tu_ro.title('Roll Guide')
-        tu_ro_label = tk.Label(tu_ro,text='\nFill \"Number of dice\", \"Type of dice\" and \"Mod value\" text fields'
-                                          ' with the numbers you want.\n\nYou can roll two types of dice with his owns'
-                                          ' mod values, but first column must be filled.\nCombined values can not be'
-                                          ' more of 100 for Number of dice.'
-                                          '\n1st die must be at least 2 and second die can be 0 but not 1.'
+        tu_ro_label = tk.Label(tu_ro,text='\nFill \"Number of dice\", \"Type of dice\" and \"Mod value\" text fields with the '
+                                          'numbers you want.\n\nYou can roll two types of dice with his owns mod values, but '
+                                          'first column must be filled.\nCombined values can not be more of 100 for Number of '
+                                          'dice.\n1st die must be at least 2 and second die can be 0 but not 1.'
                                           '\n',justify='left',font=('Arial',10),bg='white')
         tu_ro_label.pack()
 
@@ -302,8 +297,8 @@ class Tutorials:  # Almacena todos los tutoriales
         tu_ge = tk.Toplevel(raiz)
         tu_ge.resizable(0,0),tu_ge.title('Genesys Guide')
         tu_ge_label = tk.Label(tu_ge,
-                               text='\nNeeds fill the Genesys Dice and the Star Wars Force Die, can roll with at least'
-                                    ' one die of any type.\n',justify='left',font=('Arial',10),bg='white')
+                               text='\nNeeds fill the Genesys Dice and the Star Wars Force Die, can roll with at least one '
+                                    'die of any type.\n',justify='left',font=('Arial',10),bg='white')
         tu_ge_label.pack()
 
     @staticmethod
@@ -311,8 +306,8 @@ class Tutorials:  # Almacena todos los tutoriales
         tu_sge = tk.Toplevel(raiz)
         tu_sge.resizable(0,0),tu_sge.title('Show Genesys Guide')
         tu_sge_label = tk.Label(tu_sge,
-                                text='\nShow the list for additional custom dice systems, and create the interface'
-                                     ' for them.\n',justify='left',font=('Arial',10),bg='white')
+                                text='\nShow the list for additional custom dice systems, and create the interface for them.\n',
+                                justify='left',font=('Arial',10),bg='white')
         tu_sge_label.pack()
 
 
@@ -345,7 +340,7 @@ class Menus(tk.Menu):  # Gestiona la barra de menú
         dados_menu.add_command(label='Genesys',command=genesys,font=('Arial',10))
         self.add_cascade(label='Show',menu=dados_menu,font=('Arial',10))
         # Cierre
-        raiz.config(menu=self,width=400,height=400)  # Fin de la config de la barra de menu
+        raiz.config(menu=self,width=400,height=400)
 
 
 class Resultado(tk.Label):  # Gestiona la etiqueta de resultado
