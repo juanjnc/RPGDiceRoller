@@ -2415,3 +2415,6 @@
 /.idea/codeStyles/Project.xml
 /.idea/RPGDiceRoller.iml
 /.idea/vcs.xml
+/dist/RPGDiceRoller2/VC_redist.arm64.exe
+/dist/RPGDiceRoller2/VC_redist.x64.exe
+/dist/RPGDiceRoller2/VC_redist.x86.exe
