@@ -1,31 +1,16 @@
+# - *- coding: utf- 8 - *-
 import tkinter as tk
 from os import startfile  # De momento la única función usada
 from random import choices,randint  # Solo los módulos utilizados
 from tkinter import messagebox as mb
+# bg=3 para los botones
 
 
-def info(): mb.showinfo('Info RPG DR 2','Programmed in Python by Juan José Núñez.\nIcons made by Ana Canalejo')
-
-
-def version(): mb.showinfo('Version RPG DR 2','Version 2.2.1')
-
-
-def cambios(): startfile('CHANGELOG.txt')
-
-
-def limpiar(): result.config(text='')  # Limpia los resultados
-
-
-def salir():  # Menu de salida de la app
-    valor = mb.askokcancel('Close','Are you sure?')
-    if valor is True: raiz.destroy()
-
-
-def genesys():  # Genera toda la interfaz de los dados Genesys
+def genesys_iface():  # Genera toda la interfaz de los dados Genesys
     def eliminar_g():  # Elimina toda la interfaz de Genesys
         result.config(text=''),bst.destroy(),abi.destroy(),prof.destroy(),sback.destroy(),diff.destroy(),cha.destroy()
         frc.destroy(),bst_label.destroy(),abi_label.destroy(),prof_label.destroy(),sback_label.destroy(),diff_label.destroy()
-        cha_label.destroy(),frc_label.destroy(),btn_g.destroy(),menu.delete('Delete'),raiz.geometry('400x340')
+        cha_label.destroy(),frc_label.destroy(),btn_g.destroy(),menu.delete('Delete Genesys'),raiz.geometry('400x340')
 
     def roll_g():  # Define los dados del sistema Genesys junto con el dado de fuerza de SW
         try:
@@ -41,13 +26,14 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
             var_frc = ('DARK','LIGHT','DARK, DARK','LIGHT, LIGHT')
             fin = []
             if 50 >= a+b+c+d+e+f+g > 0:  # Lanza y agrupa los dados Genesys
-                for i in range(a): n = choices(var_bst,weights=[2,1,1,1,1]); fin.extend(n)
-                for j in range(b): n = choices(var_abi,weights=[2,1,1,2,1,1]); fin.extend(n)
-                for ii in range(c): n = choices(var_prof,weights=[1,1,2,1,2,2,3]); fin.extend(n)
-                for jj in range(d): n = choices(var_sback,weights=[2,1,1,2,1,1]); fin.extend(n)
-                for iii in range(e): n = choices(var_diff,weights=[1,2,3,3,1,1]); fin.extend(n)
-                for jjj in range(f): n = choices(var_cha,weights=[2,2,1,2,2,2,1]); fin.extend(n)
-                for iv in range(g): n = choices(var_frc,weights=[6,2,1,3]); fin.extend(n)
+                n = choices(var_bst,weights=[2,1,1,1,1],k=a); fin.extend(n)
+                n = choices(var_abi,weights=[2,1,1,2,1,1],k=b); fin.extend(n)
+                n = choices(var_prof,weights=[1,1,2,1,2,2,3],k=c); fin.extend(n)
+                n = choices(var_sback,weights=[2,1,1,2,1,1],k=d); fin.extend(n)
+                n = choices(var_diff,weights=[1,2,3,3,1,1],k=e); fin.extend(n)
+                n = choices(var_cha,weights=[2,2,1,2,2,2,1],k=f); fin.extend(n)
+                n = choices(var_frc,weights=[6,2,1,3],k=g); fin.extend(n)
+                ', '.join(fin)
                 suc = fin.count('success')+2*fin.count('success, success')+fin.count('advantage, success')
                 adv = fin.count('advantage')+2*fin.count('advantage, advantage')+fin.count('advantage, success')
                 tri = fin.count('triumph')
@@ -117,7 +103,7 @@ def genesys():  # Genera toda la interfaz de los dados Genesys
     # Crea el botón para tirar los dados y eliminar la interfaz
     btn_g = tk.Button(cuadro,text="Genesys/SW",fg='green',command=roll_g,font=('Arial',11),cursor='hand2')
     btn_g.grid(row=3,column=6,columnspan=2,padx=5,pady=5)
-    menu.insert_command(5,label='Delete',command=eliminar_g,font=('Arial',10))
+    menu.insert_command(5, label='Delete Genesys',command=eliminar_g,font=('Arial',10))
 
 
 class Raiz(tk.Tk):  # Crea la ventana principal
@@ -126,7 +112,7 @@ class Raiz(tk.Tk):  # Crea la ventana principal
         self.title('RPG Dice Roller v2'),self.geometry('400x340'),self.iconbitmap('ico.ico')
 
 
-class Frame(tk.Frame):  # Gestiona el marco de los botones
+class Interfaz(tk.Frame):  # Gestiona el marco de los botones
     def __init__(self,container):
         super().__init__(container)
         op = {'padx':10,'pady':10}
@@ -159,20 +145,24 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
         self.mod_label = tk.Label(self,justify='right',text="Mod Value: ",font=('Arial',12))
         self.mod_label.grid(row=2,column=1,**op,sticky='E')
         # Botón tirar dados
-        self.btn0 = tk.Button(self,text="Roll",fg='green',command=self.roll,font=('Arial',11),cursor='hand2')
-        self.btn0.grid(row=0,column=0,**op)
+        self.btn_roll = tk.Button(self,text="Roll",fg='green',command=self.roll,font=('Arial',11),cursor='hand2')
+        self.btn_roll.grid(row=0,column=0,**op)
         # Botón tirar FATE
-        self.btn1 = tk.Button(self,text="FATE",fg='green',command=self.roll_fate,font=('Arial',11),cursor='hand2')
-        self.btn1.grid(row=1,column=0,**op)
+        self.btn_fate = tk.Button(self,text="FATE",fg='green',command=self.roll_fate,font=('Arial',11),cursor='hand2')
+        self.btn_fate.grid(row=1,column=0,**op)
+        # Etiqueta modificador
+        self.mod_label = tk.Label(self,justify='right',text="Hit Location: ",font=('Arial',12))
+        self.mod_label.grid(row=3,column=1,**op,sticky='E')
         # Botón tirar RQ
-        self.btn2 = tk.Button(self,text="RQ\nHit Loc",fg='blue',command=self.roll_rq,font=('Arial',11),cursor='hand2')
-        self.btn2.grid(row=3,column=2,**op)
-        # Botón limpiar
-        self.btn3 = tk.Button(self,text="Clear",fg='red',command=limpiar,font=('Arial',14),cursor='hand2')
-        self.btn3.grid(row=3,column=0,**op)
+        self.btn_rq = tk.Button(self,text="RQ",fg='blue',command=self.roll_rq,font=('Arial',11),cursor='hand2')
+        self.btn_rq.grid(row=3,column=3,**op)
         # Botón tirar Mythras
-        self.btn4 = tk.Button(self,text="Mythras\nHit Loc",fg='blue',command=self.roll_myth,font=('Arial',11),cursor='hand2')
-        self.btn4.grid(row=3,column=1,**op),self.pack()  # Fin del Cuadro de los botones e inputs
+        self.btn_myth = tk.Button(self,text="Mythras",fg='blue',command=self.roll_myth,font=('Arial',11),cursor='hand2')
+        self.btn_myth.grid(row=3,column=2,**op),self.pack()
+        # Botón limpiar
+        self.btn_clean = tk.Button(self,text="Clear",fg='red',command=self.limpiar,font=('Arial',14),cursor='hand2', border=4)
+        self.btn_clean.grid(row=3,column=0, rowspan=3, **op)
+        # Fin del Cuadro de los botones e inputs
 
     def roll(self):  # Define cualquier dado
         try:  # Las tiradas y las listas de ambos dados
@@ -203,21 +193,19 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
     def roll_fate(self):  # Define el dado usado en FATE, FUDGE y derivados
         try:
             a,c = int(self.pool.get()),int(self.mod.get())
-            var,fin = ('+','-','0'),[]
+            var = ('+','-','0')
             if 51 > a > 0:
-                for i in range(a):
-                    n = choices(var,weights=[2,2,2])
-                    fin.extend(n)  # Lanza y agrupa
-                    total = fin.count('+')-fin.count('-')+c  # Cuenta el resultado
-                    cut_1,cut_2,cut_3,cut_4 = fin[:12],fin[12:24],fin[24:36],fin[36:]  # Corta el resultado
-                    if not cut_4:
-                        result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n= {total}',fg='green')
-                        if not cut_3:
-                            result.config(text=f'{cut_1}\n{cut_2}\n + mod: {c}\n= {total}',fg='green')
-                            if not cut_2:
-                                result.config(text=f'{cut_1}\n + mod: {c}\n= {total}',fg='green')
-                    else:
-                        result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n + mod: {c}\n= {total}',fg='green')
+                n = choices(var,weights=[2,2,2],k=a)  # Selecciona por peso de la lista tantas veces como k
+                total = n.count('+')-n.count('-')+c  # Cuenta el resultado
+                cut_1,cut_2,cut_3,cut_4 = n[:12],n[12:24],n[24:36],n[36:]  # Corta el resultado
+                if not cut_4:
+                    result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n + mod: {c}\n= {total}',fg='green')
+                    if not cut_3:
+                        result.config(text=f'{cut_1}\n{cut_2}\n + mod: {c}\n= {total}',fg='green')
+                        if not cut_2:
+                            result.config(text=f'{cut_1}\n + mod: {c}\n= {total}',fg='green')
+                else:
+                    result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n + mod: {c}\n= {total}',fg='green')
             else:
                 result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50',fg='red')
         except ValueError:
@@ -225,17 +213,18 @@ class Frame(tk.Frame):  # Gestiona el marco de los botones
 
     @staticmethod
     def roll_rq():  # Define los rangos de cuerpo de BRP y derivados
-        var,fin = ('L. Leg','R. Leg','Abdomen','R. Arm','L. Arm','Chest','Head'),[]
-        for i in range(1):
-            n = choices(var,weights=[4,4,3,3,3,1,2])
-            fin.extend(n),result.config(text=f'{fin}',fg='green')
+        var= ('L. Leg','R. Leg','Abdomen','R. Arm','L. Arm','Chest','Head')
+        n = choices(var,weights=[4,4,3,3,3,1,2], k=1)
+        result.config(text=f'{n}',fg='green')
 
     @staticmethod
     def roll_myth():  # Define los rangos de cuerpo de BRP y derivados
-        var,fin = ('L. Leg','R. Leg','Abdomen','R. Arm','L. Arm','Chest','Head'),[]
-        for i in range(1):
-            n = choices(var,weights=[3,3,3,3,3,3,2])
-            fin.extend(n),result.config(text=f'{fin}',fg='green')
+        var= ('L. Leg','R. Leg','Abdomen','R. Arm','L. Arm','Chest','Head')
+        n = choices(var,weights=[3,3,3,3,3,3,2], k=1)
+        result.config(text=f'{n}',fg='green')
+
+    @staticmethod
+    def limpiar(): result.config(text='')  # Limpia los resultados
 
 
 class Lienzo(tk.Canvas):  # Gestiona el lienzo donde se muestra el resultado
@@ -312,11 +301,11 @@ class Tutorials:  # Almacena todos los tutoriales
 
 
 class Menus(tk.Menu):  # Gestiona la barra de menú
-    def __init__(self,container):
-        super().__init__(container)
+    def __init__(self):
+        super().__init__()
         # menu archivo
         archivo_menu = tk.Menu(self,tearoff=0)
-        archivo_menu.add_command(label='Exit',command=salir,font=('Arial',10))
+        archivo_menu.add_command(label='Exit',command=self.salir,font=('Arial',10))
         self.add_cascade(label='File',menu=archivo_menu,font=('Arial',10))
         # menu de tutoriales
         tutorial_menu = tk.Menu(self,tearoff=0)
@@ -331,16 +320,31 @@ class Menus(tk.Menu):  # Gestiona la barra de menú
         self.add_cascade(label='User Guide',menu=tutorial_menu,font=('Arial',10))
         # menu ed ayuda
         ayuda_menu = tk.Menu(self,tearoff=0)
-        ayuda_menu.add_command(label='Version',command=version,font=('Arial',10))
-        ayuda_menu.add_command(label='Changelog',command=cambios,font=('Arial',10))
-        ayuda_menu.add_command(label='About...',command=info,font=('Arial',10))
+        ayuda_menu.add_command(label='Version',command=self.version,font=('Arial',10))
+        ayuda_menu.add_command(label='Changelog',command=self.cambios,font=('Arial',10))
+        ayuda_menu.add_command(label='About...',command=self.info,font=('Arial',10))
         self.add_cascade(label='Help',menu=ayuda_menu,font=('Arial',10))
         # menu de dados adicionales
         dados_menu = tk.Menu(self,tearoff=0)
-        dados_menu.add_command(label='Genesys',command=genesys,font=('Arial',10))
+        dados_menu.add_command(label='Genesys',command=genesys_iface,font=('Arial',10))
         self.add_cascade(label='Show',menu=dados_menu,font=('Arial',10))
         # Cierre
-        raiz.config(menu=self,width=400,height=400)
+        raiz.config(menu=self)
+
+    @staticmethod
+    def info(): mb.showinfo('Info RPG DR 2','Programmed in Python by Juan José Núñez.\n(https://www.python.org/)'
+                                            '\n\nIcons made by Ana Canalejo.\n(https://www.deviantart.com/miyuminineko)')
+
+    @staticmethod
+    def version(): mb.showinfo('Version RPG DR 2','Version 2.3.0')
+
+    @staticmethod
+    def cambios(): startfile('CHANGELOG.txt')
+
+    @staticmethod
+    def salir():  # Menu de salida de la app
+        valor = mb.askokcancel('Close','Are you sure?')
+        if valor is True: raiz.destroy()
 
 
 class Resultado(tk.Label):  # Gestiona la etiqueta de resultado
@@ -352,6 +356,6 @@ class Resultado(tk.Label):  # Gestiona la etiqueta de resultado
 
 if __name__=="__main__":  # Arranca toda la interfaz
     raiz = Raiz()
-    menu,cuadro,canvas = Menus(raiz),Frame(raiz),Lienzo(raiz)
+    menu,cuadro,canvas = Menus(),Interfaz(raiz),Lienzo(raiz)
     result = Resultado(canvas)
     raiz.mainloop()
