@@ -1,7 +1,7 @@
 # - *- coding: utf- 8 - *-
 import tkinter as tk
 from os import startfile  # De momento la única función usada
-from random import choices,randint  # Solo los módulos utilizados
+from random import choices,randint,choice  # Solo los módulos utilizados
 from tkinter import messagebox as mb
 # bg=3 para los botones
 
@@ -71,29 +71,29 @@ def genesys_iface():  # Genera toda la interfaz de los dados Genesys
     # Ajusta el tamaño de la ventana
     raiz.geometry('800x340')
     # Crean los textos de los dados
-    frc_label = tk.Label(cuadro,justify='right',text='Force Dice: ',font=('Arial',12))
-    frc_label.grid(row=2,column=6,padx=10,pady=10,sticky='E')
-    cha_label = tk.Label(cuadro,justify='right',text='Challenge Dice: ',font=('Arial',12))
-    cha_label.grid(row=1,column=6,padx=10,pady=10,sticky='E')
-    diff_label = tk.Label(cuadro,justify='right',text='Difficulty Dice: ',font=('Arial',12))
-    diff_label.grid(row=0,column=6,padx=10,pady=10,sticky='E')
-    sback_label = tk.Label(cuadro,justify='right',text='Setback Dice: ',font=('Arial',12))
-    sback_label.grid(row=3,column=4,padx=10,pady=10,sticky='E')
-    prof_label = tk.Label(cuadro,justify='right',text='Proficiency Dice: ',font=('Arial',12))
-    prof_label.grid(row=2,column=4,padx=10,pady=10,sticky='E')
-    abi_label = tk.Label(cuadro,justify='right',text='Ability Dice: ',font=('Arial',12))
-    abi_label.grid(row=1,column=4,padx=10,pady=10,sticky='E')
     bst_label = tk.Label(cuadro,justify='right',text='Boost Dice: ',font=('Arial',12))
     bst_label.grid(row=0,column=4,padx=10,pady=10,sticky='E')
+    abi_label = tk.Label(cuadro,justify='right',text='Ability Dice: ',font=('Arial',12))
+    abi_label.grid(row=1,column=4,padx=10,pady=10,sticky='E')
+    prof_label = tk.Label(cuadro,justify='right',text='Proficiency Dice: ',font=('Arial',12))
+    prof_label.grid(row=2,column=4,padx=10,pady=10,sticky='E')
+    sback_label = tk.Label(cuadro,justify='right',text='Setback Dice: ',font=('Arial',12))
+    sback_label.grid(row=0,column=6,padx=10,pady=10,sticky='E')
+    diff_label = tk.Label(cuadro,justify='right',text='Difficulty Dice: ',font=('Arial',12))
+    diff_label.grid(row=1,column=6,padx=10,pady=10,sticky='E')
+    cha_label = tk.Label(cuadro,justify='right',text='Challenge Dice: ',font=('Arial',12))
+    cha_label.grid(row=2,column=6,padx=10,pady=10,sticky='E')
+    frc_label = tk.Label(cuadro,justify='right',text='Force Dice: ',font=('Arial',12))
+    frc_label.grid(row=3,column=4,padx=10,pady=10,sticky='E')
     # Crean y configuran las entradas de los dados
     frc = tk.Entry(cuadro,width=5)
-    frc.grid(row=2,column=7,padx=10,pady=10),frc.config(justify='center',font=('Arial',12)),frc.insert(0,0)
+    frc.grid(row=3,column=5,padx=10,pady=10),frc.config(justify='center',font=('Arial',12)),frc.insert(0,0)
     cha = tk.Entry(cuadro,width=5)
-    cha.grid(row=1,column=7,padx=10,pady=10),cha.config(justify='center',font=('Arial',12)),cha.insert(0,0)
+    cha.grid(row=2,column=7,padx=10,pady=10),cha.config(justify='center',font=('Arial',12)),cha.insert(0,0)
     diff = tk.Entry(cuadro,width=5)
-    diff.grid(row=0,column=7,padx=10,pady=10),diff.config(justify='center',font=('Arial',12)),diff.insert(0,0)
+    diff.grid(row=1,column=7,padx=10,pady=10),diff.config(justify='center',font=('Arial',12)),diff.insert(0,0)
     sback = tk.Entry(cuadro,width=5)
-    sback.grid(row=3,column=5,padx=10,pady=10),sback.config(justify='center',font=('Arial',12)),sback.insert(0,0)
+    sback.grid(row=0,column=7,padx=10,pady=10),sback.config(justify='center',font=('Arial',12)),sback.insert(0,0)
     prof = tk.Entry(cuadro,width=5)
     prof.grid(row=2,column=5,padx=10,pady=10),prof.config(justify='center',font=('Arial',12)),prof.insert(0,0)
     abi = tk.Entry(cuadro,width=5)
@@ -160,29 +160,32 @@ class Interfaz(tk.Frame):  # Gestiona el marco de los botones
         self.btn_myth = tk.Button(self,text="Mythras",fg='blue',command=self.roll_myth,font=('Arial',11),cursor='hand2')
         self.btn_myth.grid(row=3,column=2,**op),self.pack()
         # Botón limpiar
-        self.btn_clean = tk.Button(self,text="Clear",fg='red',command=self.limpiar,font=('Arial',14),cursor='hand2', border=4)
+        self.btn_clean = tk.Button(self,text="Clear",fg='red',command=self.limpiar,font=('Arial',14),cursor='hand2', bd=4)
         self.btn_clean.grid(row=3,column=0, rowspan=3, **op)
+        # Botón Huevo de Pascua
+        self.btn_egg = tk.Button(self,text="     ",command=self.eggs,fg='red',font=('Arial',4), bd=0)
+        self.btn_egg.grid(row=2,column=0, padx=10, pady=10)
         # Fin del Cuadro de los botones e inputs
 
     def roll(self):  # Define cualquier dado
         try:  # Las tiradas y las listas de ambos dados
             a,b,c = int(self.pool.get()),int(self.dado.get()),int(self.mod.get())
             d,e,f = int(self.pool_2.get()),int(self.dado_2.get()),int(self.mod_2.get())
-            fin_1,fin_2 = [],[]
+            die_1,die_2 = [],[]
             if (101 > b > 1) and (101 > e >= 0) and (101 > a+d > 0) and (a!=0) and (e!=1):
-                for i in range(a): n = randint(1,b); fin_1.append(n)  # Lanza y agrupa dado 1
-                for j in range(d): m = randint(1,e); fin_2.append(m)  # Lanza y agrupa dado 2
-                suma = sum(fin_1+fin_2)  # Suma las dos tiradas
+                for i in range(a): n = randint(1,b); die_1.append(n)  # Lanza y agrupa dado 1
+                for j in range(d): m = randint(1,e); die_2.append(m)  # Lanza y agrupa dado 2
+                suma = sum(die_1+die_2)  # Suma las dos tiradas
                 if c==0 and f==0:  # Si no hay modificadores
-                    if not fin_2:  # Si no hay dado 2
-                        result.config(text=f'{fin_1}\n= {suma}',fg='green')
+                    if not die_2:  # Si no hay dado 2
+                        result.config(text=f'{die_1}\n= {suma}',fg='green')
                     else:
-                        result.config(text=f'{fin_1}\n{fin_2}\n= {suma}',fg='green')
+                        result.config(text=f'{die_1}\n{die_2}\n= {suma}',fg='green')
                 else:  # Si hay modificadores
-                    if not fin_2:  # Si no hay dado 2
-                        result.config(text=f'{fin_1}\n= {suma} + mod: {c+f}\n= {suma+c+f}',fg='green')
+                    if not die_2:  # Si no hay dado 2
+                        result.config(text=f'{die_1}\n= {suma} + mod: {c+f}\n= {suma+c+f}',fg='green')
                     else:
-                        result.config(text=f'{fin_1}\n{fin_2}\n= {suma} + mod: {c+f}\n= {suma+c+f}',fg='green')
+                        result.config(text=f'{die_1}\n{die_2}\n= {suma} + mod: {c+f}\n= {suma+c+f}',fg='green')
             else:  # Recoge cualquier numero erróneo
                 result.config(text='Error:\nEnter a valid number\nDice = 2 - 100\nNumber of dice = 1 - 100',fg='red')
         except ValueError:  # Recoge errores y limpia las casillas
@@ -210,6 +213,22 @@ class Interfaz(tk.Frame):  # Gestiona el marco de los botones
                 result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50',fg='red')
         except ValueError:
             result.config(text='Error:\nEnter a number',fg='red'),self.mod.delete(0,10),self.mod.insert(0,0)
+
+    def eggs(self):  # Primera parte del easter egg
+        result.config(text='You found me',fg='red')
+        self.btn_egg.config(command=self.spam)
+
+    @staticmethod
+    def spam():  # Segunda parte. contiene las frases
+        sus= ('From Spain, with love','Hi, Human','Fudging rolls is bad','Rule 0 rules!','OBEY!','Wanna kill all humans?','TPK!',
+              'Rock falls, everybody dies','Do a Sanity check!','There is a dungeon in a dragon','Wait, I lost my dice...',
+              'No meta allowed!','Stop minmaxing','I love U. Just kidding','Master of Puppets','I don\'t think so','Never again',
+              'Nobody expects the Spanish Inquisition','I hate munchkins', 'Hasta la vista','Realistic is not Grimdark',
+              'Katanas are Underpowered in d20','Iä! Iä! Cthulhu fhtagn!','Tucker\'s Kobolds!','Yes, Dark Lord','Unlucky',
+              'Called shot to the groin','Add to the List','\"It\'s what my character would do\"\nis a bad excuse','Oh, No!',
+              'Improved Initiative',)
+        n = choice(sus)
+        result.config(text=n,fg='blue')
 
     @staticmethod
     def roll_rq():  # Define los rangos de cuerpo de BRP y derivados
@@ -318,7 +337,7 @@ class Menus(tk.Menu):  # Gestiona la barra de menú
         tutorial_menu.add_separator()
         tutorial_menu.add_command(label='Genesys/SW',command=Tutorials.tut_genesys,font=('Arial',10))
         self.add_cascade(label='User Guide',menu=tutorial_menu,font=('Arial',10))
-        # menu ed ayuda
+        # menu de ayuda
         ayuda_menu = tk.Menu(self,tearoff=0)
         ayuda_menu.add_command(label='Version',command=self.version,font=('Arial',10))
         ayuda_menu.add_command(label='Changelog',command=self.cambios,font=('Arial',10))
@@ -336,7 +355,7 @@ class Menus(tk.Menu):  # Gestiona la barra de menú
                                             '\n\nIcons made by Ana Canalejo.\n(https://www.deviantart.com/miyuminineko)')
 
     @staticmethod
-    def version(): mb.showinfo('Version RPG DR 2','Version 2.3.0')
+    def version(): mb.showinfo('Version RPG DR 2','Version 2.3.1')
 
     @staticmethod
     def cambios(): startfile('CHANGELOG.txt')
