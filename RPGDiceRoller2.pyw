@@ -3,7 +3,6 @@ import tkinter as tk
 from os import startfile  # De momento la única función usada
 from random import choices,randint,choice  # Solo los módulos utilizados
 from tkinter import messagebox as mb
-# bg=3 para los botones
 
 
 def genesys_iface():  # Genera toda la interfaz de los dados Genesys
@@ -13,18 +12,18 @@ def genesys_iface():  # Genera toda la interfaz de los dados Genesys
         cha_label.destroy(),frc_label.destroy(),btn_g.destroy(),menu.delete('Delete Genesys'),raiz.geometry('400x340')
 
     def roll_g():  # Define los dados del sistema Genesys junto con el dado de fuerza de SW
+        a,b,c = int(bst.get()),int(abi.get()),int(prof.get())
+        d,e,f = int(sback.get()),int(diff.get()),int(cha.get())
+        g = int(frc.get())  # Dado de fuerza, muy situacional en el sistema
+        var_bst = ('0','success','advantage','advantage, advantage','advantage, success')
+        var_abi = ('success','success, success','0','advantage','advantage, success','advantage, advantage')
+        var_prof = ('0','triumph','success','advantage','success, success','advantage, advantage','advantage, success')
+        var_sback = ('success','success, success','0','advantage','advantage, success','advantage, advantage')
+        var_diff = ('failure','failure, failure','0','threat','threat, failure','threat, threat')
+        var_cha = ('failure','failure, failure','0','threat','threat, failure','threat, threat','despair')
+        var_frc = ('DARK','LIGHT','DARK, DARK','LIGHT, LIGHT')
+        fin = []
         try:
-            a,b,c = int(bst.get()),int(abi.get()),int(prof.get())
-            d,e,f = int(sback.get()),int(diff.get()),int(cha.get())
-            g = int(frc.get())  # Dado de fuerza, muy situacional en el sistema
-            var_bst = ('0','success','advantage','advantage, advantage','advantage, success')
-            var_abi = ('success','success, success','0','advantage','advantage, success','advantage, advantage')
-            var_prof = ('0','triumph','success','advantage','success, success','advantage, advantage','advantage, success')
-            var_sback = ('success','success, success','0','advantage','advantage, success','advantage, advantage')
-            var_diff = ('failure','failure, failure','0','threat','threat, failure','threat, threat')
-            var_cha = ('failure','failure, failure','0','threat','threat, failure','threat, threat','despair')
-            var_frc = ('DARK','LIGHT','DARK, DARK','LIGHT, LIGHT')
-            fin = []
             if 50 >= a+b+c+d+e+f+g > 0:  # Lanza y agrupa los dados Genesys
                 n = choices(var_bst,weights=[2,1,1,1,1],k=a); fin.extend(n)
                 n = choices(var_abi,weights=[2,1,1,2,1,1],k=b); fin.extend(n)
@@ -33,7 +32,6 @@ def genesys_iface():  # Genera toda la interfaz de los dados Genesys
                 n = choices(var_diff,weights=[1,2,3,3,1,1],k=e); fin.extend(n)
                 n = choices(var_cha,weights=[2,2,1,2,2,2,1],k=f); fin.extend(n)
                 n = choices(var_frc,weights=[6,2,1,3],k=g); fin.extend(n)
-                ', '.join(fin)
                 suc = fin.count('success')+2*fin.count('success, success')+fin.count('advantage, success')
                 adv = fin.count('advantage')+2*fin.count('advantage, advantage')+fin.count('advantage, success')
                 tri = fin.count('triumph')
@@ -168,10 +166,10 @@ class Interfaz(tk.Frame):  # Gestiona el marco de los botones
         # Fin del Cuadro de los botones e inputs
 
     def roll(self):  # Define cualquier dado
+        a,b,c = int(self.pool.get()),int(self.dado.get()),int(self.mod.get())
+        d,e,f = int(self.pool_2.get()),int(self.dado_2.get()),int(self.mod_2.get())
+        die_1,die_2 = [],[]
         try:  # Las tiradas y las listas de ambos dados
-            a,b,c = int(self.pool.get()),int(self.dado.get()),int(self.mod.get())
-            d,e,f = int(self.pool_2.get()),int(self.dado_2.get()),int(self.mod_2.get())
-            die_1,die_2 = [],[]
             if (101 > b > 1) and (101 > e >= 0) and (101 > a+d > 0) and (a!=0) and (e!=1):
                 for i in range(a): n = randint(1,b); die_1.append(n)  # Lanza y agrupa dado 1
                 for j in range(d): m = randint(1,e); die_2.append(m)  # Lanza y agrupa dado 2
@@ -194,9 +192,9 @@ class Interfaz(tk.Frame):  # Gestiona el marco de los botones
             self.dado_2.delete(0,10),self.dado_2.insert(0,0),self.pool_2.delete(0,10),self.pool_2.insert(0,0)
 
     def roll_fate(self):  # Define el dado usado en FATE, FUDGE y derivados
+        a,c = int(self.pool.get()),int(self.mod.get())
+        var = ('+','-','0')
         try:
-            a,c = int(self.pool.get()),int(self.mod.get())
-            var = ('+','-','0')
             if 51 > a > 0:
                 n = choices(var,weights=[2,2,2],k=a)  # Selecciona por peso de la lista tantas veces como k
                 total = n.count('+')-n.count('-')+c  # Cuenta el resultado
@@ -219,14 +217,15 @@ class Interfaz(tk.Frame):  # Gestiona el marco de los botones
         self.btn_egg.config(command=self.spam)
 
     @staticmethod
-    def spam():  # Segunda parte. contiene las frases
+    def spam():  # Segunda parte. Contiene las frases
         sus= ('From Spain, with love','Hi, Human','Fudging rolls is bad','Rule 0 rules!','OBEY!','Wanna kill all humans?','TPK!',
               'Rock falls, everybody dies','Do a Sanity check!','There is a dungeon in a dragon','Wait, I lost my dice...',
               'No meta allowed!','Stop minmaxing','I love U. Just kidding','Master of Puppets','I don\'t think so','Never again',
               'Nobody expects the Spanish Inquisition','I hate munchkins', 'Hasta la vista','Realistic is not Grimdark',
               'Katanas are Underpowered in d20','Iä! Iä! Cthulhu fhtagn!','Tucker\'s Kobolds!','Yes, Dark Lord','Unlucky',
               'Called shot to the groin','Add to the List','\"It\'s what my character would do\"\nis a bad excuse','Oh, No!',
-              'Improved Initiative',)
+              'Improved Initiative','Peace was never an option','A PC who is a Duck','Do a barrel roll','I regret nothing',
+              'All Your Base Are Belong to Us','Pathfinder is the errata \nof the errata \nof DnD 3')
         n = choice(sus)
         result.config(text=n,fg='blue')
 
