@@ -1,5 +1,6 @@
 # -*- mode: python ; coding: utf-8 -*-
 
+
 block_cipher = None
 
 
@@ -11,8 +12,8 @@ a = Analysis(['RPGDiceRoller2.pyw'],
              hookspath=[],
              runtime_hooks=[],
              excludes=[],
-             win_no_prefer_redirects=True,
-             win_private_assemblies=True,
+             win_no_prefer_redirects=False,
+             win_private_assemblies=False,
              cipher=block_cipher,
              noarchive=False)
 a.datas += [("./ico.ico", "ico.ico", "DATA")]
