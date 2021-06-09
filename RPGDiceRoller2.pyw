@@ -3,27 +3,32 @@ import tkinter as tk
 from os import startfile  # De momento la única función usada
 from random import choices,randint,choice  # Solo los módulos utilizados
 from tkinter import messagebox as mb
+from time import time,strftime
+from datetime import timedelta
+
+
+start=time()
 
 
 def genesys_iface():  # Genera toda la interfaz de los dados Genesys
     def eliminar_g():  # Elimina toda la interfaz de Genesys
         result.config(text=''),bst.destroy(),abi.destroy(),prof.destroy(),sback.destroy(),diff.destroy(),cha.destroy()
         frc.destroy(),bst_label.destroy(),abi_label.destroy(),prof_label.destroy(),sback_label.destroy(),diff_label.destroy()
-        cha_label.destroy(),frc_label.destroy(),btn_g.destroy(),menu.delete('Delete Genesys'),raiz.geometry('400x340')
+        cha_label.destroy(),frc_label.destroy(),btn_g.destroy(),menu.delete('Delete Genesys'),raiz.geometry('400x400')
 
     def roll_g():  # Define los dados del sistema Genesys junto con el dado de fuerza de SW
-        a,b,c = int(bst.get()),int(abi.get()),int(prof.get())
-        d,e,f = int(sback.get()),int(diff.get()),int(cha.get())
-        g = int(frc.get())  # Dado de fuerza, muy situacional en el sistema
-        var_bst = ('0','success','advantage','advantage, advantage','advantage, success')
-        var_abi = ('success','success, success','0','advantage','advantage, success','advantage, advantage')
-        var_prof = ('0','triumph','success','advantage','success, success','advantage, advantage','advantage, success')
-        var_sback = ('success','success, success','0','advantage','advantage, success','advantage, advantage')
-        var_diff = ('failure','failure, failure','0','threat','threat, failure','threat, threat')
-        var_cha = ('failure','failure, failure','0','threat','threat, failure','threat, threat','despair')
-        var_frc = ('DARK','LIGHT','DARK, DARK','LIGHT, LIGHT')
-        fin = []
         try:
+            a,b,c = int(bst.get()),int(abi.get()),int(prof.get())
+            d,e,f = int(sback.get()),int(diff.get()),int(cha.get())
+            g = int(frc.get())  # Dado de fuerza, muy situacional en el sistema
+            var_bst = ('0','success','advantage','advantage, advantage','advantage, success')
+            var_abi = ('success','success, success','0','advantage','advantage, success','advantage, advantage')
+            var_prof = ('0','triumph','success','advantage','success, success','advantage, advantage','advantage, success')
+            var_sback = ('success','success, success','0','advantage','advantage, success','advantage, advantage')
+            var_diff = ('failure','failure, failure','0','threat','threat, failure','threat, threat')
+            var_cha = ('failure','failure, failure','0','threat','threat, failure','threat, threat','despair')
+            var_frc = ('DARK','LIGHT','DARK, DARK','LIGHT, LIGHT')
+            fin = []
             if 50 >= a+b+c+d+e+f+g > 0:  # Lanza y agrupa los dados Genesys
                 n = choices(var_bst,weights=[2,1,1,1,1],k=a); fin.extend(n)
                 n = choices(var_abi,weights=[2,1,1,2,1,1],k=b); fin.extend(n)
@@ -67,7 +72,7 @@ def genesys_iface():  # Genera toda la interfaz de los dados Genesys
             result.config(text='Error:\nEnter a number',fg='red')
 
     # Ajusta el tamaño de la ventana
-    raiz.geometry('800x340')
+    raiz.geometry('800x400')
     # Crean los textos de los dados
     bst_label = tk.Label(cuadro,justify='right',text='Boost Dice: ',font=('Arial',12))
     bst_label.grid(row=0,column=4,padx=10,pady=10,sticky='E')
@@ -107,7 +112,7 @@ def genesys_iface():  # Genera toda la interfaz de los dados Genesys
 class Raiz(tk.Tk):  # Crea la ventana principal
     def __init__(self):
         super().__init__()
-        self.title('RPG Dice Roller v2'),self.geometry('400x340'),self.iconbitmap('ico.ico')
+        self.title('RPG Dice Roller v2'),self.geometry('400x400'),self.iconbitmap('ico.ico')
 
 
 class Interfaz(tk.Frame):  # Gestiona el marco de los botones
@@ -143,7 +148,7 @@ class Interfaz(tk.Frame):  # Gestiona el marco de los botones
         self.mod_label = tk.Label(self,justify='right',text="Mod Value: ",font=('Arial',12))
         self.mod_label.grid(row=2,column=1,**op,sticky='E')
         # Botón tirar dados
-        self.btn_roll = tk.Button(self,text="Roll",fg='green',command=self.roll,font=('Arial',11),cursor='hand2')
+        self.btn_roll = tk.Button(self,text="Roll",fg='dark green',command=self.roll,font=('Arial',12,'bold'),cursor='hand2')
         self.btn_roll.grid(row=0,column=0,**op)
         # Botón tirar FATE
         self.btn_fate = tk.Button(self,text="FATE",fg='green',command=self.roll_fate,font=('Arial',11),cursor='hand2')
@@ -158,18 +163,25 @@ class Interfaz(tk.Frame):  # Gestiona el marco de los botones
         self.btn_myth = tk.Button(self,text="Mythras",fg='blue',command=self.roll_myth,font=('Arial',11),cursor='hand2')
         self.btn_myth.grid(row=3,column=2,**op),self.pack()
         # Botón limpiar
-        self.btn_clean = tk.Button(self,text="Clear",fg='red',command=self.limpiar,font=('Arial',14),cursor='hand2', bd=4)
+        self.btn_clean = tk.Button(self,text="Clear",fg='red3',command=self.limpiar,font=('Arial',13,'italic'),cursor='hand2',bd=4)
         self.btn_clean.grid(row=3,column=0, rowspan=3, **op)
         # Botón Huevo de Pascua
         self.btn_egg = tk.Button(self,text="     ",command=self.eggs,fg='red',font=('Arial',4), bd=0)
         self.btn_egg.grid(row=2,column=0, padx=10, pady=10)
+        # Tiempo de juego
+        self.use_time = tk.Label(self,font=('Calibri',10),fg='DarkOrchid4',relief='flat')
+        self.use_time.grid(row=4,column=1,padx=5,pady=5)
+        # Tiempo local
+        self.loc_time = tk.Label(self,font=('Calibri',10),fg='darkgoldenrod4',relief='flat')
+        self.loc_time.grid(row=4,column=2,padx=5,pady=5)
+
         # Fin del Cuadro de los botones e inputs
 
     def roll(self):  # Define cualquier dado
-        a,b,c = int(self.pool.get()),int(self.dado.get()),int(self.mod.get())
-        d,e,f = int(self.pool_2.get()),int(self.dado_2.get()),int(self.mod_2.get())
-        die_1,die_2 = [],[]
         try:  # Las tiradas y las listas de ambos dados
+            a,b,c = int(self.pool.get()),int(self.dado.get()),int(self.mod.get())
+            d,e,f = int(self.pool_2.get()),int(self.dado_2.get()),int(self.mod_2.get())
+            die_1,die_2 = [],[]
             if (101 > b > 1) and (101 > e >= 0) and (101 > a+d > 0) and (a!=0) and (e!=1):
                 for i in range(a): n = randint(1,b); die_1.append(n)  # Lanza y agrupa dado 1
                 for j in range(d): m = randint(1,e); die_2.append(m)  # Lanza y agrupa dado 2
@@ -211,6 +223,16 @@ class Interfaz(tk.Frame):  # Gestiona el marco de los botones
                 result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50',fg='red')
         except ValueError:
             result.config(text='Error:\nEnter a number',fg='red'),self.mod.delete(0,10),self.mod.insert(0,0)
+
+    def playtime(self):
+        play_time = timedelta(seconds=int(time() - start))
+        self.use_time.configure(text=f'Play Time:\n{play_time}')
+        self.use_time.after(100,self.playtime)
+
+    def localtime(self):
+        local_time = strftime('%H: %M: %S')
+        self.loc_time.configure(text=f'Clock:\n{local_time}')
+        self.loc_time.after(100,self.localtime)
 
     def eggs(self):  # Primera parte del easter egg
         result.config(text='You found me',fg='red')
@@ -354,7 +376,7 @@ class Menus(tk.Menu):  # Gestiona la barra de menú
                                             '\n\nIcons made by Ana Canalejo.\n(https://www.deviantart.com/miyuminineko)')
 
     @staticmethod
-    def version(): mb.showinfo('Version RPG DR 2','Version 2.3.1')
+    def version(): mb.showinfo('Version RPG DR 2','Version 2.3.2')
 
     @staticmethod
     def cambios(): startfile('CHANGELOG.txt')
@@ -376,4 +398,6 @@ if __name__=="__main__":  # Arranca toda la interfaz
     raiz = Raiz()
     menu,cuadro,canvas = Menus(),Interfaz(raiz),Lienzo(raiz)
     result = Resultado(canvas)
+    cuadro.localtime()
+    cuadro.playtime()
     raiz.mainloop()

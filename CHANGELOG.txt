@@ -1,3 +1,4 @@
+2.3.2 - Solved a problem with catching errors. Added Clock and Play Time count. Minor aesthetic changes.
 2.3.1 - Reorganised the Genesys inputs. Optimized code. Added a Easter Egg.
 2.3.0 - Really huge improvement over how random internally works. Optimized and cleaned code. Minor aesthetic changes.
 2.2.1 - Adjusted windows size. Optimized and reduced code.
