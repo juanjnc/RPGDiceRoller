@@ -223,7 +223,7 @@ class Menus(Menu):  # Gestiona la barra de menú
                                             '\n\nIcons made by Ana Canalejo.\n(https://www.deviantart.com/miyuminineko)')
 
     @staticmethod
-    def version(): mb.showinfo('Version RPG DR 2','Version 2.3.2')
+    def version(): mb.showinfo('Version RPG DR 2','Version 2.4.0')
 
     @staticmethod
     def cambios(): startfile('CHANGELOG.txt')

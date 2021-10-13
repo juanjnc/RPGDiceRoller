@@ -1,5 +1,6 @@
+2.4.0 - Changed tk GUI to ttk GUI, in theory has a modern look.
 2.3.2 - Solved a problem with catching errors. Added Clock and Play Time count. Minor aesthetic changes.
-2.3.1 - Reorganised the Genesys inputs. Optimized code. Added a Easter Egg.
+2.3.1 - Reorganised the Genesys inputs. Optimized code. Added an Easter Egg.
 2.3.0 - Really huge improvement over how random internally works. Optimized and cleaned code. Minor aesthetic changes.
 2.2.1 - Adjusted windows size. Optimized and reduced code.
 2.2.0 - Added icons. Now "Changelog" button open this file. Changed some buttons colors. Optimized code.
@@ -17,7 +18,7 @@
 1.5.6 - Now the limit of 100 dice is tracking the combined values for 1st and 2nd die.
 1.5.5 - Fixed a bug with the 2nd die (rolls using the first die as an exponent). Now shows both dice separately.
 1.5.4 - Improved internal logic. Improved the way to show the results.
-1.5.3 - Changed "User Guide's" and "Changelog" messages box to windows.
+1.5.3 - Changed "User Guide's" and "Changelog" messages box to window.
 1.5.2 - HOTFIX: Capped values for the second die.
 1.5.1 - Improved stability. Grammar fixing. Adjusted default size.
 1.5.0 - Added the option for roll two type of dice with two mods values.
