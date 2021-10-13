@@ -19,7 +19,6 @@ a = Analysis(['RPGDiceRoller2.pyw'],
 a.datas += [("./ico.ico", "ico.ico", "DATA")]
 a.datas += [("./CHANGELOG.txt", "CHANGELOG.txt", "DATA")]
 a.datas += [("./VC_redist.x64.exe", "VC_redist.x64.exe", "DATA")]
-a.datas += [("./VC_redist.x86.exe", "VC_redist.x86.exe", "DATA")]
 a.datas += [("./VC_redist.arm64.exe", "VC_redist.arm64.exe", "DATA")]
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
