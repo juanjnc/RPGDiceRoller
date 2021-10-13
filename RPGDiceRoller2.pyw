@@ -7,8 +7,6 @@ from time import time,strftime
 from datetime import timedelta
 
 
-
-
 def genesys_iface():  # Genera toda la interfaz de los dados Genesys
     def eliminar_g():  # Elimina toda la interfaz de Genesys
         result.config(text=''),bst.destroy(),abi.destroy(),prof.destroy(),sback.destroy(),diff.destroy(),cha.destroy()
