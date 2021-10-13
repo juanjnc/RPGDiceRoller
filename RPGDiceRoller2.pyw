@@ -238,32 +238,32 @@ class Interfaz(Frame):  # Gestiona el marco de los botones
     def __init__(self,container):
         super().__init__(container)
         self.start=time()
-        Style().configure('TButton',font=('Arial',11),foreground='green',width=5)
-        Style().configure('HL.TButton',font=('Arial',11),foreground='blue',width=7)
-        Style().configure('R.TButton',font=('Arial',12,'bold'),foreground='dark green',width=5)
-        Style().configure('C.TButton',font=('Arial',13,'italic'),foreground='red3',borderwidth=4,width=5)
-        Style().configure('NL.TLabel',font=('Arial',3),borderwidth=0,width=0,takefocus=False)
-        Style().configure('TLabel',font=('Arial',12))
+        Style().configure('TButton',font=('Arial',11),foreground='green',width=5,justify='center')
+        Style().configure('HL.TButton',font=('Arial',11),foreground='blue',width=7,justify='center')
+        Style().configure('R.TButton',font=('Arial',12,'bold'),foreground='dark green',width=5,justify='center')
+        Style().configure('C.TButton',font=('Arial',13,'italic'),foreground='red3',borderwidth=4,width=5,justify='center')
+        Style().configure('NL.TLabel',font=('Arial',3),borderwidth=0,width=0,takefocus=False,justify='center')
+        Style().configure('TLabel',font=('Arial',12),justify='center')
         Style().configure('TEntry',font=('Arial',12))
         self.config(height='100',width='850')
         # Primera cantidad de dados
-        self.pool = Entry(self,width=5)
-        self.pool.grid(row=0,column=2,padx=5,pady=5),self.pool.config(justify='center',style='TEntry'),self.pool.insert(0,1)
+        self.pool = Entry(self,width=5,justify='center')
+        self.pool.grid(row=0,column=2,padx=5,pady=5),self.pool.config(style='TEntry'),self.pool.insert(0,1)
         # Primer dado
-        self.dado = Entry(self,width=5)
-        self.dado.grid(row=1,column=2,padx=5,pady=5),self.dado.config(justify='center',style='TEntry'),self.dado.insert(0,2)
+        self.dado = Entry(self,width=5,justify='center')
+        self.dado.grid(row=1,column=2,padx=5,pady=5),self.dado.config(style='TEntry'),self.dado.insert(0,2)
         # primer modificador
-        self.mod = Entry(self,width=5)
-        self.mod.grid(row=2,column=2,padx=5,pady=5),self.mod.config(justify='center',style='TEntry'),self.mod.insert(0,0)
+        self.mod = Entry(self,width=5,justify='center')
+        self.mod.grid(row=2,column=2,padx=5,pady=5),self.mod.config(style='TEntry'),self.mod.insert(0,0)
         # Segunda cantidad de dados
-        self.pool_2 = Entry(self,width=5)
-        self.pool_2.grid(row=0,column=3,padx=5,pady=5),self.pool_2.config(justify='center',style='TEntry'),self.pool_2.insert(0,0)
+        self.pool_2 = Entry(self,width=5,justify='center')
+        self.pool_2.grid(row=0,column=3,padx=5,pady=5),self.pool_2.config(style='TEntry'),self.pool_2.insert(0,0)
         # Segundo dado
-        self.dado_2 = Entry(self,width=5)
-        self.dado_2.grid(row=1,column=3,padx=5,pady=5),self.dado_2.config(justify='center',style='TEntry'),self.dado_2.insert(0,0)
+        self.dado_2 = Entry(self,width=5,justify='center')
+        self.dado_2.grid(row=1,column=3,padx=5,pady=5),self.dado_2.config(style='TEntry'),self.dado_2.insert(0,0)
         # Segundo modificador
-        self.mod_2 = Entry(self,width=5)
-        self.mod_2.grid(row=2,column=3,padx=5,pady=5),self.mod_2.config(justify='center',style='TEntry'),self.mod_2.insert(0,0)
+        self.mod_2 = Entry(self,width=5,justify='center')
+        self.mod_2.grid(row=2,column=3,padx=5,pady=5),self.mod_2.config(style='TEntry'),self.mod_2.insert(0,0)
         # Etiqueta cantidad de dados
         self.pool_label = Label(self,justify='right',text='nº of Dice: ',style='TLabel')
         self.pool_label.grid(row=0,column=1,sticky='E',padx=5,pady=5)
@@ -295,10 +295,10 @@ class Interfaz(Frame):  # Gestiona el marco de los botones
         self.btn_egg = Button(self,text="     ",command=self.eggs,style='NL.TLabel')
         self.btn_egg.grid(row=2,column=0, padx=5, pady=5)
         # Tiempo de juego
-        self.use_time = Label(self,font=('Calibri',10),foreground='DarkOrchid4',relief='flat')
+        self.use_time = Label(self,font=('Calibri',10),foreground='DarkOrchid4',relief='flat',justify='center')
         self.use_time.grid(row=4,column=1,padx=5,pady=5)
         # Tiempo local
-        self.loc_time = Label(self,font=('Calibri',10),foreground='darkgoldenrod4',relief='flat')
+        self.loc_time = Label(self,font=('Calibri',10),foreground='darkgoldenrod4',relief='flat',justify='center')
         self.loc_time.grid(row=4,column=2,padx=5,pady=5)
 
         # Fin del Cuadro de los botones e inputs
