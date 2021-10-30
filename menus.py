@@ -2,11 +2,11 @@ from tkinter import *
 from os import startfile  # De momento la única función usada
 from tkinter import messagebox as mb
 from tutorials import Tutorials as T
-from genesys import genesys_iface
+from genesys import genesys
 
 
 class Menus(Menu):  # Gestiona la barra de menú
-    def __init__(self,container,**kwargs):
+    def __init__(self,container,result, cuadro, **kwargs):
         super().__init__(container)
         # menu archivo
         archivo_menu = Menu(self,tearoff=0)
@@ -31,7 +31,7 @@ class Menus(Menu):  # Gestiona la barra de menú
         self.add_cascade(label='Help',menu=ayuda_menu,font=('Arial',10))
         # menu de dados adicionales
         dados_menu = Menu(self,tearoff=0)
-        dados_menu.add_command(label='Genesys',command=genesys_iface,font=('Arial',10))
+        dados_menu.add_command(label='Genesys',command=genesys(menu=self,**kwargs, result=result, cuadro=cuadro),font=('Arial',10))
         self.add_cascade(label='Show',menu=dados_menu,font=('Arial',10))
         # Cierre
         container.config(menu=self)
