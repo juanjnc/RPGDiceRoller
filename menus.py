@@ -1,27 +1,27 @@
 from tkinter import *
 from os import startfile  # De momento la única función usada
 from tkinter import messagebox as mb
-from tutorials import Tutorials
+from tutorials import Tutorials as T
 from genesys import genesys_iface
 
 
 class Menus(Menu):  # Gestiona la barra de menú
-    def __init__(self,container):
+    def __init__(self,container,**kwargs):
         super().__init__(container)
         # menu archivo
         archivo_menu = Menu(self,tearoff=0)
-        archivo_menu.add_command(label='Exit',command=self.salir,font=('Arial',10))
+        archivo_menu.add_command(label='Exit',command=self.crear_salir(**kwargs),font=('Arial',10))
         self.add_cascade(label='File',menu=archivo_menu,font=('Arial',10))
         # menu de tutoriales
         tutorial_menu = Menu(self,tearoff=0)
-        tutorial_menu.add_command(label='Guide',command=Tutorials.tutorial,font=('Arial',10))
-        tutorial_menu.add_command(label='Roll',command=Tutorials.tut_roll,font=('Arial',10))
-        tutorial_menu.add_command(label='FATE',command=Tutorials.tut_fate,font=('Arial',10))
-        tutorial_menu.add_command(label='RuneQuest',command=Tutorials.tut_rq,font=('Arial',10))
-        tutorial_menu.add_command(label='Mythras',command=Tutorials.tut_myth,font=('Arial',10))
-        tutorial_menu.add_command(label='Show Menu',command=Tutorials.mostrar,font=('Arial',10))
+        tutorial_menu.add_command(label='Guide',command=T.crear_tutorial(**kwargs),font=('Arial',10))
+        tutorial_menu.add_command(label='Roll',command=T.crear_tut_roll(**kwargs),font=('Arial',10))
+        tutorial_menu.add_command(label='FATE',command=T.crear_tut_fate(**kwargs),font=('Arial',10))
+        tutorial_menu.add_command(label='RuneQuest',command=T.crear_tut_rq(**kwargs),font=('Arial',10))
+        tutorial_menu.add_command(label='Mythras',command=T.crear_tut_myth(**kwargs),font=('Arial',10))
+        tutorial_menu.add_command(label='Show Menu',command=T.crear_mostrar(**kwargs),font=('Arial',10))
         tutorial_menu.add_separator()
-        tutorial_menu.add_command(label='Genesys/SW',command=Tutorials.tut_genesys,font=('Arial',10))
+        tutorial_menu.add_command(label='Genesys/SW',command=T.crear_tut_genesys(**kwargs),font=('Arial',10))
         self.add_cascade(label='User Guide',menu=tutorial_menu,font=('Arial',10))
         # menu de ayuda
         ayuda_menu = Menu(self,tearoff=0)
@@ -47,6 +47,8 @@ class Menus(Menu):  # Gestiona la barra de menú
     def cambios(): startfile('CHANGELOG.txt')
 
     @staticmethod
-    def salir():  # Menu de salida de la app
-        valor = mb.askokcancel('Close','Are you sure?')
-        if valor is True: raiz.destroy()
+    def crear_salir(raiz):
+        def salir():  # Menu de salida de la app
+            valor = mb.askokcancel('Close','Are you sure?')
+            if valor is True: raiz.destroy()
+        return salir

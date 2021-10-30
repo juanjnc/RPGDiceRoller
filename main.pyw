@@ -10,7 +10,7 @@ if __name__=="__main__":  # Arranca toda la interfaz
     cuadro = Interfaz(raiz)
     result = Resultado(canvas)
     argumentos = dict(raiz=raiz)
-    menu = Menus(raiz)
+    menu = Menus(raiz, **argumentos)
     cuadro.localtime()
     cuadro.playtime()
     raiz.mainloop()
