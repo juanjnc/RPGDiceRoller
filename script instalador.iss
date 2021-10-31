@@ -2,9 +2,9 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "RPG Dice Roller"
-#define MyAppVersion "2.4.1"
+#define MyAppVersion "3.0.0"
 #define MyAppPublisher "Juan José Núñez"
-#define MyAppExeName "RPGDiceRoller2.exe"
+#define MyAppExeName "RPGDiceRoller3.exe"
 #define MyAppAssocName MyAppName + " File"
 #define MyAppAssocExt ".myp"
 #define MyAppAssocKey StringChange(MyAppAssocName, " ", "") + MyAppAssocExt
@@ -25,7 +25,7 @@ PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=C:\Users\shurk\PycharmProjects\RPGDiceRoller\Output
 OutputBaseFilename=Installer_RPGDR
-SetupIconFile=C:\Users\shurk\PycharmProjects\RPGDiceRoller\dist\RPGDiceRoller2\ico.ico
+SetupIconFile=C:\Users\shurk\PycharmProjects\RPGDiceRoller\dist\RPGDiceRoller3\ico.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -38,8 +38,8 @@ Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\shurk\PycharmProjects\RPGDiceRoller\dist\RPGDiceRoller2\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\shurk\PycharmProjects\RPGDiceRoller\dist\RPGDiceRoller2\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "C:\Users\shurk\PycharmProjects\RPGDiceRoller\dist\RPGDiceRoller3\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "C:\Users\shurk\PycharmProjects\RPGDiceRoller\dist\RPGDiceRoller3\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]

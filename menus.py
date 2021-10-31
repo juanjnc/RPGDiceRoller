@@ -37,11 +37,11 @@ class Menus(Menu):  # Gestiona la barra de menú
         container.config(menu=self)
 
     @staticmethod
-    def info(): mb.showinfo('Info RPG DR 2','Programmed in Python by Juan José Núñez.\n(https://www.python.org/)'
+    def info(): mb.showinfo('Info RPG DR 3','Programmed in Python by Juan José Núñez.\n(https://www.python.org/)'
                                             '\n\nIcons made by Ana Canalejo.\n(https://www.deviantart.com/miyuminineko)')
 
     @staticmethod
-    def version(): mb.showinfo('Version RPG DR 2','Version 2.4.1')
+    def version(): mb.showinfo('Version RPG DR 3','Version 3.0.0')
 
     @staticmethod
     def cambios(): startfile('CHANGELOG.txt')
