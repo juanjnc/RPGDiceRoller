@@ -4,8 +4,11 @@ from random import choices  # Solo los módulos utilizados
 
 
 def genesys(menu,result,raiz, cuadro):
+
     def iface():  # Genera toda la interfaz de los dados Genesys
+
         def crear_eliminar_g():
+
             def eliminar_g():  # Elimina toda la interfaz de Genesys
                 result.config(text=''),bst.destroy(),abi.destroy(),prof.destroy(),sback.destroy(),diff.destroy(),cha.destroy()
                 frc.destroy(),bst_label.destroy(),abi_label.destroy(),prof_label.destroy(),sback_label.destroy(),diff_label.destroy()
@@ -13,6 +16,7 @@ def genesys(menu,result,raiz, cuadro):
             return eliminar_g()
 
         def crear_roll_g(result):
+
             def roll_g():  # Define los dados del sistema Genesys junto con el dado de fuerza de SW
                 try:
                     a,b,c = int(bst.get()),int(abi.get()),int(prof.get())

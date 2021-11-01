@@ -1,3 +1,4 @@
+3.1.0 - Optimized Code, bug fixing. New comments in the Easter Egg.
 3.0.0 - New internal logic. Full OOP.
 2.5.0 - Rewrite the internal logic for show the results, changed the results of roll normal
 2.4.1 - Fixed size of buttons.

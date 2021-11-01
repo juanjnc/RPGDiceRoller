@@ -6,6 +6,7 @@ from genesys import genesys
 
 
 class Menus(Menu):  # Gestiona la barra de menú
+
     def __init__(self,container,result, cuadro, **kwargs):
         super().__init__(container)
         # menu archivo
@@ -41,7 +42,7 @@ class Menus(Menu):  # Gestiona la barra de menú
                                             '\n\nIcons made by Ana Canalejo.\n(https://www.deviantart.com/miyuminineko)')
 
     @staticmethod
-    def version(): mb.showinfo('Version RPG DR 3','Version 3.0.0')
+    def version(): mb.showinfo('Version RPG DR 3','Version 3.1.0')
 
     @staticmethod
     def cambios(): startfile('CHANGELOG.txt')
