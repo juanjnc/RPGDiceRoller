@@ -1,9 +1,9 @@
 from random import choices,randint  # Solo los módulos utilizados
 
-
+# Implementa la lógica de las tiradas de cualquier dado de n caras, soporta dos dados diferentes
 def crear_roll(result,cuadro):
-    def roll():  # Define cualquier dado
-        try:  # Las tiradas y las listas de ambos dados
+    def roll():
+        try:
             a,b,c=int(cuadro.pool.get()),int(cuadro.dado.get()),int(cuadro.mod.get())
             d,e,f=int(cuadro.pool_2.get()),int(cuadro.dado_2.get()),int(cuadro.mod_2.get())
             die_1,die_2=[],[]
@@ -23,9 +23,9 @@ def crear_roll(result,cuadro):
             cuadro.dado_2.delete(0,10),cuadro.dado_2.insert(0,0),cuadro.pool_2.delete(0,10),cuadro.pool_2.insert(0,0)
     return roll
 
-
+# Implementa la lógica de las tiradas de los dados Fate y FUDGE
 def crear_roll_fate(result,cuadro):
-    def roll_fate():  # Define el dado usado en FATE, FUDGE y derivados
+    def roll_fate():
         a,c=int(cuadro.pool.get()),int(cuadro.mod.get())
         var=('+','-','0')
         try:
@@ -48,7 +48,7 @@ def crear_roll_fate(result,cuadro):
             result.config(text='Error:\nEnter a number',foreground='red'),cuadro.mod.delete(0,10),cuadro.mod.insert(0,0)
     return roll_fate
 
-
+# Define los rangos de cuerpo de BRP y derivados
 def crear_roll_rq(result):
     def roll_rq():  # Define los rangos de cuerpo de BRP y derivados
         var= ('L. Leg','R. Leg','Abdomen','R. Arm','L. Arm','Chest','Head')
@@ -56,15 +56,15 @@ def crear_roll_rq(result):
         result.config(text=f'{n}',foreground='green')
     return roll_rq
 
-
+# Define los rangos de cuerpo de BRP y derivados
 def crear_roll_myth(result):
-    def roll_myth():  # Define los rangos de cuerpo de BRP y derivados
+    def roll_myth():
         var= ('L. Leg','R. Leg','Abdomen','R. Arm','L. Arm','Chest','Head')
         n = choices(var,weights=[3,3,3,3,3,3,2], k=1)
         result.config(text=f'{n}',foreground='green')
     return roll_myth
 
-
-def crear_limpiar(result):  # Limpia los resultados
+# Limpia los resultados
+def crear_limpiar(result):
     def limpiar(): result.config(text='')
     return limpiar

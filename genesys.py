@@ -1,23 +1,20 @@
-from tkinter import *
-from tkinter.ttk import *
+from tkinter.ttk import Label, Entry, Button, Style
 from random import choices  # Solo los módulos utilizados
 
-
+# Gestiona to lo relacionado con el sistema Genesys
 def genesys(menu,result,raiz, cuadro):
-
-    def iface():  # Genera toda la interfaz de los dados Genesys
-
+    # Genera toda la interfaz de los dados Genesys
+    def iface():
+        # Elimina toda la interfaz de Genesys
         def crear_eliminar_g():
-
-            def eliminar_g():  # Elimina toda la interfaz de Genesys
+            def eliminar_g():
                 result.config(text=''),bst.destroy(),abi.destroy(),prof.destroy(),sback.destroy(),diff.destroy(),cha.destroy()
                 frc.destroy(),bst_label.destroy(),abi_label.destroy(),prof_label.destroy(),sback_label.destroy(),diff_label.destroy()
                 cha_label.destroy(),frc_label.destroy(),btn_g.destroy(),menu.delete('Delete Genesys'),raiz.geometry('400x400')
             return eliminar_g()
-
-        def crear_roll_g(result):
-
-            def roll_g():  # Define los dados del sistema Genesys junto con el dado de fuerza de SW
+        # Implementa la lógica de las tiradas de los dados del sistema Genesys
+        def crear_roll_g():
+            def roll_g():
                 try:
                     a,b,c = int(bst.get()),int(abi.get()),int(prof.get())
                     d,e,f = int(sback.get()),int(diff.get()),int(cha.get())
@@ -111,7 +108,7 @@ def genesys(menu,result,raiz, cuadro):
         bst = Entry(cuadro,width=5)
         bst.grid(row=0,column=5,padx=5,pady=5),bst.config(justify='center',style='G.TEntry'),bst.insert(0,0)
         # Crea el botón para tirar los dados y eliminar la interfaz
-        btn_g = Button(cuadro,text="Genesys/SW",command=crear_roll_g(result=result),style='G.TButton',cursor='hand2')
+        btn_g = Button(cuadro,text="Genesys/SW",command=crear_roll_g(),style='G.TButton',cursor='hand2')
         btn_g.grid(row=3,column=6,columnspan=2,padx=5,pady=5)
         menu.insert_command(5, label='Delete Genesys',command=crear_eliminar_g,font=('Arial',10))
     return iface

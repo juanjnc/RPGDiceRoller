@@ -1,12 +1,11 @@
-from tkinter import *
-from tkinter.ttk import *
+from tkinter.ttk import Style, Label, Entry, Button, Frame
 from time import time,strftime
 from datetime import timedelta
 import huevo
 import tiradas
 
-
-class Interfaz(Frame):  # Gestiona el marco de los botones
+# Gestiona el marco general de la app y de los botones
+class Interfaz(Frame):
     def __init__(self,container,**kwargs):
         super().__init__(container)
         self.start=time()
@@ -74,11 +73,13 @@ class Interfaz(Frame):  # Gestiona el marco de los botones
         self.loc_time.grid(row=4,column=2,padx=5,pady=5)
         # Fin del Cuadro de los botones e inputs
 
+    # Tiempo de Juego
     def playtime(self):
         play_time = timedelta(seconds=int(time() - self.start))
         self.use_time.configure(text=f'Play Time:\n{play_time}')
         self.use_time.after(90,self.playtime)
 
+    # Reloj
     def localtime(self):
         local_time = strftime('%H: %M: %S')
         self.loc_time.configure(text=f'Clock:\n{local_time}')

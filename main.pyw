@@ -4,8 +4,8 @@ from interfaz import Interfaz
 from resultado import Resultado
 from menus import Menus
 
-
-if __name__=="__main__":  # Arranca toda la interfaz
+# Arranca el programa
+if __name__=="__main__":
     raiz = Raiz()
     canvas = Lienzo(raiz)
     result = Resultado(canvas)
@@ -15,4 +15,3 @@ if __name__=="__main__":  # Arranca toda la interfaz
     menu = Menus(raiz,**argumentos2)
     cuadro.playtime(), cuadro.localtime()
     raiz.mainloop()
-
