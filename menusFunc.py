@@ -2,7 +2,7 @@ from os import startfile  # De momento la única función usada
 from tkinter import messagebox as mb
 
 # Versión actual
-def version(): return mb.showinfo('Version RPG DR 3','Version 3.1.0')
+def version(): return mb.showinfo('Version RPG DR 3','Version 3.1.1')
 
 #Trae el changelog
 def cambios(): return startfile('CHANGELOG.txt')

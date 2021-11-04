@@ -1,4 +1,4 @@
-from tkinter import Menu
+from tkinter import Menu, BooleanVar
 import tutorials as tu
 from genesys import genesys
 import menusFunc as MeFu
@@ -31,7 +31,7 @@ class Menus(Menu):
         self.add_cascade(label='Help',menu=ayuda_menu,font=('Arial',10))
         # menu de dados adicionales
         dados_menu = Menu(self,tearoff=0)
-        dados_menu.add_command(label='Genesys',command=genesys(menu=self,**kwargs, result=result, cuadro=cuadro),font=('Arial',10))
+        dados_menu.add_checkbutton(label='Genesys', font=('Arial',10),command=genesys(menu=self,**kwargs, result=result, cuadro=cuadro))
         self.add_cascade(label='Show',menu=dados_menu,font=('Arial',10))
         # Cierre
         container.config(menu=self)
