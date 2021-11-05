@@ -1,7 +1,7 @@
-from tkinter.ttk import *
+from tkinter.ttk import Label
 
-
-class Resultado(Label):  # Gestiona la etiqueta de resultado
+# Gestiona la etiqueta donde se muestra el resultado
+class Resultado(Label):
     def __init__(self,container):
         super().__init__(container)
         options = {'expand':'YES'}

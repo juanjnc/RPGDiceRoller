@@ -3,7 +3,7 @@ from tkinter.ttk import *
 from os import startfile  # De momento la única función usada
 from random import choices,randint,choice  # Solo los módulos utilizados
 from tkinter import messagebox as mb
-from time import time,strftime
+from tiradas import time,strftime
 from datetime import timedelta
 
 
