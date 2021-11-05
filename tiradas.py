@@ -1,26 +1,34 @@
 from random import choices,randint  # Solo los módulos utilizados
 
-# Implementa la lógica de las tiradas de cualquier dado de n caras, soporta dos dados diferentes
+# Implementa la lógica de las tiradas de cualquier dado de n caras, soporta tres dados diferentes
 def crear_roll(result,cuadro):
     def roll():
         try:
             a,b,c=int(cuadro.pool.get()),int(cuadro.dado.get()),int(cuadro.mod.get())
             d,e,f=int(cuadro.pool_2.get()),int(cuadro.dado_2.get()),int(cuadro.mod_2.get())
-            die_1,die_2=[],[]
-            if (101>b>1) and (101>e>=0) and (101>a+d>0) and (a != 0) and (e != 1):
-                for i in range(a): n=randint(1,b); die_1.append(n)  # Lanza y agrupa dado 1
-                for j in range(d): m=randint(1,e); die_2.append(m)  # Lanza y agrupa dado 2
-                suma=sum(die_1+die_2)  # Suma las dos tiradas
-                if not die_2:  # Si no hay dado 2
-                    result.config(text=f'{die_1}\n= {suma} + mod: {c+f}\n= {suma+c+f}',foreground='green')
-                else:
+            g,h,i=int(cuadro.pool_3.get()),int(cuadro.dado_3.get()),int(cuadro.mod_3.get())
+            die_1,die_2,die_3=[],[],[]
+            if (101>(b or e or h)>1) and (101>a+d+g>0) and (a != 0) and ((e and h) != 1):
+                for ii in range(a): n=randint(1,b); die_1.append(n)  # Lanza y agrupa dado 1
+                for jj in range(d): m=randint(1,e); die_2.append(m)  # Lanza y agrupa dado 2
+                for kk in range(g): w=randint(1,h); die_3.append(w)  # Lanza y agrupa dado 3
+                suma=sum(die_1+die_2+die_3)  # Suma las tres tiradas
+                if not die_3:  # Si no hay dado 3
                     result.config(text=f'{die_1}\n{die_2}\n= {suma} + mod: {c+f}\n= {suma+c+f}',foreground='green')
+                if not die_2:  # Si no hay dado 2 pero si dado 3
+                    result.config(text=f'{die_1}\n{die_3}\n= {suma} + mod: {c+i}\n= {suma+c+i}',foreground='green')
+                    if not die_3: # Si no hay dado 2 ni dado 3
+                        result.config(text=f'{die_1}\n= {suma} + mod: {c}\n= {suma+c}',foreground='green')
+                else:
+                    result.config(text=f'{die_1}\n{die_2}\n{die_3}\n= {suma} + mod: {c+f+i}\n= {suma+c+f+i}',foreground='green')
             else:  # Recoge cualquier numero erróneo
                 result.config(text='Error:\nEnter a valid number\nDice = 2 - 100\nNumber of dice = 1 - 100',foreground='red')
         except ValueError:  # Recoge errores y limpia las casillas
             result.config(text='Error:\nEnter a number',foreground='red')
             cuadro.mod.delete(0,10),cuadro.mod.insert(0,0),cuadro.mod_2.delete(0,10),cuadro.mod_2.insert(0,0)
             cuadro.dado_2.delete(0,10),cuadro.dado_2.insert(0,0),cuadro.pool_2.delete(0,10),cuadro.pool_2.insert(0,0)
+            cuadro.mod_3.delete(0,10),cuadro.mod_3.insert(0,0),cuadro.dado_3.delete(0,10),cuadro.dado_3.insert(0,0)
+            cuadro.pool_3.delete(0,10),cuadro.pool_3.insert(0,0)
     return roll
 
 # Implementa la lógica de las tiradas de los dados Fate y FUDGE
