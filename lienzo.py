@@ -6,4 +6,3 @@ class Lienzo(Canvas):
         super().__init__(container)
         options = {'side':'bottom','expand':'YES','fill':'both'}
         self.config(background='white',highlightthickness=5,highlightbackground="grey"),self.pack(**options)
-9

@@ -1,5 +1,5 @@
 from tkinter import Menu, BooleanVar
-import tutorials as tu
+import tutoriales as tu
 from genesys import Genesys
 import menusFunc as MeFu
 
@@ -9,7 +9,7 @@ gene = Genesys
 # Gestiona la barra de menú
 class Menus(Menu):
     # Interfaz del menu
-    def __init__(self,container,result,cuadro,raiz):
+    def __init__(self,container,result,iface,raiz):
         super().__init__(container)
         # menu archivo
         archivo_menu = Menu(self,tearoff=0)
@@ -34,14 +34,15 @@ class Menus(Menu):
         self.add_cascade(label='Help',menu=ayuda_menu,font=('Arial',10))
         # menu de dados adicionales
         dados_menu = Menu(self,tearoff=0)
-        sysGen = BooleanVar()
-        def sysGenShow():
-            a = sysGen.get()
+        #Bloque de dados Genesys
+        sys_gen = BooleanVar()
+        def sys_gen_show():
+            a = sys_gen.get()
             if a is True:
-               return gene.__init__(self=Genesys,raiz=raiz, result=result, cuadro=cuadro)
+               return gene.__init__(self=gene,raiz=raiz,result=result,iface=iface)
             else:
-                return gene.eliminar_g(self=Genesys,raiz=raiz, result=result)
-        dados_menu.add_checkbutton(label='Genesys', font=('Arial',10), onvalue=1, offvalue=0, variable=sysGen,command=sysGenShow)
+                return gene.eliminar_g(self=gene,raiz=raiz, result=result)
+        dados_menu.add_checkbutton(label='Genesys', font=('Arial',10), onvalue=1, offvalue=0, variable=sys_gen,command=sys_gen_show)
 
         self.add_cascade(label='Show',menu=dados_menu,font=('Arial',10))
         # Cierre

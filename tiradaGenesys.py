@@ -34,25 +34,30 @@ def crear_roll_g(result,abi,frc,cha,diff,sback,prof,bst):
                 cut_1,cut_2,cut_3,cut_4,cut_5 = fin[:5],fin[5:10],fin[10:20],fin[20:30],fin[30:]
                 match len(fin):
                     case 1|2|3|4|5:
-                        result.config(text=f'{cut_1}\nsuccess = {suc}; advantage = {adv}; triumph = {tri}'
-                                           f'\nfailure = {fail}; threat = {thr}; despair = {des}\nForce Dark'
-                                           f' Side = {fds}; Force Light Side = {fls}',foreground='green')
+                        result.config(text=f'{cut_1}\nsuccess = {suc-fail}; advantage = {adv-thr}; triumph = {tri-des}'
+                                           f'\nfailure = {fail-suc}; threat = {thr-adv}; despair = {des-tri}\nForce Dark'
+                                           f' Side = {fds-fls}; Force Light Side = {fls-fls}',
+                                      foreground='green')
                     case 6|7|8|9|10:
-                        result.config(text=f'{cut_1}\n{cut_2}\nsuccess = {suc}; advantage = {adv}'
-                                           f'; triumph = {tri}\nfailure = {fail}; threat = {thr}; despair = {des}'
-                                           f'\nForce Dark Side = {fds}; Force Light Side = {fls}',foreground='green')
+                        result.config(text=f'{cut_1}\n{cut_2}\nsuccess = {suc-fail}; advantage = {adv-thr}; triumph = {tri-des}'
+                                           f'\nfailure = {fail-suc}; threat = {thr-adv}; despair = {des-tri}\nForce Dark'
+                                           f' Side = {fds-fls}; Force Light Side = {fls-fls}',
+                                      foreground='green')
                     case 11|12|13|14|15|16|17|18|19|20:
-                        result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\nsuccess = {suc}; advantage = {adv}'
-                                           f'; triumph = {tri}\nfailure = {fail}; threat = {thr}; despair = {des}'
-                                           f'\nForce Dark Side = {fds}; Force Light Side = {fls}',foreground='green')
+                        result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\nsuccess = {suc-fail}; advantage = {adv-thr};'
+                                           f' triumph = {tri-des}\nfailure = {fail-suc}; threat = {thr-adv}; despair = {des-tri}'
+                                           f'\nForce Dark Side = {fds-fls}; Force Light Side = {fls-fls}',
+                                      foreground='green')
                     case 21|22|23|24|25|26|27|28|29|30:
-                        result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\nsuccess = {suc}; advantage = {adv}'
-                                           f'; triumph = {tri}\nfailure = {fail}; threat = {thr}; despair = {des}'
-                                           f'\nForce Dark Side = {fds}; Force Light Side = {fls}',foreground='green')
+                        result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\nsuccess = {suc-fail}; advantage = {adv-thr};'
+                                           f' triumph = {tri-des}\nfailure = {fail-suc}; threat = {thr-adv}; despair = {des-tri}'
+                                           f'\nForce Dark Side = {fds-fls}; Force Light Side = {fls-fls}',
+                                      foreground='green')
                     case _:
-                        result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n{cut_5}\nsuccess = {suc}; advantage = {adv};'
-                                           f' triumph = {tri}\nfailure = {fail}; threat = {thr}; despair = {des}'
-                                           f'\nForce Dark Side = {fds}; Force Light Side = {fls}',foreground='green')
+                        result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n{cut_5}\nsuccess = {suc-fail};'
+                                           f' advantage = {adv-thr}; triumph = {tri-des}\nfailure = {fail-suc}; threat = {thr-adv}'
+                                           f'; despair = {des-tri}\nForce Dark Side = {fds-fls}; Force Light Side = {fls-fls}',
+                                      foreground='green')
             else:
                 result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50',foreground='red')
         except ValueError:

@@ -1,3 +1,4 @@
+3.2.1 - Optimized Code, bug fixing.
 3.2.0 - Implemented the logic for Check Buttons in the Show menu. Added a 3rd dice to the pool. Revised Tutorials.
 3.1.1 - Optimized Code, bug fixing.
 3.1.0 - Optimized Code, bug fixing. New comments in the Easter Egg.

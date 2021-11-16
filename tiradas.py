@@ -1,12 +1,12 @@
 from random import choices,randint  # Solo los módulos utilizados
 
 # Implementa la lógica de las tiradas de cualquier dado de n caras, soporta tres dados diferentes
-def crear_roll(result,cuadro):
+def crear_roll(result,iface):
     def roll():
         try:
-            a,b,c=int(cuadro.pool.get()),int(cuadro.dado.get()),int(cuadro.mod.get())
-            d,e,f=int(cuadro.pool_2.get()),int(cuadro.dado_2.get()),int(cuadro.mod_2.get())
-            g,h,i=int(cuadro.pool_3.get()),int(cuadro.dado_3.get()),int(cuadro.mod_3.get())
+            a,b,c=int(iface.pool.get()),int(iface.dado.get()),int(iface.mod.get())
+            d,e,f=int(iface.pool_2.get()),int(iface.dado_2.get()),int(iface.mod_2.get())
+            g,h,i=int(iface.pool_3.get()),int(iface.dado_3.get()),int(iface.mod_3.get())
             die_1,die_2,die_3=[],[],[]
             if (101>(b or e or h)>1) and (101>a+d+g>0) and (a != 0) and ((e and h) != 1):
                 for ii in range(a): n=randint(1,b); die_1.append(n)  # Lanza y agrupa dado 1
@@ -25,10 +25,10 @@ def crear_roll(result,cuadro):
                 result.config(text='Error:\nEnter a valid number\nDice = 2 - 100\nNumber of dice = 1 - 100',foreground='red')
         except ValueError:  # Recoge errores y limpia las casillas
             result.config(text='Error:\nEnter a number',foreground='red')
-            cuadro.mod.delete(0,10),cuadro.mod.insert(0,0),cuadro.mod_2.delete(0,10),cuadro.mod_2.insert(0,0)
-            cuadro.dado_2.delete(0,10),cuadro.dado_2.insert(0,0),cuadro.pool_2.delete(0,10),cuadro.pool_2.insert(0,0)
-            cuadro.mod_3.delete(0,10),cuadro.mod_3.insert(0,0),cuadro.dado_3.delete(0,10),cuadro.dado_3.insert(0,0)
-            cuadro.pool_3.delete(0,10),cuadro.pool_3.insert(0,0)
+            iface.mod.delete(0,10),iface.mod.insert(0,0),iface.mod_2.delete(0,10),iface.mod_2.insert(0,0)
+            iface.dado_2.delete(0,10),iface.dado_2.insert(0,0),iface.pool_2.delete(0,10),iface.pool_2.insert(0,0)
+            iface.mod_3.delete(0,10),iface.mod_3.insert(0,0),iface.dado_3.delete(0,10),iface.dado_3.insert(0,0)
+            iface.pool_3.delete(0,10),iface.pool_3.insert(0,0)
     return roll
 
 # Implementa la lógica de las tiradas de los dados Fate y FUDGE

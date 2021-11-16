@@ -66,7 +66,7 @@ class Interfaz(Frame):
         self.mod_label = Label(self,justify='right',text="Mod Value: ",style='TLabel')
         self.mod_label.grid(row=2,column=1,sticky='E',padx=5,pady=5)
         # Botón tirar dados
-        self.btn_roll = Button(self,text="Roll",command=tiradas.crear_roll(**kwargs,cuadro=self),style='R.TButton',cursor='hand2')
+        self.btn_roll = Button(self,text="Roll",command=tiradas.crear_roll(**kwargs,iface=self),style='R.TButton',cursor='hand2')
         self.btn_roll.grid(row=0,column=0,padx=5,pady=5)
         # Botón tirar FATE
         self.btn_fate = Button(self,text=" FATE ",command=tiradas.crear_roll_fate(**kwargs,cuadro=self),style='TButton',cursor='hand2')
@@ -84,7 +84,7 @@ class Interfaz(Frame):
         self.btn_clean = Button(self,text="Clear",command=tiradas.crear_limpiar(**kwargs),style='C.TButton',cursor='hand2')
         self.btn_clean.grid(row=3,column=0,rowspan=3,padx=5,pady=5)
         # Botón Huevo de Pascua
-        self.btn_egg = Button(self,text="     ",command=huevo.crear_eggs(**kwargs, cuadro=self),style='NL.TLabel')
+        self.btn_egg = Button(self,text="     ",command=huevo.crear_eggs(**kwargs,iface=self),style='NL.TLabel')
         self.btn_egg.grid(row=2,column=0, padx=5, pady=5)
         # Tiempo de juego
         self.use_time = Label(self,font=('Calibri',10),foreground='DarkOrchid4',relief='flat',justify='center')
