@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "RPG Dice Roller"
-#define MyAppVersion "3.1.0"
+#define MyAppVersion "3.3.0"
 #define MyAppPublisher "Juan José Núñez"
 #define MyAppExeName "RPGDiceRoller3.exe"
 #define MyAppAssocName MyAppName + " File"
@@ -25,7 +25,7 @@ PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=dialog
 OutputDir=C:\Users\shurk\PycharmProjects\RPGDiceRoller\Output
 OutputBaseFilename=Installer_RPGDR
-SetupIconFile=C:\Users\shurk\PycharmProjects\RPGDiceRoller\dist\RPGDiceRoller3\ico.ico
+SetupIconFile=C:\Users\shurk\PycharmProjects\RPGDiceRoller\dist\RPGDiceRoller3\data\ico.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
