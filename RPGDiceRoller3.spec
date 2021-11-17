@@ -4,7 +4,7 @@
 block_cipher = None
 
 
-a = Analysis(['main.pyw'],
+a = Analysis(['C:\\Users\\shurk\\PycharmProjects\\RPGDiceRoller\\v3\\main.pyw'],
              pathex=['C:\\Users\\shurk\\PycharmProjects\\RPGDiceRoller'],
              binaries=[],
              datas=[],
@@ -16,10 +16,8 @@ a = Analysis(['main.pyw'],
              win_private_assemblies=False,
              cipher=block_cipher,
              noarchive=False)
-a.datas += [("./ico.ico", "ico.ico", "DATA")]
-a.datas += [("./CHANGELOG.txt", "CHANGELOG.txt", "DATA")]
-a.datas += [("./VC_redist.x64.exe", "VC_redist.x64.exe", "DATA")]
-a.datas += [("./VC_redist.arm64.exe", "VC_redist.arm64.exe", "DATA")]
+a.datas += Tree('./v3/data', prefix='data')
+a.datas += Tree('./v3/redist', prefix='redist')
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 exe = EXE(pyz,
@@ -31,7 +29,7 @@ exe = EXE(pyz,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=False , icon='C:\\Users\\shurk\\PycharmProjects\\RPGDiceRoller\\ico.ico')
+          console=False , icon='C:\\Users\\shurk\\PycharmProjects\\RPGDiceRoller\\v3\\data\\ico.ico')
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
