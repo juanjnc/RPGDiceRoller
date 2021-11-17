@@ -22,16 +22,17 @@ def crear_roll(result,iface):
                         result.config(text=f'{die_1}\n= {suma} + mod: {c}\n= {suma+c}',foreground='green')
                 else:
                     result.config(text=f'{die_1}\n{die_2}\n{die_3}\n= {suma} + mod: {c+f+i}\n= {suma+c+f+i}',foreground='green')
-                playsound(r'data/dice_roll.mp3')
+                playsound(r'data/dice_roll.wav')
             else:  # Recoge cualquier numero erróneo
                 result.config(text='Error:\nEnter a valid number\nDice = 2 - 100\nNumber of dice = 1 - 100',foreground='red')
+                playsound(r'data/dice_error.wav')
         except ValueError:  # Recoge errores y limpia las casillas
-            #TODO sonido error
             result.config(text='Error:\nEnter a number',foreground='red')
             iface.mod.delete(0,10),iface.mod.insert(0,0),iface.mod_2.delete(0,10),iface.mod_2.insert(0,0)
             iface.dado_2.delete(0,10),iface.dado_2.insert(0,0),iface.pool_2.delete(0,10),iface.pool_2.insert(0,0)
             iface.mod_3.delete(0,10),iface.mod_3.insert(0,0),iface.dado_3.delete(0,10),iface.dado_3.insert(0,0)
             iface.pool_3.delete(0,10),iface.pool_3.insert(0,0)
+            playsound(r'data/value_error.wav')
     return roll
 
 # Implementa la lógica de las tiradas de los dados Fate y FUDGE
@@ -53,11 +54,13 @@ def crear_roll_fate(result,cuadro):
                         result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n + mod: {c}\n= {total}',foreground='green')
                     case _:
                         result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n + mod: {c}\n= {total}',foreground='green')
-                playsound(r'data/dice_roll.mp3')
+                playsound(r'data/dice_roll.wav')
             else:
-               result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50',foreground='red')
+                result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50',foreground='red')
+                playsound(r'data/dice_error.wav')
         except ValueError:
             result.config(text='Error:\nEnter a number',foreground='red'),cuadro.mod.delete(0,10),cuadro.mod.insert(0,0)
+            playsound(r'data/value_error.wav')
     return roll_fate
 
 # Define los rangos de cuerpo de BRP y derivados
@@ -66,7 +69,7 @@ def crear_roll_rq(result):
         var= ('L. Leg','R. Leg','Abdomen','R. Arm','L. Arm','Chest','Head')
         n = choices(var,weights=[4,4,3,3,3,1,2], k=1)
         result.config(text=f'{n}',foreground='green')
-        playsound(r'data/dice_roll.mp3')
+        playsound(r'data/dice_roll.wav')
     return roll_rq
 
 # Define los rangos de cuerpo de BRP y derivados
@@ -75,7 +78,7 @@ def crear_roll_myth(result):
         var= ('L. Leg','R. Leg','Abdomen','R. Arm','L. Arm','Chest','Head')
         n = choices(var,weights=[3,3,3,3,3,3,2], k=1)
         result.config(text=f'{n}',foreground='green')
-        playsound(r'data/dice_roll.mp3')
+        playsound(r'data/dice_roll.wav')
     return roll_myth
 
 # Limpia los resultados

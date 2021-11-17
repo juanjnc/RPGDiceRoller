@@ -4,4 +4,6 @@ from tkinter import Tk
 class Raiz(Tk):
     def __init__(self):
         super().__init__()
-        self.title('RPG Dice Roller v3'),self.geometry('400x400'),self.iconbitmap(r'.\data\ico.ico')
+        self.title('RPG Dice Roller v3')
+        self.geometry('400x400')
+        self.iconbitmap(r'.\data\ico.ico')

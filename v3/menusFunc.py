@@ -9,9 +9,10 @@ def cambios(): return startfile('.\data\CHANGELOG.txt')
 
 # Info y créditos básicos
 def licenses(): return mb.showinfo('Licenses','3rd party libraries: Playsound (https://github.com/TaylorSMarks/playsound/blob/master/LICENSE)'
-                                              '\n\nSound obtained from FreeSound (https://freesound.org/s/353975/)'
-                                              '\n\nUsed PyInstaller for creating the executables.\n(https://www.pyinstaller.org/license.html)'
-                                              '\n\nUsed Inno Setup for creating the installer.\n(https://jrsoftware.org/files/is/license.txt)')
+                                              '\n\nSounds obtained from FreeSound: (https://freesound.org/s/353975/) (https://freesound.org/s/350872/)'
+                                              '\n(https://freesound.org/s/171494/) (https://freesound.org/s/242503/)'
+                                              '\n\nUsed PyInstaller for creating the executables. (https://www.pyinstaller.org/license.html)'
+                                              '\n\nUsed Inno Setup for creating the installer. (https://jrsoftware.org/files/is/license.txt)')
 
 
 # Info y créditos básicos

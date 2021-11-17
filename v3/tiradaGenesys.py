@@ -59,9 +59,11 @@ def crear_roll_g(result,abi,frc,cha,diff,sback,prof,bst):
                                            f' advantage = {adv-thr}; triumph = {tri-des}\nfailure = {fail-suc}; threat = {thr-adv}'
                                            f'; despair = {des-tri}\nForce Dark Side = {fds-fls}; Force Light Side = {fls-fls}',
                                       foreground='green')
-                playsound(r'data/dice_roll.mp3')
+                playsound(r'data/dice_roll.wav')
             else:
                 result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50',foreground='red')
+                playsound(r'data/dice_error.wav')
         except ValueError:
             result.config(text='Error:\nEnter a number',foreground='red')
+            playsound(r'data/value_error.wav')
     return roll_g

@@ -23,8 +23,8 @@ def crear_tut_roll(raiz):
         tu_ro_label = Label(tu_ro,text='\nFill \"Number of dice\", \"Type of dice\" and \"Mod value\" text fields with the '
                                             'numbers you want.\n\nYou can roll up three types of dice with his owns mod values, but '
                                             'first column must be filled.\nCombined values can not be more of 100 for Number of '
-                                            'dice.\n1st die must be at least 2 and 2nd or 3rd die can be 0 but not 1.'
-                                            '\n',justify='left',font=('Arial',10),background="white")
+                                            'dice.\n1st die must be at least 2 and 2nd or 3rd die can be 0 but not 1.\n',
+                            justify='left',font=('Arial',10),background="white")
         tu_ro_label.pack()
     return tut_roll
 
@@ -68,7 +68,8 @@ def crear_tut_genesys(raiz):
         tu_ge = Toplevel(raiz)
         tu_ge.resizable(0,0),tu_ge.title('Genesys Guide')
         tu_ge_label = Label(tu_ge,text='\nNeeds fill the Genesys Dice and the Star Wars Force Die, can roll with at least one '
-                                        'die of any type.\n',justify='left',font=('Arial',10),background="white")
+                                        'die of any type.\n',
+                            justify='left',font=('Arial',10),background="white")
         tu_ge_label.pack()
     return tut_genesys
 

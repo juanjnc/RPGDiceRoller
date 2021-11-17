@@ -1,8 +1,11 @@
 from random import choice
+from playsound import playsound
+
 
 # Primera parte del easter egg
 def crear_eggs(iface,result):
     def eggs():
+        playsound(r'data/secret.wav')
         result.config(text='You found me',foreground='red')
         iface.btn_egg.config(command=crear_spam(result,iface))
     return eggs

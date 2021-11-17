@@ -1,16 +1,20 @@
 from tkinter.ttk import Label, Entry, Button, Style
 from tiradaGenesys import crear_roll_g
 
+
 class Genesys:
+
     # Genera toda la interfaz de los dados Genesys
     def __init__(self,result,raiz,iface):
         # Ajusta el tamaño de la ventana
         raiz.geometry('800x400')
-        # Crean los textos de los dados
+
+        #  Estilo de la interfaz
         Style().configure('G.TButton',font=('Arial',11),foreground='green',width=12)
         Style().configure('G.TLabel',font=('Arial',12))
         Style().configure('G.TEntry',font=('Arial',12))
 
+        # Crean la interfaz de los dados
         self.bst_label = Label(iface,justify='right',text='Boost Dice: ',style='G.TLabel')
         self.bst_label.grid(row=0,column=5,padx=5,pady=5,sticky='E')
         self.abi_label = Label(iface,justify='right',text='Ability Dice: ',style='G.TLabel')
@@ -25,6 +29,7 @@ class Genesys:
         self.cha_label.grid(row=2,column=7,padx=5,pady=5,sticky='E')
         self.frc_label = Label(iface,justify='right',text='Force Dice: ',style='G.TLabel')
         self.frc_label.grid(row=3,column=5,padx=5,pady=5,sticky='E')
+
         # Crean y configuran las entradas de los dados
         self.frc = Entry(iface,width=5)
         self.frc.grid(row=3,column=6,padx=5,pady=5),self.frc.config(justify='center',style='G.TEntry'),self.frc.insert(0,0)
@@ -41,10 +46,12 @@ class Genesys:
         self.bst = Entry(iface,width=5)
         self.bst.grid(row=0,column=6,padx=5,pady=5),self.bst.config(justify='center',style='G.TEntry'),self.bst.insert(0,0)
         grids = dict(abi=self.abi,frc=self.frc,cha=self.cha,diff=self.diff,sback=self.sback,prof=self.prof,bst=self.bst)
+
         # Crea el botón para tirar los dados y eliminar la interfaz
         self.btn_g = Button(iface,text="Genesys/SW",command=crear_roll_g(result,**grids),style='G.TButton',cursor='hand2')
         self.btn_g.grid(row=3,column=7,columnspan=2,padx=5,pady=5)
-     # Elimina toda la interfaz de Genesys
+
+    # Elimina toda la interfaz de Genesys
     def eliminar_g(self,result,raiz):
         result.config(text=''),self.bst.destroy(),self.abi.destroy(),self.prof.destroy(),self.sback.destroy(),self.diff.destroy()
         self.cha.destroy(),self.frc.destroy(),self.bst_label.destroy(),self.abi_label.destroy(),self.prof_label.destroy()
