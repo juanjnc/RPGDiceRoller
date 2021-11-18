@@ -1,6 +1,7 @@
 from checker import checker_version, checker_playsound
 
-#Si no se cumplen los requisitos lanza una ventana con los Errores
+
+# Si no se cumplen los requisitos lanza una ventana con los Errores
 try:
     from raiz import Raiz
     from menus import Menus

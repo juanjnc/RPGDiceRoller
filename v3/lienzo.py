@@ -1,5 +1,6 @@
 from tkinter import Canvas
 
+
 # Gestiona el lienzo donde se muestra el resultado
 class Lienzo(Canvas):
     def __init__(self,container):

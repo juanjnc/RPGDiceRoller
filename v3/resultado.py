@@ -1,5 +1,6 @@
 from tkinter.ttk import Label
 
+
 # Gestiona la etiqueta donde se muestra el resultado
 class Resultado(Label):
     def __init__(self,container):
