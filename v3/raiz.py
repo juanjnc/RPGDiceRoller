@@ -7,4 +7,4 @@ class Raiz(Tk):
         super().__init__()
         self.title('RPG Dice Roller v3')
         self.geometry('400x400')
-        self.iconbitmap(r'.\data\ico.ico')
+        self.iconbitmap(self, default=r'.\data\ico.ico')

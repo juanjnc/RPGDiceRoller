@@ -1,3 +1,4 @@
+3.3.1 - Added text to name the dice columns and the Genesys columns. Fixed some icons.
 3.3.0 - Added sounds for different situations. Added Error Handlers for Python version and Playsound. Bug fixing.
 3.2.1 - Optimized Code, bug fixing.
 3.2.0 - Implemented the logic for Check Buttons in the Show menu. Added a 3rd dice to the pool. Revised Tutorials.
