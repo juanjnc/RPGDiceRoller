@@ -34,7 +34,7 @@ class Menus(Menu):
         ayuda_menu = Menu(self, tearoff=0)
         ayuda_menu.add_command(label='Version', command=MeFu.version, font=('Arial', 10))
         ayuda_menu.add_command(label='Changelog', command=MeFu.cambios, font=('Arial', 10))
-        ayuda_menu.add_command(label='Licenses', command=MeFu.licenses, font=('Arial', 10))
+        ayuda_menu.add_command(label='3rd Party Licenses', command=MeFu.licenses, font=('Arial', 10))
         ayuda_menu.add_command(label='About...', command=MeFu.info, font=('Arial', 10))
         self.add_cascade(label='Help', menu=ayuda_menu, font=('Arial', 10))
 

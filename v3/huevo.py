@@ -5,9 +5,9 @@ from playsound import playsound
 # Primera parte del easter egg
 def crear_eggs(iface, result):
     def eggs():
-        playsound(r'data/secret.wav')
         result.config(text='You found me', foreground='red')
         iface.btn_egg.config(command=crear_spam(result, iface))
+        playsound(r'data/secret.wav')
 
     return eggs
 
@@ -15,10 +15,10 @@ def crear_eggs(iface, result):
 # Segunda parte. Contiene las frases
 def crear_spam(result, iface):
     def spam():
-        m = ('ADnD', 'Anima BF', 'B/X', 'Call of Cthulhu', 'DnD 3.X', 'DnD 4', 'DnD 5', 'FATE', 'Pathfinder 1e',
-             'Pathfinder 2e', 'PbtA', 'Trail of Cthulhu', 'Warhammer 40k', 'Warhammer Age of Sigmar',
+        m = ('Advanced DnD', 'Anima BF', 'B/X', 'Call of Cthulhu', 'DnD 3.X', 'DnD 4', 'DnD 5', 'FATE', 'Pathfinder 1e',
+             'Pathfinder 2e', 'PbtA', 'Trail of Cthulhu', 'Warhammer 40k', 'Warhammer Age of Sigmar', 'wops, I forgot',
              'Warhammer Fantasy', 'World Of Darkness', 'Basic RolePlaying', 'RuneQuest', 'Mythras', 'Rolemaster',
-             'Middle-Earth RolePlaying', 'Traveller')
+             'Middle-Earth RolePlaying', 'Traveller', 'Starfinder', 'Level Up: Advanced 5e', 'King Arthur Pendragon')
         game = choice(m)
         # for i in m: print(i)
         sus = ('From Spain, with love', 'Hi, Human', 'Fudging rolls is bad', 'Rule 0 rules!', 'OBEY!',  'TPK!',
@@ -38,7 +38,7 @@ def crear_spam(result, iface):
                'Don\'t impose your favorite game', 'Optimizing your PC is OK\nRuining the fun is not OK',
                'There\'s no check against STR\nfor bending the rules', 'It\'s a secret to everybody', 'Just Fireball',
                'I survived to the character creation\nin Traveller', 'It\'s dangerous to go alone\nTake this!',
-               f'FIGHT ME:\nI don\'t like {game}', 'Linear Warriors\nQuadratic Wizards', 'Act normally',
+               f'FIGHT ME:\nI don\'t like {game}', 'Linear Warriors\nQuadratic Wizards', 'Act normally', 'Nooooo JSON!',
                f'I\'m ready for play\n{game}', 'You\'ve excessive homebrew in your game', 'NANANANANA\nBATMAN',
                '\U0001F3A4 Never gonna give you up \U0001F3B5\n\U0001F3B6 Never gonna let you down \U0001F399')
         # for i in sus:print(i)

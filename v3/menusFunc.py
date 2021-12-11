@@ -12,8 +12,9 @@ def cambios(): return startfile(r'.\data\CHANGELOG.txt')
 
 # Info y créditos básicos
 def licenses(): return mb.showinfo('Licenses',
-                                   '3rd party libraries: Playsound ('
-                                   'https://github.com/TaylorSMarks/playsound/blob/master/LICENSE) '
+                                   '3rd party libraries: Playsound'
+                                   '\nThis software is Copyright (c) 2021 Taylor Marks <taylor@marksfam.com>.'
+                                   '\n(https://github.com/TaylorSMarks/playsound/blob/master/LICENSE)'
                                    '\n\nSounds obtained from FreeSound: (https://freesound.org/s/353975/) ('
                                    'https://freesound.org/s/350872/) '
                                    '\n(https://freesound.org/s/171494/) (https://freesound.org/s/242503/)'
