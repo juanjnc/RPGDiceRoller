@@ -50,3 +50,9 @@ I'm completely open to suggestions, comments and tips for learning.
 
 * In the Output folder there is an installer for Windows built by me to help my friends with its use, it sometimes returns a false positive, but that is beyond my knowledge.
 * For Linux or Mac there is no installer, but if you know how to make it, you can create one without problems.
+
+## Copyright
+
+Copyright (c) 2021 Juan José Núñez Cózar under MIT License.
+
+See the LICENSE file for more information.
