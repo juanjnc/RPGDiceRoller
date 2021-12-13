@@ -29,7 +29,7 @@ exe = EXE(pyz,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
-          console=False , icon='C:\\Users\\shurk\\PycharmProjects\\RPGDiceRoller\\v3\\data\\ico.ico')
+          console=False , icon='./v3/data/ico.ico')
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,

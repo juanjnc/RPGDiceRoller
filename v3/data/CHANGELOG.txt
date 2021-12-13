@@ -1,3 +1,4 @@
+3.3.2 - Added MIT License
 3.3.1 - Added text to name the dice columns and the Genesys columns. Fixed some icons.
 3.3.0 - Added sounds for different situations. Added Error Handlers for Python version and Playsound. Bug fixing.
 3.2.1 - Optimized Code, bug fixing.
