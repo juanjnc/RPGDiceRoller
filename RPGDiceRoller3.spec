@@ -4,8 +4,8 @@
 block_cipher = None
 
 
-a = Analysis(['C:\\Users\\shurk\\PycharmProjects\\RPGDiceRoller\\v3\\main.pyw'],
-             pathex=['C:\\Users\\shurk\\PycharmProjects\\RPGDiceRoller'],
+a = Analysis(['.\\v3\\main.pyw'],
+             pathex=['.\\RPGDiceRoller'],
              binaries=[],
              datas=[],
              hiddenimports=[],

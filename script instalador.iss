@@ -3,7 +3,8 @@
 
 #define MyAppName "RPG Dice Roller"
 #define MyAppVersion "3.3.2"
-#define MyAppPublisher "Juan José Núñez"
+#define MyAppPublisher "Juan José Núñez Cózar"
+#define MyAppURL "https://github.com/shurkun-juan/RPGDiceRoller"
 #define MyAppExeName "RPGDiceRoller3.exe"
 #define MyAppAssocName MyAppName + " File"
 #define MyAppAssocExt ".myp"
@@ -17,6 +18,8 @@ AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 ;AppVerName={#MyAppName} {#MyAppVersion}
 AppPublisher={#MyAppPublisher}
+AppSupportURL={#MyAppURL}
+AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
 ChangesAssociations=yes
 DisableProgramGroupPage=yes
