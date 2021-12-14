@@ -2471,3 +2471,5 @@
 /dist/RPGDiceRoller2/tcl8/8.6/http-2.9.1.tm
 /build/RPGDiceRoller3/
 /dist/RPGDiceRoller3/
+
+v3/__pycache__/
