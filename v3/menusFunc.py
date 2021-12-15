@@ -48,7 +48,7 @@ def licenses(): return mb.showinfo('Licenses',
 # Info y créditos básicos
 def info(): return mb.showinfo('Info RPG DR 3',
                                'Copyright (c) 2021 Juan José Núñez Cózar under MIT License'
-                               '\nWebsite: https://github.com/shurkun-juan/RPGDiceRoller'
+                               '\nWebsite: https://github.com/juanjnc/RPGDiceRoller'
                                '\n\nProgrammed in Python.\n(https://www.python.org/)'
                                '\n\nIcons made by Ana Canalejo.\n(https://www.deviantart.com/miyuminineko)'
                                '\n\nThanks to Rubén, Steph and Mauro for the help and support provided.')
