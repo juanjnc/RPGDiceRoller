@@ -10,6 +10,7 @@ Estoy totalmente abierto a sugerencias, comentarios y consejos para seguir apren
 * Los .ZIP son versiones antiguas que conservo por los hitos en el desarrollo y en mi aprendizaje.
 * La versión actual se encuentra en la carpeta v3.
 * Requiere Python 3.10 y playsound 1.2.2 (https://pypi.org/project/playsound)
+  * playsound en linux requiere pygobject
 
 ### Archivos adicionales:
 
@@ -36,6 +37,7 @@ I'm completely open to suggestions, comments and tips for learning.
 * The .ZIP files, are older versions which I maintain for the improvements in development and in my learning.
 * The current version is in the v3 folder.
 * Requires Python 3.10 and playsound 1.2.2 (https://pypi.org/project/playsound)
+  * playsound in linux requieres pygobject
 
 ### Additional files:
 
