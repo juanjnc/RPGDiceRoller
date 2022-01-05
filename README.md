@@ -20,6 +20,7 @@ Estoy totalmente abierto a sugerencias, comentarios y consejos para seguir apren
 ### Es multiplataforma?:
 
 * En principio el código debería funcionar en Windows, Linux o Mac de 64 bits. Pero como uso Windows no he podido comprobarlo.
+  * Comprobado y preparado para Linux el 2022/01/05
 
 ### Hay instaladores?:
 
@@ -47,6 +48,7 @@ I'm completely open to suggestions, comments and tips for learning.
 ### Is it multiplatform?:
 
 * In theory the code should work on 64 bits Windows, Linux or Mac. However, I use Windows and I'm not able to check it.
+  * Checked and ready for Linux at 2022/01/05
 
 ### Are there installers?:
 
