@@ -1,5 +1,9 @@
-from os import startfile  # De momento la única función usada
+from sys import platform
 from tkinter import messagebox as mb
+try:
+    from os import startfile
+except ImportError:
+    from subprocess import call
 
 
 # Versión actual
@@ -7,7 +11,12 @@ def version(): return mb.showinfo('Version RPG DR 3', 'Version 3.3.2')
 
 
 # Trae el changelog
-def cambios(): return startfile(r'.\data\CHANGELOG.txt')
+def cambios():
+    if platform == "win32":
+        return startfile(r'./data/CHANGELOG.txt')
+    else:  # Solución encontrada facilmente en web, parece un problema comun
+        opener = "open" if platform == "darwin" else "xdg-open"
+        return call([opener, r'./data/CHANGELOG.txt'])
 
 
 def mitlicense(): return mb.showinfo('License', 'MIT License'

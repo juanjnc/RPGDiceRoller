@@ -1,5 +1,4 @@
-from tkinter import Tk
-
+from tkinter import Tk, PhotoImage
 
 # Gestiona la ventana principal
 class Raiz(Tk):
@@ -7,4 +6,5 @@ class Raiz(Tk):
         super().__init__()
         self.title('RPG Dice Roller v3')
         self.geometry('400x400')
-        self.iconbitmap(self, default=r'.\data\ico.ico')
+        img = PhotoImage(file=r'./data/ico.png')
+        self.wm_iconphoto(True, img)
