@@ -1,5 +1,6 @@
 from tkinter import Tk, PhotoImage
 
+
 # Gestiona la ventana principal
 class Raiz(Tk):
     def __init__(self):
