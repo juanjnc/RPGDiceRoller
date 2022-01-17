@@ -1,5 +1,6 @@
 from sys import platform  # Comprueba el SO
 from tkinter import messagebox as mb
+from webbrowser import open as webopen
 # Usa un import u otro según SO
 if platform == "win32":
     from os import startfile
@@ -7,7 +8,7 @@ from subprocess import call
 
 
 # Versión actual
-def version(): return mb.showinfo('Version RPG DR 3', 'Version 3.3.2')
+def version(): return mb.showinfo('Version RPG DR 3', 'Version 3.3.3')
 
 
 # Trae el changelog según el SO, es un problema relativamente común, lo encontré en diversos foros
@@ -71,3 +72,14 @@ def crear_salir(raiz):
             raiz.destroy()
 
     return salir
+
+
+# Lleva a la página del proyecto
+def website():
+    return webopen("https://github.com/juanjnc/RPGDiceRoller")
+
+
+# Lleva a la página del releases del proyecto
+def release():
+    return webopen("https://github.com/juanjnc/RPGDiceRoller/releases")
+

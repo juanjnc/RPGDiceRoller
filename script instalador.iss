@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "RPG Dice Roller"
-#define MyAppVersion "3.3.2"
+#define MyAppVersion "3.3.3"
 #define MyAppPublisher "Juan José Núñez Cózar"
 #define MyAppURL "https://github.com/shurkun-juan/RPGDiceRoller"
 #define MyAppExeName "RPGDiceRoller3.exe"
@@ -35,7 +35,6 @@ WizardStyle=modern
 
 [Languages]
 Name: "english"; MessagesFile: "compiler:Default.isl"
-Name: "spanish"; MessagesFile: "compiler:Languages\Spanish.isl"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked

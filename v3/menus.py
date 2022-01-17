@@ -15,6 +15,8 @@ class Menus(Menu):
 
         # menu archivo
         archivo_menu = Menu(self, tearoff=0)
+        archivo_menu.add_command(label='Website', command=MeFu.website, font=('Arial', 10))
+        archivo_menu.add_command(label='Download', command=MeFu.release, font=('Arial', 10))
         archivo_menu.add_command(label='Exit', command=MeFu.crear_salir(raiz), font=('Arial', 10))
         self.add_cascade(label='File', menu=archivo_menu, font=('Arial', 10))
 
