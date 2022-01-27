@@ -1,3 +1,4 @@
+3.3.4 - New form to show the Genesys dice, added a legend in the tutorial.
 3.3.3 - New menus to the website.
 3.3.2 - Added MIT License.
 3.3.1 - Added text to name the dice columns and the Genesys columns. Fixed some icons.

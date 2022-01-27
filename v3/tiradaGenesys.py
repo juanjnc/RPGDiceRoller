@@ -9,64 +9,60 @@ def crear_roll_g(result, abi, frc, cha, diff, sback, prof, bst):
             a, b, c = int(bst.get()), int(abi.get()), int(prof.get())
             d, e, f = int(sback.get()), int(diff.get()), int(cha.get())
             g = int(frc.get())  # Dado de fuerza, muy situacional en el sistema
-            var_bst = ('0', 'success', 'advantage', 'advantage, advantage', 'advantage, success')
-            var_abi = ('success', 'success, success', '0', 'advantage', 'advantage, success', 'advantage, advantage')
-            var_prof = ('0', 'triumph', 'success', 'advantage', 'success, success', 'advantage, advantage', 'advantage, success')
-            var_sback = ('success', 'success, success', '0', 'advantage', 'advantage, success', 'advantage, advantage')
-            var_diff = ('failure', 'failure, failure', '0', 'threat', 'threat, failure', 'threat, threat')
-            var_cha = ('failure', 'failure, failure', '0', 'threat', 'threat, failure', 'threat, threat', 'despair')
-            var_frc = ('DARK', 'LIGHT', 'DARK, DARK', 'LIGHT, LIGHT')
+            var_bst = ('–', '–', 'S', 'SA', 'AA', 'A')
+            var_abi = ('–', 'S', 'S', 'SS', 'A', 'A', 'SA', 'AA')
+            var_prof = ('–', 'S', 'S', 'SS', 'SS', 'A', 'SA', 'SA', 'SA', 'AA', 'AA', 'Tr')
+            var_sback = ('–', '–', 'F', 'F', 'T', 'T')
+            var_diff = ('–', 'F', 'FF', 'T', 'T', 'T', 'TT', 'FT')
+            var_cha = ('–', 'D', 'D', 'DD', 'DD', 'T', 'T', 'FT', 'FT', 'TT', 'TT', 'De')
+            var_frc = ('D', 'D', 'D', 'D', 'D', 'D', 'DD', 'L', 'L', 'LL', 'LL', 'LL')
             fin = []
             if 50 >= a + b + c + d + e + f + g > 0:  # Lanza y agrupa los dados Genesys
-                n = choices(var_bst, weights=[2, 1, 1, 1, 1], k=a)
+                n = choices(var_bst, k=a)
                 fin.extend(n)
-                n = choices(var_abi, weights=[2, 1, 1, 2, 1, 1], k=b)
+                n = choices(var_abi, k=b)
                 fin.extend(n)
-                n = choices(var_prof, weights=[1, 1, 2, 1, 2, 2, 3], k=c)
+                n = choices(var_prof, k=c)
                 fin.extend(n)
-                n = choices(var_sback, weights=[2, 1, 1, 2, 1, 1], k=d)
+                n = choices(var_sback, k=d)
                 fin.extend(n)
-                n = choices(var_diff, weights=[1, 2, 3, 3, 1, 1], k=e)
+                n = choices(var_diff, k=e)
                 fin.extend(n)
-                n = choices(var_cha, weights=[2, 2, 1, 2, 2, 2, 1], k=f)
+                n = choices(var_cha, k=f)
                 fin.extend(n)
-                n = choices(var_frc, weights=[6, 2, 1, 3], k=g)
+                n = choices(var_frc, k=g)
                 fin.extend(n)
-                suc = fin.count('success') + 2 * fin.count('success, success') + fin.count('advantage, success')
-                adv = fin.count('advantage') + 2 * fin.count('advantage, advantage') + fin.count('advantage, success')
-                tri = fin.count('triumph')
-                thr = fin.count('threat') + 2 * fin.count('threat, threat') + fin.count('threat, failure')
-                fail = fin.count('failure') + 2 * fin.count('failure, failure') + fin.count('threat, failure')
-                des = fin.count('despair')
-                fds = fin.count('DARK') + 2 * fin.count('DARK, DARK')
-                fls = fin.count('LIGHT') + 2 * fin.count('LIGHT, LIGHT')
-                cut_1, cut_2, cut_3, cut_4, cut_5 = fin[:5], fin[5:10], fin[10:20], fin[20:30], fin[30:]
+                suc = fin.count('S') + 2 * fin.count('SS') + fin.count('SA')
+                adv = fin.count('A') + 2 * fin.count('AA') + fin.count('SA')
+                tri = fin.count('Tr')
+                thr = fin.count('T') + 2 * fin.count('TT') + fin.count('FT')
+                fail = fin.count('F') + 2 * fin.count('FF') + fin.count('FT')
+                des = fin.count('De')
+                fds = fin.count('D') + 2 * fin.count('DD')
+                fls = fin.count('L') + 2 * fin.count('LL')
+                cut_1, cut_2, cut_3, cut_4, = fin[:15], fin[15:30], fin[30:40], fin[40:]
                 match len(fin):
-                    case 1 | 2 | 3 | 4 | 5:
-                        result.config(text=f'{cut_1}\nsuccess = {suc}; advantage = {adv}; triumph = {tri}'
-                                           f'\nfailure = {fail}; threat = {thr}; despair = {des}\nForce Dark'
+                    case 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15:
+                        result.config(text=f'{cut_1}\nSuccess = {suc}; Advantage = {adv}; Triumph = {tri}'
+                                           f'\nFailure = {fail}; Threat = {thr}; Despair = {des}\nForce Dark'
                                            f' Side = {fds}; Force Light Side = {fls}',
                                       foreground='green')
-                    case 6 | 7 | 8 | 9 | 10:
-                        result.config(text=f'{cut_1}\n{cut_2}\nsuccess = {suc}; advantage = {adv}; triumph = {tri}'
-                                           f'\nfailure = {fail}; threat = {thr}; despair = {des}\nForce Dark'
+                    case 16 | 17 | 18 | 19 | 20 | 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30:
+                        result.config(text=f'{cut_1}\n{cut_2}\nSuccess = {suc}; Advantage = {adv}; Triumph = {tri}'
+                                           f'\nFailure = {fail}; Threat = {thr}; Despair = {des}\nForce Dark'
                                            f' Side = {fds}; Force Light Side = {fls}',
                                       foreground='green')
-                    case 11 | 12 | 13 | 14 | 15 | 16 | 17 | 18 | 19 | 20:
-                        result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\nsuccess = {suc}; advantage = {adv};'
-                                           f' triumph = {tri}\nfailure = {fail}; threat = {thr}; despair = {des}'
+                    case 31 | 32 | 33 | 34 | 35| 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45:
+                        result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\nSuccess = {suc}; Advantage = {adv};'
+                                           f' Triumph = {tri}\nFailure = {fail}; Threat = {thr}; Despair = {des}'
                                            f'\nForce Dark Side = {fds}; Force Light Side = {fls}',
                                       foreground='green')
-                    case 21 | 22 | 23 | 24 | 25 | 26 | 27 | 28 | 29 | 30:
+                    case _:
                         result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\nsuccess = {suc}; advantage = {adv};'
                                            f' triumph = {tri}\nfailure = {fail}; threat = {thr}; despair = {des}'
                                            f'\nForce Dark Side = {fds}; Force Light Side = {fls}',
                                       foreground='green')
-                    case _:
-                        result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\n{cut_4}\n{cut_5}\nsuccess = {suc};'
-                                           f' advantage = {adv}; triumph = {tri}\nfailure = {fail}; threat = {thr}'
-                                           f'; despair = {des}\nForce Dark Side = {fds}; Force Light Side = {fls}',
-                                      foreground='green')
+
                 playsound(r'data/dice_roll.wav')
             else:
                 result.config(text='Error:\nEnter a valid number\nNumber of dice = 1 - 50', foreground='red')

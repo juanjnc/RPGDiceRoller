@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "RPG Dice Roller"
-#define MyAppVersion "3.3.3"
+#define MyAppVersion "3.3.4"
 #define MyAppPublisher "Juan José Núñez Cózar"
 #define MyAppURL "https://github.com/shurkun-juan/RPGDiceRoller"
 #define MyAppExeName "RPGDiceRoller3.exe"

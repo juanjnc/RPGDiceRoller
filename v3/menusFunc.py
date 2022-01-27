@@ -8,7 +8,7 @@ from subprocess import call
 
 
 # Versión actual
-def version(): return mb.showinfo('Version RPG DR 3', 'Version 3.3.3')
+def version(): return mb.showinfo('Version RPG DR 3', 'Version 3.3.4')
 
 
 # Trae el changelog según el SO, es un problema relativamente común, lo encontré en diversos foros
@@ -42,7 +42,7 @@ def mitlicense(): return mb.showinfo('License', 'MIT License'
 
 
 # Info y créditos básicos
-def licenses(): return mb.showinfo('Licenses',
+def licenses(): return mb.showinfo('3rd Party Licenses',
                                    '3rd party libraries: Playsound'
                                    '\nThis software is Copyright (c) 2021 Taylor Marks <taylor@marksfam.com>.'
                                    '\n(https://github.com/TaylorSMarks/playsound/blob/master/LICENSE)'

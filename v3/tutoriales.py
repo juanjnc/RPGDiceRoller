@@ -6,7 +6,7 @@ from tkinter.ttk import Label
 def crear_tutorial(raiz):
     def tutorial():
         tu = Toplevel(raiz)
-        tu.resizable(0, 0), tu.title('General Guide')
+        tu.resizable(False, False), tu.title('General Guide')
         tu_label = Label(tu,
                          text='\nFill the text fields with the numbers you want.\n\n\"Number of dice\" indicates how '
                               'many dice you want to roll.\n\"Type of dice\" indicates how many sides have your '
@@ -24,7 +24,7 @@ def crear_tutorial(raiz):
 def crear_tut_roll(raiz):
     def tut_roll():
         tu_ro = Toplevel(raiz)
-        tu_ro.resizable(0, 0), tu_ro.title('Roll Guide')
+        tu_ro.resizable(False, False), tu_ro.title('Roll Guide')
         tu_ro_label = Label(tu_ro,
                             text='\nFill \"Number of dice\", \"Type of dice\" and \"Mod value\" text fields with the '
                                  'numbers you want.\n\nYou can roll up three types of dice with his owns mod values, '
@@ -40,7 +40,7 @@ def crear_tut_roll(raiz):
 def crear_tut_fate(raiz):
     def tut_fate():
         tu_fa = Toplevel(raiz)
-        tu_fa.resizable(0, 0), tu_fa.title('FATE Guide')
+        tu_fa.resizable(False, False), tu_fa.title('FATE Guide')
         tu_fa_label = Label(tu_fa, text='\nNeeds fill \"Number of dice\" and \"Mod value\" in the first Column\n',
                             justify='left', font=('Arial', 10), background="white")
         tu_fa_label.pack()
@@ -52,7 +52,7 @@ def crear_tut_fate(raiz):
 def crear_tut_rq(raiz):
     def tut_rq():
         tu_rq = Toplevel(raiz)
-        tu_rq.resizable(0, 0), tu_rq.title('RQ Hit Location Guide')
+        tu_rq.resizable(False, False), tu_rq.title('RQ Hit Location Guide')
         tu_rq_label = Label(tu_rq,
                             text='\nNo input needed. Roll once. Use the RuneQuest/BRP humanoid hit location table.\n'
                                  '\nUse a 20-sided dice with a range of values for location, with this total '
@@ -68,7 +68,7 @@ def crear_tut_rq(raiz):
 def crear_tut_myth(raiz):
     def tut_myth():
         tu_rq = Toplevel(raiz)
-        tu_rq.resizable(0, 0), tu_rq.title('Mythras Hit Location Guide')
+        tu_rq.resizable(False, False), tu_rq.title('Mythras Hit Location Guide')
         tu_rq_label = Label(tu_rq, text='\nNo input needed. Roll once. Use the Mythras humanoid hit location table.\n'
                                         '\nUse a 20-sided dice with a range of values for location, with this total '
                                         'probability: \nL. Leg - 3, R. Leg - 3, Abdomen - 3, R. Arm - 3, L. Arm - 3, '
@@ -83,10 +83,14 @@ def crear_tut_myth(raiz):
 def crear_tut_genesys(raiz):
     def tut_genesys():
         tu_ge = Toplevel(raiz)
-        tu_ge.resizable(0, 0), tu_ge.title('Genesys Guide')
+        tu_ge.resizable(False, False), tu_ge.title('Genesys Guide')
         tu_ge_label = Label(tu_ge,
                             text='\nNeeds fill the Genesys Dice and the Star Wars Force Die, can roll with at least '
-                                 'one die of any type.\n',
+                                 'one die of any type.\n\n'
+                                 'Symbols meaning, can combinate in the results:'
+                                 '\nS = success, A = Advantage, Tr = Triumph'
+                                 '\nF = Failure, T = Threat, De = Despair'
+                                 '\nD = Dark Force Energy L, = Light Force Energy\n',
                             justify='left', font=('Arial', 10), background="white")
         tu_ge_label.pack()
 
@@ -97,7 +101,7 @@ def crear_tut_genesys(raiz):
 def crear_mostrar(raiz):
     def mostrar():
         tu_sge = Toplevel(raiz)
-        tu_sge.resizable(0, 0), tu_sge.title('Show Genesys Guide')
+        tu_sge.resizable(False, False), tu_sge.title('Show Genesys Guide')
         tu_sge_label = Label(tu_sge,
                              text='\nShow the list for additional custom dice systems, and create the interface for '
                                   'them.\n',
