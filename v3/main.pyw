@@ -1,26 +1,27 @@
 from checker import checker_version, checker_playsound
 
+
 # Si no se cumplen los requisitos lanza una ventana con los Errores
 try:
-    from raiz import Raiz
+    from root import Root
     from menus import Menus
-    from lienzo import Lienzo
-    from interfaz import Interfaz
-    from resultado import Resultado
+    from result_canvas import Result_Canvas
+    from main_interface import Main_Interface
+    from result_label import Result_Label
 
     # Arranca el programa
     if __name__ == "__main__":
-        raiz = Raiz()
-        canvas = Lienzo(raiz)
-        result = Resultado(canvas)
-        argumentos1 = dict(result=result)
-        iface = Interfaz(raiz, **argumentos1)
-        argumentos2 = dict(raiz=raiz, result=result, iface=iface)
-        menu = Menus(raiz, **argumentos2)
-        raiz.mainloop()
+        root = Root()
+        canvas = Result_Canvas(root)
+        result = Result_Label(canvas)
+        arg1 = dict(result=result)
+        iface = Main_Interface(root, **arg1)
+        arg2 = dict(root=root, result=result, iface=iface)
+        menu = Menus(root, **arg2)
+        root.mainloop()
 except SyntaxError:
-    raiz = Raiz()
+    root = Root()
     checker_version()
 except ModuleNotFoundError:
-    raiz = Raiz()
+    root = Root()
     checker_playsound()

@@ -2,7 +2,7 @@ from tkinter import Tk, PhotoImage
 
 
 # Gestiona la ventana principal
-class Raiz(Tk):
+class Root(Tk):
     def __init__(self):
         super().__init__()
         self.title('RPG Dice Roller v3')

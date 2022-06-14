@@ -3,7 +3,7 @@ from playsound import playsound
 
 
 # Implementa la lógica de las tiradas de los dados del sistema Genesys
-def crear_roll_g(result, abi, frc, cha, diff, sback, prof, bst):
+def create_roll_g(result, abi, frc, cha, diff, sback, prof, bst):
     def roll_g():
         try:
             a, b, c = int(bst.get()), int(abi.get()), int(prof.get())

@@ -1,5 +1,5 @@
 from tkinter.ttk import Label, Entry, Button, Style
-from tiradaGenesys import crear_roll_g
+from genesys_roll import create_roll_g
 
 
 class Genesys:
@@ -60,7 +60,7 @@ class Genesys:
                      bst=self.bst)
 
         # Crea el botón para tirar los dados y eliminar la interfaz
-        self.btn_g = Button(iface, text="Roll Pool", command=crear_roll_g(result, **grids), style='G.TButton',
+        self.btn_g = Button(iface, text="Roll Pool", command=create_roll_g(result, **grids), style='G.TButton',
                             cursor='hand2')
         self.btn_g.grid(row=4, column=7, columnspan=1, padx=5, pady=5)
 

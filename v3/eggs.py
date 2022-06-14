@@ -3,17 +3,17 @@ from playsound import playsound
 
 
 # Primera parte del easter egg
-def crear_eggs(iface, result):
+def create_eggs(iface, result):
     def eggs():
         result.config(text='You found me', foreground='red')
-        iface.btn_egg.config(command=crear_spam(result, iface))
+        iface.btn_egg.config(command=create_spam(result, iface))
         playsound(r'data/secret.wav')
 
     return eggs
 
 
 # Segunda parte. Contiene las frases
-def crear_spam(result, iface):
+def create_spam(result, iface):
     def spam():
         m = ('Advanced DnD', 'Anima BF', 'B/X', 'Call of Cthulhu', 'DnD 3.X', 'DnD 4', 'DnD 5', 'FATE', 'Pathfinder 1e',
              'Pathfinder 2e', 'PbtA', 'Trail of Cthulhu', 'Warhammer 40k', 'Warhammer Age of Sigmar', 'wops, I forgot',
@@ -30,7 +30,7 @@ def crear_spam(result, iface):
                'Unlucky', 'Called shot to the groin', 'Add to the List', 'All Your Base Are Belong to Us', 'a',
                '\"It\'s what my character would do\"\nis a bad excuse', 'Oh, No!', 'Improved Initiative', 'Roll under',
                'Peace was never an option', 'A PC who is a Duck', 'Do a barrel roll', 'I regret nothing', 'Roll over',
-               'Pathfinder 1e is the errata\nof the errata\nof DnD 3', 'Please, don\'t play FATAL', 'Recursion?',
+               'Pathfinder 1e is the errata\nof the errata\nof DnD 3', 'Please, don\'t play FATAL', 'Loop?',
                'Pathfinder\nAKA\nMathfinder', 'BLOOD FOR THE BLOOD GOD!\nCRITS FOR THE CRIT GOD!', 'Hard to decide...',
                'You can\'t seduce the dragon, the elf\nor the bartender\'s daughter', 'Keep Calm\n&\nRoll',
                'The best Edition is your favorite Edition', '4chan doesn\'t cause Sanity loss', 'Not in my Town',
@@ -45,8 +45,8 @@ def crear_spam(result, iface):
         phrase = choice(sus)
         result.config(text=phrase, foreground='blue')
         match phrase:
-            case 'Recursion?':
-                iface.btn_egg.config(command=crear_eggs(result=result, iface=iface))
+            case 'Loop?':
+                iface.btn_egg.config(command=create_eggs(result=result, iface=iface))
             case _:
                 pass
 

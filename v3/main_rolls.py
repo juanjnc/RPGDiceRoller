@@ -3,12 +3,12 @@ from playsound import playsound
 
 
 # Implementa la lógica de las tiradas de cualquier dado de n caras, soporta tres dados diferentes
-def crear_roll(result, iface):
+def create_roll(result, iface):
     def roll():
         try:
-            a, b, c = int(iface.pool.get()), int(iface.dado.get()), int(iface.mod.get())
-            d, e, f = int(iface.pool_2.get()), int(iface.dado_2.get()), int(iface.mod_2.get())
-            g, h, i = int(iface.pool_3.get()), int(iface.dado_3.get()), int(iface.mod_3.get())
+            a, b, c = int(iface.pool.get()), int(iface.dice_1.get()), int(iface.mod.get())
+            d, e, f = int(iface.pool_2.get()), int(iface.dice_2.get()), int(iface.mod_2.get())
+            g, h, i = int(iface.pool_3.get()), int(iface.dice_3.get()), int(iface.mod_3.get())
             die_1, die_2, die_3 = [], [], []
             if (101 > (b or e or h) > 1) and (101 > a + d + g > 0) and (a != 0) and ((e and h) != 1):
                 for ii in range(a):  # Lanza y agrupa dado 1
@@ -40,8 +40,8 @@ def crear_roll(result, iface):
         except ValueError:  # Recoge errores y limpia las casillas
             result.config(text='Error:\nEnter a number', foreground='red')
             iface.mod.delete(0, 10), iface.mod.insert(0, 0), iface.mod_2.delete(0, 10), iface.mod_2.insert(0, 0)
-            iface.dado_2.delete(0, 10), iface.dado_2.insert(0, 0), iface.pool_2.delete(0, 10), iface.pool_2.insert(0, 0)
-            iface.mod_3.delete(0, 10), iface.mod_3.insert(0, 0), iface.dado_3.delete(0, 10), iface.dado_3.insert(0, 0)
+            iface.dice_2.delete(0, 10), iface.dice_2.insert(0, 0), iface.pool_2.delete(0, 10), iface.pool_2.insert(0, 0)
+            iface.mod_3.delete(0, 10), iface.mod_3.insert(0, 0), iface.dice_3.delete(0, 10), iface.dice_3.insert(0, 0)
             iface.pool_3.delete(0, 10), iface.pool_3.insert(0, 0)
             playsound(r'data/value_error.wav')
 
@@ -49,7 +49,7 @@ def crear_roll(result, iface):
 
 
 # Implementa la lógica de las tiradas de los dados Fate y FUDGE
-def crear_roll_fate(result, cuadro):
+def create_roll_fate(result, cuadro):
     def roll_fate():
         try:
             a, c = int(cuadro.pool.get()), int(cuadro.mod.get())
@@ -81,7 +81,7 @@ def crear_roll_fate(result, cuadro):
 
 
 # Define los rangos de cuerpo de BRP y derivados
-def crear_roll_rq(result):
+def create_roll_rq(result):
     def roll_rq():  # Define los rangos de cuerpo de BRP y derivados
         var = ('L. Leg', 'R. Leg', 'Abdomen', 'R. Arm', 'L. Arm', 'Chest', 'Head')
         n = choices(var, weights=[4, 4, 3, 3, 3, 1, 2], k=1)
@@ -92,7 +92,7 @@ def crear_roll_rq(result):
 
 
 # Define los rangos de cuerpo de BRP y derivados
-def crear_roll_myth(result):
+def create_roll_myth(result):
     def roll_myth():
         var = ('L. Leg', 'R. Leg', 'Abdomen', 'R. Arm', 'L. Arm', 'Chest', 'Head')
         n = choices(var, weights=[3, 3, 3, 3, 3, 3, 2], k=1)
@@ -103,7 +103,7 @@ def crear_roll_myth(result):
 
 
 # Limpia los resultados
-def crear_limpiar(result):
-    def limpiar(): result.config(text='')
+def create_clean(result):
+    def clean(): result.config(text='')
 
-    return limpiar
+    return clean
