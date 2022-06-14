@@ -5,9 +5,9 @@ from genesys_roll import create_roll_g
 class Genesys:
 
     # Genera toda la interfaz de los dados Genesys
-    def __init__(self, result, raiz, iface):
+    def __init__(self, result, root, iface):
         # Ajusta el tamaño de la ventana
-        raiz.geometry('800x400')
+        root.geometry('800x400')
 
         #  Estilo de la interfaz
         Style().configure('G.TButton', font=('Arial', 11), foreground='green', width=8)
@@ -37,25 +37,25 @@ class Genesys:
         # Crean y configuran las entradas de los dados
         self.frc = Entry(iface, width=5)
         self.frc.grid(row=4, column=6, padx=5, pady=5), self.frc.config(justify='center',
-                                                                        style='G.TEntry'), self.frc.insert(0, 0)
+                                                                        style='G.TEntry'), self.frc.insert(0, '0')
         self.cha = Entry(iface, width=5)
         self.cha.grid(row=3, column=8, padx=5, pady=5), self.cha.config(justify='center',
-                                                                        style='G.TEntry'), self.cha.insert(0, 0)
+                                                                        style='G.TEntry'), self.cha.insert(0, '0')
         self.diff = Entry(iface, width=5)
         self.diff.grid(row=2, column=8, padx=5, pady=5), self.diff.config(justify='center',
-                                                                          style='G.TEntry'), self.diff.insert(0, 0)
+                                                                          style='G.TEntry'), self.diff.insert(0, '0')
         self.sback = Entry(iface, width=5)
         self.sback.grid(row=1, column=8, padx=5, pady=5), self.sback.config(justify='center',
-                                                                            style='G.TEntry'), self.sback.insert(0, 0)
+                                                                            style='G.TEntry'), self.sback.insert(0, '0')
         self.prof = Entry(iface, width=5)
         self.prof.grid(row=3, column=6, padx=5, pady=5), self.prof.config(justify='center',
-                                                                          style='G.TEntry'), self.prof.insert(0, 0)
+                                                                          style='G.TEntry'), self.prof.insert(0, '0')
         self.abi = Entry(iface, width=5)
         self.abi.grid(row=2, column=6, padx=5, pady=5), self.abi.config(justify='center',
-                                                                        style='G.TEntry'), self.abi.insert(0, 0)
+                                                                        style='G.TEntry'), self.abi.insert(0, '0')
         self.bst = Entry(iface, width=5)
         self.bst.grid(row=1, column=6, padx=5, pady=5), self.bst.config(justify='center',
-                                                                        style='G.TEntry'), self.bst.insert(0, 0)
+                                                                        style='G.TEntry'), self.bst.insert(0, '0')
         grids = dict(abi=self.abi, frc=self.frc, cha=self.cha, diff=self.diff, sback=self.sback, prof=self.prof,
                      bst=self.bst)
 
@@ -65,8 +65,8 @@ class Genesys:
         self.btn_g.grid(row=4, column=7, columnspan=1, padx=5, pady=5)
 
     # Elimina toda la interfaz de Genesys
-    def eliminar_g(self, result, raiz):
+    def eliminar_g(self, result, root):
         result.config(text=''), self.bst.destroy(), self.abi.destroy(), self.prof.destroy(), self.sback.destroy()
         self.diff.destroy(), self.cha.destroy(), self.frc.destroy(), self.bst_label.destroy(), self.abi_label.destroy()
         self.prof_label.destroy(), self.sback_label.destroy(), self.diff_label.destroy(), self.cha_label.destroy()
-        self.frc_label.destroy(), self.btn_g.destroy(), self.title.destroy(), raiz.geometry('400x400')
+        self.frc_label.destroy(), self.btn_g.destroy(), self.title.destroy(), root.geometry('400x400')

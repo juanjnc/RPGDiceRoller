@@ -2,7 +2,7 @@ from tkinter import Canvas
 
 
 # Gestiona el lienzo donde se muestra el resultado
-class Result_Canvas(Canvas):
+class ResultCanvas(Canvas):
     def __init__(self, container):
         super().__init__(container)
         options = {'side': 'bottom', 'expand': 'YES', 'fill': 'both'}

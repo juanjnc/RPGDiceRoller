@@ -5,17 +5,17 @@ from checker import checker_version, checker_playsound
 try:
     from root import Root
     from menus import Menus
-    from result_canvas import Result_Canvas
-    from main_interface import Main_Interface
-    from result_label import Result_Label
+    from result_canvas import ResultCanvas
+    from main_interface import MainInterface
+    from result_label import ResultLabel
 
     # Arranca el programa
     if __name__ == "__main__":
         root = Root()
-        canvas = Result_Canvas(root)
+        canvas = ResultCanvas(root)
         result = Result_Label(canvas)
         arg1 = dict(result=result)
-        iface = Main_Interface(root, **arg1)
+        iface = MainInterface(root, **arg1)
         arg2 = dict(root=root, result=result, iface=iface)
         menu = Menus(root, **arg2)
         root.mainloop()

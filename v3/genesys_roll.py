@@ -52,7 +52,7 @@ def create_roll_g(result, abi, frc, cha, diff, sback, prof, bst):
                                            f'\nFailure = {fail}; Threat = {thr}; Despair = {des}\nForce Dark'
                                            f' Side = {fds}; Force Light Side = {fls}',
                                       foreground='green')
-                    case 31 | 32 | 33 | 34 | 35| 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45:
+                    case 31 | 32 | 33 | 34 | 35 | 36 | 37 | 38 | 39 | 40 | 41 | 42 | 43 | 44 | 45:
                         result.config(text=f'{cut_1}\n{cut_2}\n{cut_3}\nSuccess = {suc}; Advantage = {adv};'
                                            f' Triumph = {tri}\nFailure = {fail}; Threat = {thr}; Despair = {des}'
                                            f'\nForce Dark Side = {fds}; Force Light Side = {fls}',

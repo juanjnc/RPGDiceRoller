@@ -1,7 +1,7 @@
 from tkinter import Menu, BooleanVar
 import tutorials as tu
 from genesys import Genesys
-import menus_func as MeFu
+import menus_functions as menus_func
 
 # Objetos de los dados adicionales
 gene = Genesys
@@ -15,9 +15,9 @@ class Menus(Menu):
 
         # menu archivo
         archivo_menu = Menu(self, tearoff=0)
-        archivo_menu.add_command(label='Website', command=MeFu.website, font=('Arial', 10))
-        archivo_menu.add_command(label='Download', command=MeFu.release, font=('Arial', 10))
-        archivo_menu.add_command(label='Exit', command=MeFu.crear_salir(root), font=('Arial', 10))
+        archivo_menu.add_command(label='Website', command=menus_func.website, font=('Arial', 10))
+        archivo_menu.add_command(label='Download', command=menus_func.release, font=('Arial', 10))
+        archivo_menu.add_command(label='Exit', command=menus_func.crear_salir(root), font=('Arial', 10))
         self.add_cascade(label='File', menu=archivo_menu, font=('Arial', 10))
 
         # menu de tutoriales
@@ -34,11 +34,11 @@ class Menus(Menu):
 
         # menu de ayuda
         ayuda_menu = Menu(self, tearoff=0)
-        ayuda_menu.add_command(label='Version', command=MeFu.version, font=('Arial', 10))
-        ayuda_menu.add_command(label='Changelog', command=MeFu.cambios, font=('Arial', 10))
-        ayuda_menu.add_command(label='License', command=MeFu.mitlicense, font=('Arial', 10))
-        ayuda_menu.add_command(label='3rd Party Licenses', command=MeFu.licenses, font=('Arial', 10))
-        ayuda_menu.add_command(label='About...', command=MeFu.info, font=('Arial', 10))
+        ayuda_menu.add_command(label='Version', command=menus_func.version, font=('Arial', 10))
+        ayuda_menu.add_command(label='Changelog', command=menus_func.cambios, font=('Arial', 10))
+        ayuda_menu.add_command(label='License', command=menus_func.mitlicense, font=('Arial', 10))
+        ayuda_menu.add_command(label='3rd Party Licenses', command=menus_func.licenses, font=('Arial', 10))
+        ayuda_menu.add_command(label='About...', command=menus_func.info, font=('Arial', 10))
         self.add_cascade(label='Help', menu=ayuda_menu, font=('Arial', 10))
 
         # menu de dados adicionales
@@ -49,9 +49,9 @@ class Menus(Menu):
         def sys_gen_show():
             a = sys_gen.get()
             if a is True:
-                return gene.__init__(self=gene, raiz=root, result=result, iface=iface)
+                return gene.__init__(self=gene, root=root, result=result, iface=iface)
             else:
-                return gene.eliminar_g(self=gene, raiz=root, result=result)
+                return gene.eliminar_g(self=gene, root=root, result=result)
 
         dados_menu.add_checkbutton(label='Genesys', font=('Arial', 10), onvalue=1, offvalue=0, variable=sys_gen,
                                    command=sys_gen_show)
