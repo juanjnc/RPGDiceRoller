@@ -13,7 +13,7 @@ try:
     if __name__ == "__main__":
         root = Root()
         canvas = ResultCanvas(root)
-        result = Result_Label(canvas)
+        result = ResultLabel(canvas)
         arg1 = dict(result=result)
         iface = MainInterface(root, **arg1)
         arg2 = dict(root=root, result=result, iface=iface)
