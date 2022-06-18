@@ -1,10 +1,12 @@
 from tkinter import Menu, BooleanVar
 import tutorials as tu
 from genesys import Genesys
+from sw_legion import SWLegion
 import menus_functions as menus_func
 
 # Objetos de los dados adicionales
 gene = Genesys
+swl = SWLegion
 
 
 # Gestiona la barra de menú
@@ -30,6 +32,7 @@ class Menus(Menu):
         tutorial_menu.add_command(label='Show Menu', command=tu.create_show(root), font=('Arial', 10))
         tutorial_menu.add_separator()
         tutorial_menu.add_command(label='Genesys/SW', command=tu.create_tut_genesys(root), font=('Arial', 10))
+        tutorial_menu.add_command(label='SW Legion', command=tu.create_tut_swl(root), font=('Arial', 10))
         self.add_cascade(label='User Guide', menu=tutorial_menu, font=('Arial', 10))
 
         # menu de ayuda
@@ -55,6 +58,19 @@ class Menus(Menu):
 
         dados_menu.add_checkbutton(label='Genesys', font=('Arial', 10), onvalue=1, offvalue=0, variable=sys_gen,
                                    command=sys_gen_show)
+
+        # Bloque de dados Star Wars Legion
+        sys_swl = BooleanVar()
+
+        def sys_swl_show():
+            a = sys_swl.get()
+            if a is True:
+                return swl.__init__(self=swl, root=root, result=result, iface=iface)
+            else:
+                return swl.eliminar_swl(self=swl, root=root, result=result)
+
+        dados_menu.add_checkbutton(label='SW Legion', font=('Arial', 10), onvalue=1, offvalue=0, variable=sys_swl,
+                                   command=sys_swl_show)
         self.add_cascade(label='Show', menu=dados_menu, font=('Arial', 10))
 
         # Cierre

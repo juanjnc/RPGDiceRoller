@@ -97,6 +97,23 @@ def create_tut_genesys(root):
     return tut_genesys
 
 
+# Instrucciones de botón SW Legion
+def create_tut_swl(root):
+    def tut_swl():
+        tu_swl = Toplevel(root)
+        tu_swl.resizable(False, False), tu_swl.title('Star Wars Legion Guide')
+        tu_swl_label = Label(tu_swl,
+                             text='\nNeeds fill the Star Wars Legions Die, can roll with at least '
+                                  'one die of any type.\n\n'
+                                  'Symbols meaning, can combinate in the results:'
+                                  '\nB = Block, DS = Defense Surge'
+                                  '\nH = Hit, CH = Critical Hit, AS = Attack Surge\n',
+                             justify='left', font=('Arial', 10), background="white")
+        tu_swl_label.pack()
+
+    return tut_swl
+
+
 # Instrucciones del menú para mostrar más tipos de dados
 def create_show(root):
     def show():
