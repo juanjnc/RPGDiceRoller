@@ -1,3 +1,4 @@
+3.4.1 - Fixed a bug in the canvas sowing [] when a dice is empty.
 3.4.0 - Added Star Wars Legion custom dice, minor fixes.
 3.3.4 - New form to show the Genesys dice, added a legend in the tutorial.
 3.3.3 - New menus to the website.

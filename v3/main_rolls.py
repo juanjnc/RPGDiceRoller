@@ -21,14 +21,14 @@ def create_roll(result, iface):
                     w = randint(1, h)
                     die_3.append(w)
                 suma = sum(die_1 + die_2 + die_3)  # Suma las tres tiradas
-                if not die_3:  # Si no hay dado 3
+                if die_2 == [] and die_3 == []:
+                    result.config(text=f'{die_1}\n= {suma} + mod: {c}\n= {suma + c}', foreground='green')
+                elif die_2 != [] and die_3 == []:
                     result.config(text=f'{die_1}\n{die_2}\n= {suma} + mod: {c + f}\n= {suma + c + f}',
                                   foreground='green')
-                if not die_2:  # Si no hay dado 2 pero si dado 3
+                elif die_2 == [] and die_3 != []:
                     result.config(text=f'{die_1}\n{die_3}\n= {suma} + mod: {c + i}\n= {suma + c + i}',
                                   foreground='green')
-                    if not die_3:  # Si no hay dado 2 ni dado 3
-                        result.config(text=f'{die_1}\n= {suma} + mod: {c}\n= {suma + c}', foreground='green')
                 else:
                     result.config(text=f'{die_1}\n{die_2}\n{die_3}\n= {suma} + mod: {c + f + i}\n= {suma + c + f + i}',
                                   foreground='green')

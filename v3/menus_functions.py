@@ -8,7 +8,7 @@ from subprocess import call
 
 
 # Versión actual
-def version(): return mb.showinfo('Version RPG DR 3', 'Version 3.4.0')
+def version(): return mb.showinfo('Version RPG DR 3', 'Version 3.4.1')
 
 
 # Trae el changelog según el SO, es un problema relativamente común, lo encontré en diversos foros

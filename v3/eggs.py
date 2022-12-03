@@ -20,7 +20,7 @@ def create_spam(result, iface):
              'Warhammer Fantasy', 'World Of Darkness', 'Basic RolePlaying', 'RuneQuest', 'Mythras', 'Rolemaster',
              'Middle-Earth RolePlaying', 'Traveller', 'Starfinder', 'Level Up: Advanced 5e', 'King Arthur Pendragon')
         game = choice(m)
-        # for i in m: print(i)
+
         sus = ('From Spain, with love', 'Hi, Human', 'Fudging rolls is bad', 'Rule 0 rules!', 'OBEY!',  'TPK!',
                'Wanna kill all humans?', 'Rock falls, everybody dies', 'Do a Sanity check!', 'I need to explain...',
                'There is a dungeon in a dragon', 'Wait, I lost my dice...', 'No meta allowed!', 'Stop minmaxing',
@@ -41,13 +41,11 @@ def create_spam(result, iface):
                f'FIGHT ME:\nI don\'t like {game}', 'Linear Warriors\nQuadratic Wizards', 'Act normally', 'Nooooo JSON!',
                f'I\'m ready for play\n{game}', 'You\'ve excessive homebrew in your game', 'NANANANANA\nBATMAN',
                '\U0001F3A4 Never gonna give you up \U0001F3B5\n\U0001F3B6 Never gonna let you down \U0001F399')
-        # for i in sus:print(i)
+
         phrase = choice(sus)
         result.config(text=phrase, foreground='blue')
         match phrase:
             case 'Loop?':
                 iface.btn_egg.config(command=create_eggs(result=result, iface=iface))
-            case _:
-                pass
 
     return spam
